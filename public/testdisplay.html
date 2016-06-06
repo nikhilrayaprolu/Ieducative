@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+	<script type="text/javascript" src="/controllers/testdisplay.js"></script>
+	<title>test paper attempt</title>
+</head>
+<body ng-app="TestForm" >
+<div ng-controller="TestCreator">
+{{Questions}}
+<form novalidate ng-submit="submit()">
+<div ng-repeat="question in Questions">
+	<p>{{$index+1}}.{{question.name}}</p>
+	
+	<div ng-repeat="option in question.options">
+	
+	<input type="radio" name="{{$parent.$index}}" ng-value="$index+1" ng-model="Answers[$parent.$index]">{{$index+1}}.{{option}}<br>
+	</div>
+	
+
+</div>
+
+	{{Answers}}
+	<input type="submit" id="submit" value="Submit" />
+	</form>
+</div>
+</body>
+</html>

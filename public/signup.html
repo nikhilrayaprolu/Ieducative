@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+	<script type="text/javascript" src="/controllers/signup.js"></script>
+<script type="text/javascript" src="/controllers/service.js"></script>
+	<script type="text/javascript" src="/controllers/constants.js"></script>
+		<title>Sign Up</title>
+		 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<!-- Compiled and minified JavaScript -->
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+	</head>
+	<body ng-app="SignUp">
+		<nav>
+			<div class="nav-wrapper nav-fixed">
+				<a href="#" class="brand-logo">IEducative</a>
+				<ul id="nav-mobile" class="right hide-on-med-and-down">
+
+					<li><a href="sass.html">Testseries</a></li>
+					<li><a href="badges.html">Courses</a></li>
+					<li><a href="collapsible.html">Blog</a></li>
+					<li><a href="collapsible.html">Your Profile</a></li>
+					<li class="active"><a href="Login.html">User</a></li>
+				</ul>
+			</div>
+		</nav> 
+
+		<div class="container">
+			<div class="row">
+				<div class="col s6 pull-s1 card-panel red lighten-5" ng-controller="SignUpController">
+				{{content}}{{name}}
+				<h3>SignUp</h3>
+					<form class="" >
+					<div class="row">
+						<div class="input-field col s12">
+							<i class="material-icons prefix">account_circle</i>
+							<input type="text" placeholder="Placeholder" id="user_name" class="validate" ng-model="name">
+							<label for="user_name">User Name</label>
+						</div>
+					</div>
+
+						<div class="row">
+							<div class="input-field col s6">
+							
+								<input placeholder="Placeholder" id="first_name" type="text" class="validate" ng-model="FirstName">
+								<label for="first_name">First Name</label>
+							</div>
+							<div class="input-field col s6">
+								<input id="last_name" type="text" class="validate" ng-model="LastName">
+								<label for="last_name">Last Name</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s12">
+								<input id="password" type="password" class="validate" ng-model="password">
+								<label for="password">Password</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s12">
+							<i class="material-icons prefix">phone</i>
+								<input id="phone" type="tel" class="validate" ng-model="phone">
+								<label for="phone">Phone</label>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="input-field col s12">
+							<i class="material-icons prefix">email</i>
+								<input id="email" type="email" class="validate" ng-model="email">
+								<label for="email">Email</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s12">
+							<i class="material-icons prefix">today</i>
+								<input id="bday" type="datetime-local" class="	validate" ng-model="dob">
+								<label for="Date of Birth">Date of Birth</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s12">
+							
+								<input id="presentclass" type="text" class="validate" ng-model="studentclass">
+								<label for="present class">present class</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s12">
+							
+								<input id="school" type="text" class="validate" ng-model="schoolname">
+								<label for="school">school</label>
+							</div>
+						</div>
+						
+						<button class="btn waves-effect waves-light" type="submit" name="action" ng-click="submit()">SignUp
+    					<i class="material-icons right">send</i>
+  						</button>
+        
+					</form>
+				</div>
+				<div class=" col s6 card-panel red lighten-5" ng-controller="SignInController">
+				<h3>LogIn</h3>
+
+					<form  class=""> 
+					<div class="input-field col s12">
+							<i class="material-icons prefix">account_circle</i>
+							<input type="text" placeholder="Placeholder" id="user_name" class="validate" ng-model="name">
+							<label for="user_name">User Name</label>
+						</div>
+						<div class="row">
+							<div class="input-field col s12">
+								<input id="password" type="password" class="validate" ng-model="password">
+								<label for="password">Password</label>
+							</div>
+						</div>
+						<button class="btn waves-effect waves-light" type="submit" name="action" ng-click="submit()">Submit
+    					<i class="material-icons right">send</i>
+  						</button>
+        
+					</form>
+					<button class="btn waves-effect waves-light" type="submit" name="action" ng-click="redirect()">Submit</button>
+    					
+				</div>
+			</div>
+
+		</div>
+
+
+
+
+
+
+	</body>
+</html>

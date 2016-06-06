@@ -1,0 +1,15 @@
+
+->routing of javascript modules work and bootstrapping materialize css
+->front end view start for pages(initially grab the same model of moodle for courses) 
+->front end view start for back forth(faculty,admin)and make all the operations they could have
+->then front end view start for testseries(intially options for testseries solve and test series submit all go to main repo)
+->then modalize the whole changing the system of making it
+
+->go on adding many features we could
+->and make the routing part
+
+
+
+design paradigms
+----------------
+side navigator required

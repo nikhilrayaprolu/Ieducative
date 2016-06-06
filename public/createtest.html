@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+	<script type="text/javascript" src="/controllers/createtest.js"></script>
+	<title>test paper creator</title>
+</head>
+<body ng-app="TestForm" >
+<div ng-controller="TestCreator">
+<input type="text" ng-model="title">
+<input type="text" ng-model="uniqueno">
+<input type="text" ng-model="QuestionNumber">
+<form novalidate class="simple-form" ng-submit="submit()">
+<div ng-repeat="i in getNumber(QuestionNumber) track by $index">
+	{{$index+1}}.Question:<input type="text" ng-model="Questions[$index].name"/><br/>
+	<div ng-repeat="j in getNumber(4)">
+	{{$index+1}}.option:<input type="text" ng-model="Questions[$parent.$index].options[$index]"/><br/>
+	</div>
+	Correctoption:<input type="text" ng-model="correct[$index]"/><br/>
+
+</div>
+<input type="submit" id="submit" value="Submit" />
+</form>
+
+ {{Questions}}
+ {{correct}}
+ </div>
+</body>
+</html>

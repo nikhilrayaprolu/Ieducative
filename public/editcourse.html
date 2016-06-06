@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+	<script type="text/javascript" src="/controllers/editcourse.js"></script>
+	<title>new course creator</title>
+</head>
+
+<body ng-app="NewCourseApp" >
+<div ng-controller="EditCourse">
+
+								<input id="school" type="text" class="validate" ng-model="schoolname">
+								<label for="school">school</label>
+<form novalidate class="simple-form" ng-submit="submit()">
+<input id="coursename" type="text" ng-model="name">
+<label for="coursename">Name of course</label><br>
+<input id="syllabus" type="text" ng-model="syllabus">
+<label for="syllabus">Syllabus</label><br>
+<input id="fees" type="text" ng-model="fees">
+<label for="fees">fees</label><br>
+<input id="durationofweeks" type="text" ng-model="durationofweeks">
+<label for="durationofweeks">durationofweeks</label><br>
+<input id="faculty" type="text" ng-model="faculty">
+<label for="faculty">faculty</label><br>
+<input id="pre_requisites" type="text" ng-model="pre_requisites">
+<label for="pre_requisites">pre_requisites</label><br>
+<input id="courseclass" type="text" ng-model="courseclass">
+<label for="courseclass">courseclass</label><br>
+<input type="submit" id="submit" value="Submit" />
+</form>
+{{name}}
+ </div>
+
+</body>
+</html>
