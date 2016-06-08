@@ -116,6 +116,7 @@ getToken = function (headers) {
 };
 app.use('/api',apiRoutes);
 app.post('/addCourse',upload.single('photo'),addCourse.saveNewCourse);
+app.post('/removeCourse',addCourse.deleteCourse);
 app.post('/findCourse',addCourse.findCourseDetails);
 app.post('/addTopic',addTopic.saveNewTopic);
 app.post('/findTopic',addTopic.findTopicDetails);
@@ -123,5 +124,8 @@ app.post('/testcreate',addTestPaper.saveNewTestPaper);
 app.post('/testpaper',addTestPaper.findTestDetails);
 app.post('/answercheck',addTestPaper.findingmarks);
 app.get('/faculty/:facultyid',addCourse.findCoursesoffaculty);
+app.get('/findTopic/:id',addTopic.findTopicbyid);
+app.post('/removeTopic',addTopic.deleteTopic);
+app.put('/addTopic',addTopic.updateNewTopic);
 app.listen(port);
 console.log('There will be dragons: http://localhost:' + port);

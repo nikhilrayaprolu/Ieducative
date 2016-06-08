@@ -8,6 +8,7 @@ app.controller('EditCourse',['$scope','$http',function($scope,$http){
 	$scope.student=[];
 	$scope.pre_requisites=[];
 	$scope.courseclass=''
+	
 	$scope.getNumber=function(N){
 		return Array.apply(null, {length: N}).map(Number.call, Number);
 	};

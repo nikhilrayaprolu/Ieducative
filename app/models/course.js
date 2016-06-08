@@ -32,7 +32,7 @@ var Courses=mongoose.Schema({
 Courses.plugin(autoIncrement.plugin,'Courses');
 
 var addCourse=mongoose.model('addCourse',Courses);
-exports.saveNewCourse=function(req,res){
+/*exports.saveNewCourse=function(req,res){
 	 console.log(req.body);
 	var courseData=new addCourse(req.body);
 	if(req.file){
@@ -45,10 +45,60 @@ exports.saveNewCourse=function(req,res){
 			res.send(err);
 		}
 	});
+}*/
+exports.deleteCourse=function(req,res){
+	if(req.body.id){
+		addCourse.remove({_id:req.body.id},function(err){
+			if(!err){
+				res.sendStatus(200);
+			}else{
+				console.log(err);
+			}
+		});
+	};
+};
+exports.saveNewCourse=function(req,res){
+if(req.body.id){
+	addCourse.findOne({_id:req.body.id},function(err,course){
+		
+		
+		course.name=req.body.name;
+		course.syllabus=req.body.syllabus;
+		course.fees=req.body.fees;
+		course.durationWeeks=req.body.durationWeeks;
+		course.faculty=req.body.faculty;
+		course.student=req.body.student;
+		course.pre_requisites=req.body.pre_requisites;
+		course.courseclass=req.body.courseclass;
+		course.save(function(err){
+			if(err){
+				console.log(err);
+
+			}else{
+				console.log('success');
+				res.sendStatus(200);
+			}
+		});
+	});
 }
+else{
+	console.log(req.body);
+	var courseData=new addCourse(req.body);
+	if(req.file){
+	courseData.set('profilephoto',req.file.filename);}
+
+	courseData.save({},function(err,data){
+		if(!err){	
+			res.sendStatus(200);
+		}else{
+			res.send(err);
+		}
+	});
+}
+};
 exports.findCourseDetails=function(req,res){
-	if(req.body.name!=null){
-		addCourse.find({name:req.body.name},function(err,data){
+	if(req.body.id!=null){
+		addCourse.find({_id:req.body.id},function(err,data){
 			if(!err){
 				if(data==''){
 					res.sendStatus(400);

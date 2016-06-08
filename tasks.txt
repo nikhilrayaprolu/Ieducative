@@ -13,3 +13,17 @@
 design paradigms
 ----------------
 side navigator required
+
+
+
+7:authorisation and neatify till courses part tues
+8:TestPaper workout and neatify	weds
+9:workout on stats	thurs
+13:Newsforum for each course separately mon
+14:Notification part decide tues
+15:overall modification wed
+16 same as 15 thu
+17:Faculty student modification excetara
+18,19:profilification
+20-23:webinarization and video conferencification
+

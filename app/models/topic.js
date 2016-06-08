@@ -26,9 +26,51 @@ exports.saveNewTopic=function(req,res){
 		}
 	});
 }
+exports.findTopicbyid=function(req,res){
+	if(req.params.id!=null){
+		addTopic.find({_id:req.params.id},function(err,data){
+			if(!err){
+				if(data=='')res.sendStatus(400);
+			else{
+				res.send(data);
+			}
+			}else{res.send(err);
+			}
+		});
+	};
+};
+exports.updateNewTopic=function(req,res){
+	if(req.body.id!=null){
+		addTopic.findOne({_id:req.body.id},function(err,topic){
+		topic.topictitle=req.body.topictitle;
+		topic.topictext=req.body.topictext;
+		topic.Course=req.body.Course;	
+		topic.save(function(err){
+			if(err){
+				console.log(err);
+
+			}else{
+				console.log('success');
+				res.sendStatus(200);
+			}
+		});
+	});
+}
+	}
+exports.deleteTopic=function(req,res){
+	if(req.body.id){
+		addTopic.remove({_id:req.body.id},function(err){
+			if(!err){
+				res.sendStatus(200);
+			}else{
+				console.log(err);
+			}
+		});
+	};
+};
 exports.findTopicDetails=function(req,res){
-	if(req.body.course!=null){
-		addTopic.find({name:req.body.course_id},function(err,data){
+	if(req.body.Course!=null){
+		addTopic.find({Course:req.body.Course},function(err,data){
 			if(!err){
 				if(data==''){
 					res.sendStatus(400);

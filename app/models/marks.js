@@ -23,6 +23,7 @@ exports.saveNewTestMarks=function(testdata){
 		answersgiven:testdata.answersgiven,
 		totalmarks:testdata.totalmarks,
 		Testid:testdata.Testid,
+		
 	});
 
 	TestMarks.save({},function(err,data){

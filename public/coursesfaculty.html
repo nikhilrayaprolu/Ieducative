@@ -46,12 +46,16 @@
     		</thead>
     		<tbody>
     				    		
-    				    			<tr ng-repeat="course in courses">
-    				    				<td>{{course.name}}</td>
+					    			<tr ng-repeat="course in courses"  >
+    				    			
+    				    				<td><a ng-click="coursehome(course._id)">{{course.name}}</a></td>
     				    				<td>{{course.syllabus}}</td>
     				    				<td>{{course.courseclass}}</td>
-    				    				<td><button class="btn waves-effect waves-light" type="submit" name="action" ng-click="newcourse({{course._id}})">Edit
+    				    				
+
+    				    				<td><button class="btn waves-effect waves-light" type="submit" name="action" ng-click="newcourse(course._id)">Edit
     		</button></td>
+
     				</tr>
     				</tbody>
     				</table>    
