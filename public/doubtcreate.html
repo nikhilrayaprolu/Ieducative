@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>New  Question</title>
+		 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+	<script type="text/javascript" src="/controllers/doubtcreate.js"></script>
+<script type="text/javascript" src="/controllers/service.js"></script>
+	<script type="text/javascript" src="/controllers/constants.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.js"></script>
+	   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+    
+		  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/main.css">\
+		<base href="/">
+</head>
+<body ng-app="Ieducative">
+<div ng-controller="NewQuestionController" ng-init="">
+	<form novalidate class="simple-form" ng-submit="submit()">
+		Title:<input type="text" name="Title" ng-model="Title">
+		Question:<input type="text" name="PostBody" ng-model="PostBody">
+		Topic:<input type="text" name="Topic" ng-model="Topic">
+		<input type="submit" id="submit" value="Submit" />
+	</form>
+    
+</div>
+
+
+</body>
+</html>

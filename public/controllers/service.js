@@ -1,16 +1,23 @@
 app
 .service('AuthService',function($q,$http,API_ENDPOINT){
 	var LOCAL_TOKEN_KEY='yourTokenKey';
+	var LOCAL_GROUP='group';
+	var LOCAL_USER='user';
 	var isAuthenticated=false;
 	var authToken;
 	function loadUserCredentials(){
 		var token =window.localStorage.getItem(LOCAL_TOKEN_KEY);
+		var group =window.localStorage.getItem(LOCAL_GROUP);
+		var user=window.localStorage.getItem(LOCAL_USER);
 		if(token){
-			useCredentials(token);
+			useCredentials(token,group);
 		}
 	}
-	function storeUserCredentials(token){
+	function storeUserCredentials(token,group,user){
+		console.log(user);
 		window.localStorage.setItem(LOCAL_TOKEN_KEY,token);
+		window.localStorage.setItem(LOCAL_GROUP,group);
+		window.localStorage.setItem(LOCAL_USER,user);
 		useCredentials(token);
 	}
 	function useCredentials(token){
@@ -23,7 +30,8 @@ app
 		isAuthenticated =false;
 		$http.defaults.headers.common.Authorization=undefined;
 		window.localStorage.removeItem(LOCAL_TOKEN_KEY);
-
+		window.localStorage.removeItem(LOCAL_GROUP);
+		window.localStorage.removeItem(LOCAL_USER);
 	}
 	var register = function(user){
 		return $q(function(resolve,reject){
@@ -42,10 +50,11 @@ app
 			$http.post(API_ENDPOINT.url+'authenticate',user).then(function(result){
 				console.log(result);
 				if(result.data.success){
-					storeUserCredentials(result.data.token);
-					resolve(result.data.msg);
+					console.log(result.data);
+					storeUserCredentials(result.data.token,result.data.group,result.data.username);
+					resolve(result.data.username);
 				}else{
-					reject(resolve.data.msg);
+					reject(resolve.data.username);
 				}
 			});
 		});

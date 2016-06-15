@@ -1,6 +1,6 @@
 var path=require('path');
-
-
+var jwt = require('jwt-simple');
+var config = require('./../../config/database');
 var mongoose=require('mongoose'),
 Schema=mongoose.Schema,
 autoIncrement=require('mongoose-auto-increment');
@@ -113,8 +113,70 @@ exports.findCourseDetails=function(req,res){
 		});
 	};
 };
+exports.Subscribe=function(req,res){
+	var token =getToken(req.headers);
+	if(token){
+		var decoded=jwt.decode(token,config.secret);
+		console.log(decoded);
+		console.log(req.body.username,decoded.name);
+		if(req.body.username==decoded.name){
+			query={'_id':req.body.courseid};
+			addCourse.findOneAndUpdate(query,{$addToSet:{student:req.body.username}},{upsert:true},function(err,doc){
+				if(err)return res.send(500,{error:err});
+				return res.send("success")
+			});
+		}else{
+			res.sendStatus(401);
+		}
+	}else{
+		res.send("token required")
+	}
+}
+exports.findCoursesofstudent=function(req,res){
+	var token=getToken(req.headers);
+	if(token){
+		var decoded=jwt.decode(token,config.secret);
+		if(req.params.studentid==decoded.name){
+			addCourse.find({student:req.params.studentid},function(err,data){
+				if(!err){
+					if(data==''){
+						res.sendStatus(400);
+					}else{
+						res.send(data);
+					}
+				}else{
+					res.send(err);
+				}
+			});
+
+		}else{
+			res.sendStatus(401);	
+		}
+	}else{
+		res.sendStatus(401);
+	}
+}
+exports.findallcourses=function(req,res){
+	addCourse.find({},function(err,data){
+			if(!err){
+				if(data==''){
+					res.sendStatus(400);
+
+				}
+				else{
+					res.send(data);
+				}
+			}else{
+				res.send(err);
+			}
+		});
+};
 exports.findCoursesoffaculty=function(req,res){
-	if(req.params.facultyid!=null){
+var token = getToken(req.headers);
+if(token){
+	var decoded = jwt.decode(token,config.secret);
+	console.log(decoded.name,decoded);
+	if(req.params.facultyid==decoded.name){
 		addCourse.find({faculty:req.params.facultyid},function(err,data){
 			if(!err){
 				if(data==''){
@@ -129,32 +191,10 @@ exports.findCoursesoffaculty=function(req,res){
 		});
 
 
+	}else{
+		res.sendStatus(401);
 	}
+}else{
+	res.sendStatus(401);
+}	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
