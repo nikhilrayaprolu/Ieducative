@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html>
-	<head>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
-	<script type="text/javascript" src="/controllers/coursesfaculty.js"></script>
-		<title>Faculty Home</title>
+<head>
+	<title>Student Home Page</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+	<script type="text/javascript" src="/controllers/coursesstudent.js"></script>
+<script type="text/javascript" src="/controllers/service.js"></script>
+	<script type="text/javascript" src="/controllers/constants.js"></script>
+		<title>Sign Up</title>
 		 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
 		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -11,10 +14,8 @@
 		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
 		<base href="/">
-		<script type="text/javascript" src="/controllers/service.js"></script>
-    <script type="text/javascript" src="/controllers/constants.js"></script>
-	</head>
-	<body ng-app="CourseFaculty">
+</head>
+<body ng-app="CoursesStudent">
 		<nav>
 			<div class="nav-wrapper nav-fixed">
 				<a href="#" class="brand-logo">IEducative</a>
@@ -31,9 +32,13 @@
 			</div>
 		</nav> 
 
-		<div class="container" ng-controller="CourseFaculty" ng-init="coursesfaculty()">
-			<button style="float: right;" class="btn waves-effect waves-light" type="submit" name="action" ng-click="newcourse()">AddNewCourse
+		<div class="container" ng-controller="CourseStudent" ng-init="coursesstudent()">
+		{{studentid}}
+			<button style="float: right;" class="btn waves-effect waves-light" type="submit" name="action" ng-click="newcourse()">AllCourses
     		</button>
+    		<button style="float: right;" class="btn waves-effect waves-light" type="submit" name="action" ng-click="TestPaper()">TestPaper
+    		</button>
+    		
     		<div ng-repeat="course in courses">
     		{{course}}
 
@@ -44,28 +49,18 @@
     				<th data-field="name">Course </th>
     				<th data-field="syllabus">Syllabus</th>
     				<th data-field="studentclass" >Class</th>
-    				<th datafield="edit"></th>		
+    				
     					</tr>
     		</thead>
     		<tbody>
-    				    		
-					    			<tr ng-repeat="course in courses"  >
+    		    			<tr ng-repeat="course in courses"  >
     				    			
     				    				<td><a ng-click="coursehome(course._id)">{{course.name}}</a></td>
     				    				<td>{{course.syllabus}}</td>
     				    				<td>{{course.courseclass}}</td>
-    				    				
-
-	 				    				<td><button class="btn waves-effect waves-light" type="submit" name="action" ng-click="newcourse(course._id)">Edit
-    		</button></td>
-
     				</tr>
     				</tbody>
     				</table>    
-
-
-
-		</div>
-
-		</body>
+</div>
+</body>
 </html>

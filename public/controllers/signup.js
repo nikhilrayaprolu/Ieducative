@@ -1,5 +1,5 @@
 var app=angular.module('SignUp',[]);
-app.controller('SignUpController',['$scope','$http',function($scope,$http,AuthService){
+app.controller('SignUpController',['$scope','$http','AuthService',function($scope,$http,AuthService){
 	$scope.name='',
 	$scope.password='',
 	$scope.FirstName='',
@@ -9,8 +9,8 @@ app.controller('SignUpController',['$scope','$http',function($scope,$http,AuthSe
 	$scope.dob='',
 	$scope.studentclass='',
 	$scope.schoolname='',
-			
-$scope.user={
+$scope.submit=function(){
+AuthService.register({
 	name:$scope.name,
 	password:$scope.password,
 	FirstName:$scope.FirstName,
@@ -21,20 +21,10 @@ $scope.user={
 	studentclass:$scope.studentclass,
 	schoolname:$scope.schoolname,
 
-};
-
-$scope.submit=function(){
-AuthService.register($scope.user).then(function(msg) {
-      $state.go('outside.login');
-      var alertPopup = $ionicPopup.alert({
-        title: 'Register success!',
-        template: msg
-      });
+}).then(function(msg) {
+      alert("registration successfull Please Login to have the fun")
     }, function(errMsg) {
-      var alertPopup = $ionicPopup.alert({
-        title: 'Register failed!',
-        template: errMsg
-      });
+      alert("registration is not successfull")
     });		
 		
 
@@ -80,7 +70,13 @@ $scope.submit=function(){
 	password:$scope.password,
 
 }).then(function(msg) {
-      alert("success");
+	console.log(msg);
+      if(msg=='Faculty'){
+      	window.location="http://localhost:8080/coursesfaculty.html?id="+$scope.name;
+      }else{
+      	window.location="http://localhost:8080/coursesstudent.html?id="+$scope.name;
+      };
+
     }, function(errMsg) {
       alert("unsuccess");
     });
@@ -96,11 +92,7 @@ $scope.submit=function(){
 
 		});
 */};
-$scope.redirect=function(){
-	$http.get("/api/memberinfo").then(function(response){
-			document.write(response);
-		});
-};
+
 	$scope.$on('auth-not-authenticated',function(event){
 		AuthService.logout();
 	alert("login again");
@@ -134,5 +126,4 @@ $scope.redirect=function(){
           }
         };
       }
-    ]);
-*
+    ]);*/

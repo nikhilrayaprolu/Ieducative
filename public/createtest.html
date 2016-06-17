@@ -6,10 +6,13 @@
 	<title>test paper creator</title>
 </head>
 <body ng-app="TestForm" >
+
 <div ng-controller="TestCreator">
-<input type="text" ng-model="title">
-<input type="text" ng-model="uniqueno">
-<input type="text" ng-model="QuestionNumber">
+title:<input type="text" ng-model="title">
+uniqueno:<input type="text" ng-model="uniqueno">
+QuestionNumber:<input type="text" ng-model="QuestionNumber">
+Subject:<input type="text" name="" ng-model="subject">
+Class:<input type="text" name="" ng-model="class">
 <form novalidate class="simple-form" ng-submit="submit()">
 <div ng-repeat="i in getNumber(QuestionNumber) track by $index">
 	{{$index+1}}.Question:<input type="text" ng-model="Questions[$index].name"/><br/>
@@ -19,6 +22,8 @@
 	Correctoption:<input type="text" ng-model="correct[$index]"/><br/>
 
 </div>
+testrating:<input type="text" name="" ng-model="testrating"><br>
+let testrating be 1(easy)2(hard)3(difficult)<br>
 <input type="submit" id="submit" value="Submit" />
 </form>
 

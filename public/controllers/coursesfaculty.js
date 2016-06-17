@@ -1,6 +1,6 @@
 var app=angular.module('CourseFaculty',[]);
-app.controller('CourseFaculty',['$scope','$http',function($scope,$http){
-	$scope.facultyid='slj';
+app.controller('CourseFaculty',['$scope','$http','$location','AuthService',function($scope,$http,$location,AuthService){
+	$scope.facultyid=$location.search().id;
 	$scope.courses=[];
 	$scope.getNumber=function(N){
 		return Array.apply(null, {length: N}).map(Number.call, Number);
@@ -9,6 +9,7 @@ app.controller('CourseFaculty',['$scope','$http',function($scope,$http){
 		window.location="http://localhost:8080/newcourse.html?id="+id;
 		};
 	$scope.coursesfaculty=function(){
+		AuthService.usertoken();
 		$http.get("/faculty/"+$scope.facultyid).then(function(response){
 			console.log(response);
 			$scope.courses=response.data;
@@ -17,10 +18,10 @@ app.controller('CourseFaculty',['$scope','$http',function($scope,$http){
 	$scope.coursehome=function(id){
 		window.location='http://localhost:8080/coursehome.html?id='+id;
 	}
-
-
-	
-
 }]);
+app.config(function($locationProvider) {
+ $locationProvider.html5Mode(true); 
+});
+
 
 

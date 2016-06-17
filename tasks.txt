@@ -1,29 +1,30 @@
+front end using routes,
+side bar through ng-include
+message and email service
+no subscription to those which are subscribed.
+button hide on no authorisations
+check for all authorisation mistakes
+count down counter check server side
+if user has already attempted paper he doesn't get a rank
+message,email service
+sort all tables by date
+store date,time and ip addresses
+authorisations:check authorisations (Oreilly)
+student profile pic add.
+routes,pagination,and filters angular js(Oreilly)
+Https for express(Oreilly)
 
-->routing of javascript modules work and bootstrapping materialize css
-->front end view start for pages(initially grab the same model of moodle for courses) 
-->front end view start for back forth(faculty,admin)and make all the operations they could have
-->then front end view start for testseries(intially options for testseries solve and test series submit all go to main repo)
-->then modalize the whole changing the system of making it
 
-->go on adding many features we could
-->and make the routing part
+Testing Quality Assurance Oreilly
+File Upload Oreilly
+cookie handling Oreilly
+sending email Oreilly
+Production Concerns Oreilly
+Cross-Origin Resource Sharing (CORS) Oreilly
+Debbuging Oreilly
+Maintenance Oreilly
 
-
-
-design paradigms
-----------------
-side navigator required
-
-
-
-7:authorisation and neatify till courses part tues
-8:TestPaper workout and neatify	weds
-9:workout on stats	thurs
-13:Newsforum for each course separately mon
-14:Notification part decide tues
-15:overall modification wed
-16 same as 15 thu
-17:Faculty student modification excetara
-18,19:profilification
-20-23:webinarization and video conferencification
+money transactions
+student evaluations
+video+audio api link up
 

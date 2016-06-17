@@ -11,8 +11,13 @@ var User = require('./app/models/user');
 var port = process.env.PORT || 8080;
 var jwt = require('jwt-simple');
 var addCourse=require("./app/models/course");
-var addTopic=require("./app/models/topic")
-var addTestPaper=require("./app/models/testpaper")
+var addTopic=require("./app/models/topic");
+var addTestPaper=require("./app/models/testpaper");
+var addTestMarks=require("./app/models/marks");
+var addTestRating=require("./app/models/testrating");
+var addTestStats=require("./app/models/teststats");
+var addForumPosts=require("./app/models/forumposts")
+var addForumComments=require("./app/models/forumcomments")
 //var facultyPage=require("./app/models/facultyPage")
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
@@ -41,7 +46,7 @@ apiRoutes.post('/signup',function(req,res){
 	email:req.body.email,
 	phone:req.body.phone,
 	dob:req.body.dob,
-	group:req.body.group,
+	group:'Faculty',
 	studentclass:req.body.studentclass,
 		schoolname:req.body.schoolname,
 		state:req.body.state,
@@ -71,7 +76,7 @@ apiRoutes.post('/authenticate',function(req,res){
 			user.comparePassword(req.body.password,function(err,isMatch){
 				if(isMatch && !err){
 					var token = jwt.encode(user,config.secret);
-					res.json({success:true,token:'JWT '+ token});
+					res.json({success:true,token:'JWT '+ token,group:user.group,username:user.name});
 				}else{
 					res.send({success:false,msg:'Authentication failed.wrong Password.'});
 				}
@@ -123,9 +128,26 @@ app.post('/findTopic',addTopic.findTopicDetails);
 app.post('/testcreate',addTestPaper.saveNewTestPaper);
 app.post('/testpaper',addTestPaper.findTestDetails);
 app.post('/answercheck',addTestPaper.findingmarks);
-app.get('/faculty/:facultyid',addCourse.findCoursesoffaculty);
+app.get('/faculty/:facultyid',passport.authenticate('jwt', { session: false}),addCourse.findCoursesoffaculty);
 app.get('/findTopic/:id',addTopic.findTopicbyid);
 app.post('/removeTopic',addTopic.deleteTopic);
 app.put('/addTopic',addTopic.updateNewTopic);
+app.post('/subscribe',addCourse.Subscribe);
+app.get('/student/:studentid',passport.authenticate('jwt', { session: false}),addCourse.findCoursesofstudent);
+app.get('/courses',addCourse.findallcourses);
+app.get('/testpapers',addTestPaper.findalltestpapers);
+app.get('/userrank/:testid/:marks',addTestMarks.yourtestrank);
+app.get('/testpaperstats/:testid',addTestMarks.testpaperstats);
+app.get('/testresults/:marksid',addTestMarks.thistestmarks);
+app.get('/topten/:testid',addTestMarks.toptenpeople);
+app.post('/testrating/',addTestRating.saveNewTestRating);
+app.get('/userstats/:userid',addTestMarks.finduserstats);
+app.get('/facultyteststats/:facultyname',addTestStats.returnfacultypapers);
+app.get('/testwisemarks/:testid',addTestMarks.testpaperstats);
+app.get('/forumpost/:courseid',addForumPosts.getForumPosts);
+app.post('/forumpost',addForumPosts.saveNewForumPosts);
+app.get('/forumcomment/:postid',addForumComments.findPostComments);
+app.post('/forumcomment/',addForumComments.saveNewForumComments);
+
 app.listen(port);
 console.log('There will be dragons: http://localhost:' + port);

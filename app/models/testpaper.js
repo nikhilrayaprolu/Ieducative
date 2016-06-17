@@ -1,5 +1,6 @@
 var mongoose=require('mongoose');
 var marks=require('./marks');
+var teststats=require('./teststats');
 Schema=mongoose.Schema,
 autoIncrement=require('mongoose-auto-increment');
 
@@ -13,6 +14,11 @@ var TestPaper=mongoose.Schema({
 	Questions:Object,
 	Correct:Array,
 	TestPapermatter:Object,
+	class:Number,
+	subject:String,
+	facultyname:String,
+
+
 },{collection:'TestPaper'});
 TestPaper.plugin(autoIncrement.plugin,'TestPaper');
 var addTestPaper=mongoose.model('addTestPaper',TestPaper);
@@ -21,6 +27,7 @@ exports.saveNewTestPaper=function(req,res){
 	console.log(req);
 	TestPaperData.save({},function(err,data){
 		if(!err){
+			teststats.saveontestregister(data,req.body.testrating);
 			res.sendStatus(200);
 
 		}else{
@@ -29,6 +36,20 @@ exports.saveNewTestPaper=function(req,res){
 
 	});
 }
+exports.findalltestpapers=function(req,res){
+	addTestPaper.find({},function(err,data){
+		if(!err){
+			if(data==''){
+				res.sendStatus(400);
+			}else{
+				console.log(data);
+				res.send(data);
+			}
+		}else{
+			res.send(err);
+		}
+	});
+};
 exports.findTestDetails=function(req,res){
 	if(req.body.testid!=null){
 		console.log(typeof req.body.testid);
@@ -78,10 +99,16 @@ exports.findingmarks=function(req,res){
 						console.log(result,completeresult);
 					data={	answersgiven:result,
 						totalmarks:completeresult,
-						Testid:testid};
-						marks.saveNewTestMarks(data);
-
-						res.send({result:result , completeresult:completeresult});
+						Testid:testid,
+						username:req.body.username,
+						Answers:Answers,
+					};
+						marks.saveNewTestMarks(data,function(marksid){
+						console.log(marksid+"no");	
+						res.send({result:result , completeresult:completeresult,marksid:marksid});
+						});
+						
+						
 
 
 					}}

@@ -9,6 +9,9 @@ app.controller('CourseHome',['$scope','$http','$location',function($scope,$http,
 	$scope.newtopic=function(id){
 		window.location="http://localhost:8080/newtopic.html?id="+$scope.Course_id;
 		};
+	$scope.Blog=function(){
+		window.location="http://localhost:8080/courseblog.html?courseid="+$scope.Course_id;
+	}
 	topiccourses=function(){
 		$http.post("/findTopic",{Course:$scope.Course_id}).then(function(response){
 			console.log(response);
