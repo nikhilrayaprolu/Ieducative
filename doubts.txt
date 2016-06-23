@@ -1,2 +1,0 @@
-is it rest?
-how about authentication

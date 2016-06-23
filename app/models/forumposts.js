@@ -35,6 +35,15 @@ exports.saveNewForumPosts=function(req,res){
 		}
 	});
 }
+exports.getPostBody=function(req,res){
+	addForumPosts.findOne({_id:req.params.postid},function(err,data){
+		if(!err){
+			res.send(data);
+		}else{
+			res.send(err);
+		}
+	})
+}
 exports.getForumPosts=function(req,res){
 	addForumPosts.find({course:req.params.courseid},function(err,data){
 		if(!err){

@@ -16,18 +16,33 @@ var addTestPaper=require("./app/models/testpaper");
 var addTestMarks=require("./app/models/marks");
 var addTestRating=require("./app/models/testrating");
 var addTestStats=require("./app/models/teststats");
-var addForumPosts=require("./app/models/forumposts")
-var addForumComments=require("./app/models/forumcomments")
+var addForumPosts=require("./app/models/forumposts");
+var addForumComments=require("./app/models/forumcomments");
+var addUserChannels=require("./app/models/userchannels");
 //var facultyPage=require("./app/models/facultyPage")
+var server = require('http').Server(app).listen(port);
+var io = require('socket.io')(server);
+io.sockets.on('connection', function(socket) {
+    // once a client has connected, we expect to get a ping from them saying what room they want to join
+    socket.on('room', function(room) {
+        console.log(socket.join(room));
+        console.log(room);
+    });
+     socket.on('newnotification', function (data) {
+    	console.log(data);
+    	io.sockets.in(data.room).emit('message',data.body);
+  });
+});
+
+// now, it's easy to send a message to just the clients in a given room
+
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 app.use(morgan('dev'));
 app.use(passport.initialize());
 app.use(express.static('public'));
-
-app.get('/',function(req,res){
-	res.send('Hello! the api is at http://localhost:'+port+'/api');
-
+app.get('/', function (req, res) {
+  res.sendfile(__dirname + '/index.html');
 });
 mongoose.connect(config.database);
 require('./config/passport')(passport);
@@ -146,8 +161,9 @@ app.get('/facultyteststats/:facultyname',addTestStats.returnfacultypapers);
 app.get('/testwisemarks/:testid',addTestMarks.testpaperstats);
 app.get('/forumpost/:courseid',addForumPosts.getForumPosts);
 app.post('/forumpost',addForumPosts.saveNewForumPosts);
+app.get('/postbody/:postid',addForumPosts.getPostBody);
 app.get('/forumcomment/:postid',addForumComments.findPostComments);
 app.post('/forumcomment/',addForumComments.saveNewForumComments);
-
-app.listen(port);
+app.get('/userchannels/:username',addUserChannels.getUserChannels);
+app.post('/')
 console.log('There will be dragons: http://localhost:' + port);

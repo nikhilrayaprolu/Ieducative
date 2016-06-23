@@ -1,7 +1,8 @@
 var path=require('path');
 var jwt = require('jwt-simple');
 var config = require('./../../config/database');
-var mongoose=require('mongoose'),
+var mongoose=require('mongoose');
+var userchannels=require('./userchannels');
 Schema=mongoose.Schema,
 autoIncrement=require('mongoose-auto-increment');
 var mongoose = require('mongoose');
@@ -123,6 +124,11 @@ exports.Subscribe=function(req,res){
 			query={'_id':req.body.courseid};
 			addCourse.findOneAndUpdate(query,{$addToSet:{student:req.body.username}},{upsert:true},function(err,doc){
 				if(err)return res.send(500,{error:err});
+				data={
+					username:req.body.username,
+					channels:req.body.courseid,
+				}
+				userchannels.saveNewUserChannel(data);
 				return res.send("success")
 			});
 		}else{
