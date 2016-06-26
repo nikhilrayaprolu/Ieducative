@@ -17,15 +17,15 @@ app.config(function($routeProvider){
 		templateUrl:'allcourses.html',
 		controller:'AllCourses'
 	})
-	.when('/commentcreate',{
+	.when('/commentcreate/:id',{
 		templateUrl:'commentcreate.html',
 		controller:'CommentCreateController'
 	})
-	.when('/courseblog',{
+	.when('/courseblog/:id',{
 		templateUrl:'courseblog.html',
 		controller:'CourseBlogController'
 	})
-	.when('/coursehome',{
+	.when('/coursehome/:id',{
 		templateUrl:'coursehome.html',
 		controller:'CourseHome'
 	})
@@ -33,7 +33,7 @@ app.config(function($routeProvider){
 		templateUrl:'createtest.html',
 		controller:'TestCreator'
 	})
-	.when('/doubtcreate',{
+	.when('/doubtcreate/:courseid',{
 		templateUrl:'doubtcreate.html',
 		controller:'NewQuestionController'
 	})
@@ -41,7 +41,7 @@ app.config(function($routeProvider){
 		templateUrl:'editcourse.html',
 		controller:'EditCourse'
 	})
-	.when('/edittopic',{
+	.when('/edittopic/:id',{
 		templateUrl:'edittopic.html',
 		controller:'TopicEditor'
 	})
@@ -70,7 +70,7 @@ app.config(function($routeProvider){
 		controller:'NotificationSender'
 	})
 	
-	.when('/postbody',{
+	.when('/postbody/:postid',{
 		templateUrl:'postbody.html',
 		controller:'PostBodyController'
 	})
@@ -83,11 +83,11 @@ app.config(function($routeProvider){
 		controller:'TestPaper'
 
 	})
-	.when('/testresults',{
+	.when('/testresults/:marksid',{
 		templateUrl:'testresults.html',
 		controller:'TestResults'
 	})
-	.when('/testresultsfaculty',{
+	.when('/testresultsfaculty/:testid',{
 		templateUrl:'testresultsfaculty.html',
 		controller:'facultyresults'
 	})
