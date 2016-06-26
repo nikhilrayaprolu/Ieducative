@@ -1,7 +1,7 @@
-var app=angular.module('Ieducative',[]);
-app.controller('TestResults',['$scope','$http','$location','AuthService',function($scope,$http,$location,AuthService){
+
+app.controller('TestResults',['$scope','$http','$location','AuthService','$routeParams',function($scope,$http,$location,AuthService,$routeParams){
 	$scope.studentid=window.localStorage.user;
-	$scope.marksid=$location.search().marksid;
+	$scope.marksid=$routeParams.marksid;
 	$scope.testid='';
 	$scope.TestPaper=[];
 	$scope.NoofAttemptedStudents=0;
@@ -50,7 +50,8 @@ app.controller('TestResults',['$scope','$http','$location','AuthService',functio
 };
 
 	$scope.testpaperhome=function(id){
-		window.location='http://localhost:8080/testdisplay.html?id='+id;
+		$location.path('/testdisplay/'+id);
+		//window.location='http://localhost:8080/testdisplay.html?id='+id;
 	};
 	$scope.submitrating=function(){
 		$http.post('/testrating',{
@@ -62,9 +63,6 @@ app.controller('TestResults',['$scope','$http','$location','AuthService',functio
 		})
 	};
 }]);
-app.config(function($locationProvider) {
- $locationProvider.html5Mode(true); 
-});
 
 
 

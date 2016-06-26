@@ -1,4 +1,4 @@
-var app=angular.module('Ieducative',['ngRoute']);
+
 app.controller('NotificationReceiver',['$location','$scope','$http','$routeParams',function($location,$scope,$http,$routeParams){
 	$scope.user=window.localStorage.user;
 	$scope.channels=[];
@@ -41,6 +41,3 @@ socket.on('message', function(data) {
 	};
 	
 }]);
-app.config(function($locationProvider) {
- $locationProvider.html5Mode(true); 
-});

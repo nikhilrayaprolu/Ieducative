@@ -5,6 +5,3 @@ app.controller('MainController',['$location','$scope','$http','$routeParams',fun
 	
 
 }]);
-app.config(function($locationProvider) {
- $locationProvider.html5Mode(true); 
-});

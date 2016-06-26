@@ -91,3 +91,6 @@ app
 .config(function($httpProvider){
 	$httpProvider.interceptors.push('AuthInterceptor');
 });
+app.config(function($locationProvider) {
+ $locationProvider.html5Mode(true); 
+});

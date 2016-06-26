@@ -1,4 +1,3 @@
-var app=angular.module('Ieducative',[]);
 app.controller('TestPaper',['$scope','$http','$location','AuthService',function($scope,$http,$location,AuthService){
 	$scope.studentid=window.localStorage.user;
 	$scope.TestPaper=[];
@@ -7,7 +6,8 @@ app.controller('TestPaper',['$scope','$http','$location','AuthService',function(
 	};
 
 	$scope.newcourse=function(id){
-		window.location="http://localhost:8080/allcourses.html?id="+$scope.studentid;
+		$location.path('/allcourses/'+$scope.studentid);
+		//window.location="http://localhost:8080/allcourses.html?id="+$scope.studentid;
 		};
 	$scope.TestPapers=function(){
 		AuthService.usertoken();
@@ -19,12 +19,10 @@ app.controller('TestPaper',['$scope','$http','$location','AuthService',function(
 		});
 	};
 	$scope.testpaperhome=function(id){
-		window.location='http://localhost:8080/testdisplay.html?id='+id;
+		$location.path('/testdisplay/'+id);
+		//window.location='http://localhost:8080/testdisplay.html?id='+id;
 	}
 }]);
-app.config(function($locationProvider) {
- $locationProvider.html5Mode(true); 
-});
 
 
 

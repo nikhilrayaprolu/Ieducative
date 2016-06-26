@@ -1,12 +1,12 @@
-var app=angular.module('Ieducative',['ngRoute']);
+
 app.controller('TopicCreator',['$location','$scope','$http','$routeParams',function($location,$scope,$http,$routeParams){
 	$scope.topictitle="";
 	$scope.topictext="";
 	$scope.Course='';
 	init=function(){
 		//console.log($location.search().id);
-		console.log($location.search());
-		$scope.Course=$location.search().id;
+		//console.log($location.search());
+		$scope.Course=$routeParams.id;
 	//console.log($location.search().id);
 	//Course=$location.search().id;
 };
@@ -25,8 +25,5 @@ init();
 	};
 
 }]);
-app.config(function($locationProvider) {
- $locationProvider.html5Mode(true); 
-});
 
 

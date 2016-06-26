@@ -1,4 +1,4 @@
-var app=angular.module('NewCourseApp',['ngRoute']);
+
 app.controller('NewCourse',['$location','$scope','$http','$routeParams',function($location,$scope,$http,$routeParams){
 	$scope.id=''
 	$scope.name="";
@@ -63,7 +63,4 @@ app.controller('NewCourse',['$location','$scope','$http','$routeParams',function
 	};
 
 }]);
-app.config(function($locationProvider) {
- $locationProvider.html5Mode(true); 
-});
 

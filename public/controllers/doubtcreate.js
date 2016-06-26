@@ -1,6 +1,6 @@
-var app=angular.module('Ieducative',['ngRoute']);
+
 app.controller('NewQuestionController',['$location','$scope','$http','$routeParams',function($location,$scope,$http,$routeParams){
-	$scope.course=$location.search().courseid;
+	$scope.course=$routeParams.courseid;
 	$scope.user=window.localStorage.user;
 	$scope.Title='';
 	$scope.PostBody='';
@@ -23,6 +23,3 @@ app.controller('NewQuestionController',['$location','$scope','$http','$routePara
 	};
 	
 }]);
-app.config(function($locationProvider) {
- $locationProvider.html5Mode(true); 
-});

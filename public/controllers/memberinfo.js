@@ -1,4 +1,4 @@
-var app=angular.module('SignUp',[]);
+
 app.factory('initialretriever',function($http){
 	console.log('OK')
 	return $http.get('/api/memberinfo');

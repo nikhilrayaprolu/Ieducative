@@ -14,7 +14,8 @@ app.controller('AllCourses',['$scope','$http','$location','AuthService',function
 		});
 	};
 	$scope.coursehome=function(id){
-		window.location='http://localhost:8080/coursehome.html?id='+id;
+		$location.path('/coursehome/'+id)
+		//window.location='http://localhost:8080/coursehome.html?id='+id;
 	};
 	$scope.subscribe=function(id){
 		console.log(id);
@@ -24,9 +25,6 @@ app.controller('AllCourses',['$scope','$http','$location','AuthService',function
 	};
 }]);
 	
-app.config(function($locationProvider) {
- $locationProvider.html5Mode(true); 
-});
 
 
 

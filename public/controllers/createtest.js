@@ -1,4 +1,4 @@
-var app=angular.module('TestForm',[]);
+
 app.controller('TestCreator',['$scope','$http',function($scope,$http){
 	$scope.facultyname=window.localStorage.user;
 	$scope.QuestionNumber=5;

@@ -1,6 +1,6 @@
-var app=angular.module('Ieducative',['ngRoute']);
+
 app.controller('PostBodyController',['$location','$scope','$http','$routeParams',function($location,$scope,$http,$routeParams){
-	$scope.postid=$location.search().postid;
+	$scope.postid=$routeParams.postid;
 	$scope.userid=window.localStorage.user;
 	$scope.Post={};
 	$scope.Comments=[];
@@ -21,10 +21,8 @@ app.controller('PostBodyController',['$location','$scope','$http','$routeParams'
 		})
 	}
 	$scope.NewComment=function(){
-		window.location="http://localhost:8080/commentcreate.html?postid="+$scope.postid;
+		$location.path('/commentcreate/'+$scope.postid);
+		//window.location="http://localhost:8080/commentcreate.html?postid="+$scope.postid;
 	};
 	
 }]);
-app.config(function($locationProvider) {
- $locationProvider.html5Mode(true); 
-});

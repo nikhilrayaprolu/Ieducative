@@ -33,65 +33,65 @@ app.config(function($routeProvider){
 		templateUrl:'createtest.html',
 		controller:'TestCreator'
 	})
-	.when('doubtcreate',{
+	.when('/doubtcreate',{
 		templateUrl:'doubtcreate.html',
 		controller:'NewQuestionController'
 	})
-	.when('editcourse',{
+	.when('/editcourse',{
 		templateUrl:'editcourse.html',
 		controller:'EditCourse'
 	})
-	.when('edittopic',{
+	.when('/edittopic',{
 		templateUrl:'edittopic.html',
 		controller:'TopicEditor'
 	})
-	.when('facultystats',{
+	.when('/facultystats',{
 		templateUrl:'facultystats.html',
 		controller:'facultystats'
 	})
-	.when('memberinfo',{
+	.when('/memberinfo',{
 		templateUrl:'memberinfo.html',
 		controller:'MemberController'
 	})
-	.when('newcourse',{
+	.when('/newcourse',{
 		templateUrl:'newcourse.html',
 		controller:'NewCourse'
 	})
-	.when('newtopic',{
+	.when('/newtopic',{
 		templateUrl:'newtopic.html',
 		controller:'TopicCreator'
 	})
-	.when('notificationreceiver',{
+	.when('/notificationreceiver',{
 		templateUrl:'notificationreceiver.html',
 		controller:'NotificationReceiver'
 	})
-	.when('notificationsender',{
+	.when('/notificationsender',{
 		templateUrl:'notificationsender.html',
 		controller:'NotificationSender'
 	})
 	
-	.when('postbody',{
+	.when('/postbody',{
 		templateUrl:'postbody.html',
 		controller:'PostBodyController'
 	})
-	.when('testdisplay',{
+	.when('/testdisplay',{
 		templateUrl:'testdisplay.html',
 		controller:'TestingController'
 	})
-	.when('testpapers',{
+	.when('/testpaper',{
 		templateUrl:'testpapers.html',
 		controller:'TestPaper'
 
 	})
-	.when('testresults',{
+	.when('/testresults',{
 		templateUrl:'testresults.html',
 		controller:'TestResults'
 	})
-	.when('testresultsfaculty',{
+	.when('/testresultsfaculty',{
 		templateUrl:'testresultsfaculty.html',
 		controller:'facultyresults'
 	})
-	.when('userstats',{
+	.when('/userstats',{
 		templateUrl:'userstats.html',
 		controller:'UserStats'
 	})

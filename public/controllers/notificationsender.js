@@ -1,4 +1,4 @@
-var app=angular.module('Ieducative',['ngRoute']);
+
 app.controller('NotificationSender',['$location','$scope','$http','$routeParams',function($location,$scope,$http,$routeParams){
 	$scope.Postid=$location.search().postid;
 	$scope.user=window.localStorage.user;
@@ -20,6 +20,3 @@ app.controller('NotificationSender',['$location','$scope','$http','$routeParams'
 	};
 	
 }]);
-app.config(function($locationProvider) {
- $locationProvider.html5Mode(true); 
-});

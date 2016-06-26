@@ -1,4 +1,4 @@
-var app=angular.module('Ieducative',['ngRoute']);
+
 app.controller('facultystats',['$location','$scope','$http','$routeParams',function($location,$scope,$http,$routeParams){
 	$scope.tests={};
 	$scope.facultyid=window.localStorage.user;
@@ -21,10 +21,8 @@ app.controller('facultystats',['$location','$scope','$http','$routeParams',funct
 		})
 	}
 	$scope.results=function(marksid){
-		window.location="http://localhost:8080/testresultsfaculty.html?testid="+marksid;
+		$location.path('/testresultsfaculty/'+marksid);
+		//window.location="http://localhost:8080/testresultsfaculty.html?testid="+marksid;
 	}
 
 }]);
-app.config(function($locationProvider) {
- $locationProvider.html5Mode(true); 
-});

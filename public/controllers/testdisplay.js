@@ -1,5 +1,5 @@
-var app=angular.module('TestForm',[]);
-app.controller('TestCreator',['$scope','$http',function($scope,$http){
+
+app.controller('TestCreator',['$scope','$http','$location','$routeParams',function($scope,$http,$location,$routeParams){
 	$scope.Questions={};
 	$scope.Questionid='';
 	$scope.QuestionNumber='';
@@ -81,7 +81,8 @@ $scope.submit=function(){
 			console.log(response.data.completeresult,response.data.result);
 			console.log(response.data.completeresult+response.data.result);
 			alert(response.data.completeresult+response.data.result);
-			window.location="http://localhost:8080/testresults.html?marksid="+response.data.marksid;
+			$location.path('/testresults/'+response.data.marksid);
+			//window.location="http://localhost:8080/testresults.html?marksid="+response.data.marksid;
 			return response;
 
 		});

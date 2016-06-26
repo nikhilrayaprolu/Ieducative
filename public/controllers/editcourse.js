@@ -1,4 +1,4 @@
-var app=angular.module('NewCourseApp',[]);
+
 app.controller('EditCourse',['$scope','$http',function($scope,$http){
 	$scope.name="";
 	$scope.syllabus="";

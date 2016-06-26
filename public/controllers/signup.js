@@ -36,26 +36,8 @@ AuthService.register({
 
 }]);
 		
-/*		$http.post("/api/signup",{
-	name:$scope.name,
-	password:$scope.password,
-	FirstName:$scope.FirstName,
-	LastName:$scope.LastName,
-	email:$scope.email,
-	phone:$scope.phone,
-	dob:$scope.dob,
-	studentclass:$scope.studentclass,
-	schoolname:$scope.schoolname,
 
-}).then(function(response){
-			alert(response);
-			console.log(response);
-			return response;
-
-		});
-*/
-
-app.controller('SignInController',['$scope','$http','AuthService',function($scope,$http,AuthService,AUTH_EVENTS){
+app.controller('SignInController',['$scope','$http','AuthService','$location',function($scope,$http,AuthService,$location){
 	$scope.name='',
 	$scope.password='',
 			$scope.user={
@@ -72,26 +54,19 @@ $scope.submit=function(){
 }).then(function(msg) {
 	console.log(msg);
       if(msg=='Faculty'){
-      	window.location="http://localhost:8080/coursesfaculty";
+      	$location.path('/coursesfaculty');
+      	//window.location="http://localhost:8080/coursesfaculty";
+
       }else{
-      	window.location="http://localhost:8080/coursesstudent";
+      	//window.location="/coursesstudent";
+      	$location.path('/coursesstudent')
       };
 
     }, function(errMsg) {
       alert("unsuccess");
     });
 
-/*		$http.post("/api/authenticate",{
-	name:$scope.name,
-	password:$scope.password,
-
-}).then(function(response){
-			alert(response.data);
-			console.log(response.data);
-			return response;
-
-		});
-*/};
+};
 
 	$scope.$on('auth-not-authenticated',function(event){
 		AuthService.logout();
@@ -99,31 +74,3 @@ $scope.submit=function(){
 	});
 
 }]);
-
-/*$httpProvider.interceptors.push(['$rootScope', '$q', '$localStorage',
-      function ($rootScope, $q, $localStorage) {
-        return {
-          request: function (config) {
-            config.params = config.params || {};
-            config.headers = config.headers || {};
-            if ($localStorage.token) {
-              config.headers.Authorization = $localStorage.token;
-              config.params.token = $localStorage.token; 
-            }
-            return config;
-          },
-          response: function (res) {
-            return res || $q.when(res);
-          },
-          'responseError': function(response) {
-              if(response.status === 401 || response.status === 400) {
-                //console.log("Not logged in");
-                // Handle unauthenticated user
-                $rootScope.$broadcast('unauthorized');
-                //$location.path('auth/login');
-              }
-              return $q.reject(response);
-          }
-        };
-      }
-    ]);*/

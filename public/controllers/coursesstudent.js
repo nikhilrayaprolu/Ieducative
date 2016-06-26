@@ -7,7 +7,8 @@ app.controller('CourseStudent',['$scope','$http','$location','AuthService',funct
 	};
 
 	$scope.newcourse=function(id){
-		window.location="http://localhost:8080/allcourses.html?id="+$scope.studentid;
+		location.path('/allcourses');
+		//window.location="http://localhost:8080/allcourses.html?id="+$scope.studentid;
 		};
 	$scope.coursesstudent=function(){
 		AuthService.usertoken();
@@ -18,15 +19,14 @@ app.controller('CourseStudent',['$scope','$http','$location','AuthService',funct
 	};
 	$scope.coursesstudent();
 	$scope.coursehome=function(id){
-		window.location='http://localhost:8080/coursehome.html?id='+id;
+		$location.path('coursehome/'+id);
+		//window.location='http://localhost:8080/coursehome.html?id='+id;
 	}
 	$scope.TestPaper=function(){
-		window.location='http://location:8080/testpapers.html?id='+$scope.studentid;
+		$location.path('/testpapers/'+$scope.studentid);
+		//window.location='http://location:8080/testpapers.html?id='+$scope.studentid;
 	}
 }]);
-app.config(function($locationProvider) {
- $locationProvider.html5Mode(true); 
-});
 
 
 
