@@ -1,0 +1,33 @@
+textarea {
+  font-family: monospace;
+  margin: 2px;
+  height: 100px;
+  width: 250px;
+}
+div#send {
+  float: left;
+  margin-right: 20px;
+}
+div#receive {
+}
+div#sendreceive {
+  margin: 0 0 20px 0;
+}
+h2 {
+  margin: 0 0 10px 0;
+}
+div#local {
+  float: left;
+  margin-right: 20px;
+}
+div#remote {
+  float: left;
+}
+div#screen {
+  float: left;
+}
+div#videocontainer {
+  margin: 0 0 20px 0;
+  width:1300px;
+  height:700px;
+}

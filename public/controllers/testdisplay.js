@@ -6,12 +6,25 @@ app.controller('TestCreator',['$scope','$http',function($scope,$http){
 	$scope.Answers=[];
 	$scope.NoOfHours=1;
 	$scope.username=window.localStorage.user;
+	$scope.days=0;
+	$scope.hours=0;
+	$scope.minutes=0;
+	$scope.seconds=0;
+	localstorage=window.localStorage;
+
 	$scope.getNumber=function(N){
 		return Array.apply(null, {length: N}).map(Number.call, Number);
 	};
 	var starttime=new Date();
+	if(!localstorage.endtime){
 	var endtime=new Date(starttime);
+
 	endtime.setHours(starttime.getHours()+$scope.NoOfHours);
+	localstorage.endtime=endtime;
+}
+else{
+	var endtime=localstorage.endtime;
+};
 	$scope.getTimeRemaining=function (endtime){
 		  var t = Date.parse(endtime) - Date.parse(new Date());
 		  var seconds = Math.floor( (t/1000) % 60 );
@@ -28,20 +41,29 @@ app.controller('TestCreator',['$scope','$http',function($scope,$http){
 		}
 	$scope.initializeClock=function (id, endtime){
 		  var clock = document.getElementById(id);
+
 		  var timeinterval = setInterval(function(){
 		    var t = $scope.getTimeRemaining(endtime);
-		    clock.innerHTML = 'days: ' + t.days + '<br>' +
-		                      'hours: '+ t.hours + '<br>' +
-		                      'minutes: ' + t.minutes + '<br>' +
-		                      'seconds: ' + t.seconds;
+		    $scope.days=t.days;
+		    localstorage.days=t.days;
+		    $scope.hours=t.hours;
+		    $scope.minutes=t.minutes;
+		    
+		    localstorage.seconds=t.seconds;
+
+		    $scope.seconds=localstorage.seconds;
+		    $scope.$digest();
+		    //console.log($scope.seconds,t.seconds);
+		    
 		    if(t.total<=0){
 		      clearInterval(timeinterval);
 		    }
 		  },1000);
 		}
+		
 	init=function(){
 
-	$http.post("/testpaper",{testid:21}).then(function(response){
+	$http.post("/testpaper",{testid:0}).then(function(response){
 			console.log(response);
 			$scope.Questions=response.data[0].Questions;
 			$scope.Questionid=response.data[0]._id;

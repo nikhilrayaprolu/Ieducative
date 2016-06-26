@@ -1,4 +1,4 @@
-var app=angular.module('SignUp',[]);
+
 app.controller('SignUpController',['$scope','$http','AuthService',function($scope,$http,AuthService){
 	$scope.name='',
 	$scope.password='',
@@ -72,9 +72,9 @@ $scope.submit=function(){
 }).then(function(msg) {
 	console.log(msg);
       if(msg=='Faculty'){
-      	window.location="http://localhost:8080/coursesfaculty.html?id="+$scope.name;
+      	window.location="http://localhost:8080/coursesfaculty";
       }else{
-      	window.location="http://localhost:8080/coursesstudent.html?id="+$scope.name;
+      	window.location="http://localhost:8080/coursesstudent";
       };
 
     }, function(errMsg) {

@@ -1,4 +1,4 @@
-var app=angular.module('Ieducative',[]);
+
 app.controller('AllCourses',['$scope','$http','$location','AuthService',function($scope,$http,$location,AuthService){
 	$scope.studentid=$location.search().id;
 	$scope.courses=[];

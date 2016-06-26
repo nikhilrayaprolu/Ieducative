@@ -41,9 +41,6 @@ app.use(bodyParser.json());
 app.use(morgan('dev'));
 app.use(passport.initialize());
 app.use(express.static('public'));
-app.get('/', function (req, res) {
-  res.sendfile(__dirname + '/index.html');
-});
 mongoose.connect(config.database);
 require('./config/passport')(passport);
 var apiRoutes =express.Router();
@@ -165,5 +162,8 @@ app.get('/postbody/:postid',addForumPosts.getPostBody);
 app.get('/forumcomment/:postid',addForumComments.findPostComments);
 app.post('/forumcomment/',addForumComments.saveNewForumComments);
 app.get('/userchannels/:username',addUserChannels.getUserChannels);
-app.post('/')
+app.get('*', function (req, res) {
+  res.sendfile(__dirname + '/public/main.html');
+});
+
 console.log('There will be dragons: http://localhost:' + port);

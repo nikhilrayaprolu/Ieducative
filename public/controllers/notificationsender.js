@@ -1,5 +1,5 @@
 var app=angular.module('Ieducative',['ngRoute']);
-app.controller('CommentCreateController',['$location','$scope','$http','$routeParams',function($location,$scope,$http,$routeParams){
+app.controller('NotificationSender',['$location','$scope','$http','$routeParams',function($location,$scope,$http,$routeParams){
 	$scope.Postid=$location.search().postid;
 	$scope.user=window.localStorage.user;
 	

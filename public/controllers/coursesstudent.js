@@ -1,4 +1,4 @@
-var app=angular.module('CoursesStudent',[]);
+
 app.controller('CourseStudent',['$scope','$http','$location','AuthService',function($scope,$http,$location,AuthService){
 	$scope.studentid=window.localStorage.user;
 	$scope.courses=[];
@@ -16,6 +16,7 @@ app.controller('CourseStudent',['$scope','$http','$location','AuthService',funct
 			$scope.courses=response.data;
 		});
 	};
+	$scope.coursesstudent();
 	$scope.coursehome=function(id){
 		window.location='http://localhost:8080/coursehome.html?id='+id;
 	}

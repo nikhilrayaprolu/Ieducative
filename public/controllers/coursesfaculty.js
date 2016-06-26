@@ -1,6 +1,6 @@
-var app=angular.module('CourseFaculty',[]);
+
 app.controller('CourseFaculty',['$scope','$http','$location','AuthService',function($scope,$http,$location,AuthService){
-	$scope.facultyid=$location.search().id;
+	$scope.facultyid=window.localStorage.user;
 	$scope.courses=[];
 	$scope.getNumber=function(N){
 		return Array.apply(null, {length: N}).map(Number.call, Number);
