@@ -57,7 +57,7 @@ app.config(function($routeProvider){
 		templateUrl:'newcourse.html',
 		controller:'NewCourse'
 	})
-	.when('/newtopic',{
+	.when('/newtopic/:courseid',{
 		templateUrl:'newtopic.html',
 		controller:'TopicCreator'
 	})
@@ -70,20 +70,20 @@ app.config(function($routeProvider){
 		controller:'NotificationSender'
 	})
 	
-	.when('/postbody/:postid',{
+	.when('/doubt/:postid',{
 		templateUrl:'postbody.html',
 		controller:'PostBodyController'
 	})
-	.when('/testdisplay',{
-		templateUrl:'testdisplay.html',
-		controller:'TestingController'
+	.when('/testdisplay/:id',{
+		templateUrl:'testdisplay1.html',
+		controller:'TestDisplay'
 	})
 	.when('/testpaper',{
 		templateUrl:'testpapers.html',
 		controller:'TestPaper'
 
 	})
-	.when('/testresults/:marksid',{
+	.when('/testresult/:marksid',{
 		templateUrl:'testresults.html',
 		controller:'TestResults'
 	})

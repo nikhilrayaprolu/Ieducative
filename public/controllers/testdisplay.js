@@ -1,5 +1,5 @@
 
-app.controller('TestCreator',['$scope','$http','$location','$routeParams',function($scope,$http,$location,$routeParams){
+app.controller('TestDisplay',['$scope','$http','$location','$routeParams',function($scope,$http,$location,$routeParams){
 	$scope.Questions={};
 	$scope.Questionid='';
 	$scope.QuestionNumber='';
@@ -11,7 +11,7 @@ app.controller('TestCreator',['$scope','$http','$location','$routeParams',functi
 	$scope.minutes=0;
 	$scope.seconds=0;
 	localstorage=window.localStorage;
-
+	$scope.testid=$routeParams.id;
 	$scope.getNumber=function(N){
 		return Array.apply(null, {length: N}).map(Number.call, Number);
 	};
@@ -63,7 +63,7 @@ else{
 		
 	init=function(){
 
-	$http.post("/testpaper",{testid:0}).then(function(response){
+	$http.post("/testpaper",{testid:$scope.testid}).then(function(response){
 			console.log(response);
 			$scope.Questions=response.data[0].Questions;
 			$scope.Questionid=response.data[0]._id;
@@ -81,7 +81,7 @@ $scope.submit=function(){
 			console.log(response.data.completeresult,response.data.result);
 			console.log(response.data.completeresult+response.data.result);
 			alert(response.data.completeresult+response.data.result);
-			$location.path('/testresults/'+response.data.marksid);
+			$location.path('/testresult/'+response.data.marksid);
 			//window.location="http://localhost:8080/testresults.html?marksid="+response.data.marksid;
 			return response;
 

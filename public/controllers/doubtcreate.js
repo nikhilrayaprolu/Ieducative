@@ -15,8 +15,9 @@ app.controller('NewQuestionController',['$location','$scope','$http','$routePara
 
 
 		}).then(function(response){
-			return response;
+			
 			alert("successfully submitted");
+			$location.path('/courseblog/'+$scope.course);
 		});
 
 

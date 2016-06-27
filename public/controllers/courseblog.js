@@ -24,7 +24,7 @@ app.controller('CourseBlogController',['$location','$scope','$http','$routeParam
 		//window.location="http://localhost:8080/doubtcreate.html?courseid="+$scope.courseid;
 	};
 	$scope.postmain=function(id){
-		$location.path('/postbody/'+id);
+		$location.path('/doubt/'+id);
 		//window.location="http://localhost:8080/postbody.html?postid="+id;
 	}
 }]);

@@ -22,8 +22,9 @@ exports.saveNewForumComments=function(req,res){
 	courseno:req.body.courseno,
 	});
 	ForumComments.save({},function(err,data){
-		if(!err){	
-			res.sendStatus(200);
+		if(!err){
+			res.send(data);	
+			//res.sendStatus(200);
 		}else{
 			res.send(err);
 		}

@@ -1,5 +1,4 @@
-
-app.controller('CourseHome',['$scope','$http','$location','$routeParams',function($scope,$http,$location,'$routeParams'){
+app.controller('CourseHome',['$scope','$http','$location','$routeParams',function($scope,$http,$location,$routeParams){
 	$scope.facultyid=window.localStorage.user;
 	$scope.topics=[];
 	$scope.Course_id=$routeParams.id;

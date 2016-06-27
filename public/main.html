@@ -6,10 +6,22 @@
 <script src="https://code.jquery.com/jquery-3.0.0.js"></script>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+	
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.js"></script>
 	<script type="text/javascript" src="/controllers/maincontroller.js"></script>
 <script type="text/javascript" src="/controllers/signup.js"></script>
 	<script type="text/javascript" src="/controllers/coursesstudent.js"></script>
 	<script type="text/javascript" src="/controllers/testpapers.js"></script>
+	<script type="text/javascript" src="/controllers/coursehome.js"></script>
+	<script type="text/javascript" src="/controllers/allcourses.js"></script>
+	<script type="text/javascript" src="/controllers/newtopic.js"></script>
+	<script type="text/javascript" src="/controllers/courseblog.js"></script>
+	<script type="text/javascript" src="/controllers/doubtcreate.js"></script>
+	<script type="text/javascript" src="/controllers/postbody.js"></script>
+	<script type="text/javascript" src="/controllers/commentcreate.js"></script>
+	<script type="text/javascript" src="/controllers/createtest.js"></script>
+	<script type="text/javascript" src="/controllers/testdisplay.js"></script>
+	<script type="text/javascript" src="/controllers/testresults.js"></script>
 <base href="/">
 <script type="text/javascript" src="/controllers/service.js"></script>
   <script type="text/javascript" src="/controllers/constants.js"></script>
@@ -24,15 +36,17 @@
 				<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
 		<meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <link rel="stylesheet" type="text/css" href="css/main.css">
 
-		
+<link rel="stylesheet" type="text/css" href="css/main.css">		
 </head>
 <body ng-app="Ieducative" ng-controller="MainController">
 <div ng-include src="'test.html'" ></div>
 	<div id="main">
-		<div ng-view>
+		<div class="page {{ pageClass }}" ng-view>
 			
 		</div>
-	</div>
+		
+  </div>
+          
+
 </body>

@@ -21,8 +21,28 @@ app.controller('PostBodyController',['$location','$scope','$http','$routeParams'
 		})
 	}
 	$scope.NewComment=function(){
-		$location.path('/commentcreate/'+$scope.postid);
-		//window.location="http://localhost:8080/commentcreate.html?postid="+$scope.postid;
+		$scope.commentshow=1;
+
+	}
+
+	$scope.submit=function(){
+		$http.post("/forumcomment",{
+			Postid:$scope.postid,
+			CommentBody:$scope.CommentBody,
+			user:$scope.user,
+
+		}).then(function(response){
+			$scope.commentshow=0;
+			$scope.Comments.push(response);
+			alert("successfully submitted");
+		});
+
+
 	};
+	
+	//$scope.NewComment=function(){
+	//	$location.path('/commentcreate/'+$scope.postid);
+		//window.location="http://localhost:8080/commentcreate.html?postid="+$scope.postid;
+	
 	
 }]);

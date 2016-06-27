@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
-	<script type="text/javascript" src="/controllers/createtest.js"></script>
-	<title>test paper creator</title>
-</head>
-<body ng-app="TestForm" >
 
-<div ng-controller="TestCreator">
+<main>
+<div ng-controller="TestCreator" style="width: 50%">
 title:<input type="text" ng-model="title">
 uniqueno:<input type="text" ng-model="uniqueno">
 QuestionNumber:<input type="text" ng-model="QuestionNumber">
@@ -30,5 +23,4 @@ let testrating be 1(easy)2(hard)3(difficult)<br>
  {{Questions}}
  {{correct}}
  </div>
-</body>
-</html>
+</main>

@@ -1,5 +1,6 @@
 
 app.controller('AllCourses',['$scope','$http','$location','AuthService',function($scope,$http,$location,AuthService){
+	$scope.pageClass = 'page-home';
 	$scope.studentid=window.localStorage.user;
 	$scope.courses=[];
 	$scope.getNumber=function(N){

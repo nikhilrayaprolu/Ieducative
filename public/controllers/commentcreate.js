@@ -3,12 +3,16 @@ app.controller('CommentCreateController',['$location','$scope','$http','$routePa
 	
 	$scope.Postid=$routeParams.id;
 	$scope.user=window.localStorage.user;
-	
+	$scope.commentshow=0;
 	CommentBody='';
-	
+	$scope.NewComment=function(postid){
+		$scope.commentshow=1;
+
+	}
+
 	$scope.submit=function(){
 		$http.post("/forumcomment",{
-			Postid:$scope.Postid,
+			Postid:$scope.postid,
 			CommentBody:$scope.CommentBody,
 			user:$scope.user,
 

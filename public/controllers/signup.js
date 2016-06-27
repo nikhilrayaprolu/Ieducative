@@ -1,5 +1,6 @@
 
 app.controller('SignUpController',['$scope','$http','AuthService',function($scope,$http,AuthService){
+	$scope.pageClass = 'page-home';
 	$scope.name='',
 	$scope.password='',
 	$scope.FirstName='',

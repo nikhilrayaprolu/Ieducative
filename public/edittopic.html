@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
-	<script type="text/javascript" src="/controllers/edittopic.js"></script>
-	<title>Topic Editor</title>
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.js"></script>
-	<base href="/">
-</head>
-
-<body ng-app="Ieducative" >
-
+<main>
 <div ng-controller="TopicEditor">
 <button style="float: right;" class="btn waves-effect waves-light" type="submit" name="action" ng-click="delete()">Delete</button>
 
@@ -22,6 +11,4 @@ Topictext<input type="text" name="" ng-model="topictext">
 </form>
 {{name}}
  </div>
-
-</body>
-</html>
+</main>
