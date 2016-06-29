@@ -19,18 +19,40 @@ var addTestStats=require("./app/models/teststats");
 var addForumPosts=require("./app/models/forumposts");
 var addForumComments=require("./app/models/forumcomments");
 var addUserChannels=require("./app/models/userchannels");
+var addnotifications=require("./app/models/notifications");
+var addlogout=require("./app/models/logoutdetails");
+var addUser=require("./app/models/userchanges");
 //var facultyPage=require("./app/models/facultyPage")
 var server = require('http').Server(app).listen(port);
 var io = require('socket.io')(server);
 io.sockets.on('connection', function(socket) {
     // once a client has connected, we expect to get a ping from them saying what room they want to join
     socket.on('room', function(room) {
-        console.log(socket.join(room));
-        console.log(room);
+    	socket.join(room);
+    	if(room=='0'){
+        //console.log(socket.join(room));
+        console.log("yes",io.sockets.clients(0)) ;
+
+    };
+        //console.log(room);
     });
+    socket.on('username',function(username){
+    	socket['username']=username;
+    });
+    socket.on('disconnect',function(){
+    	addlogout.saveNewLogoutDetails(socket['username'],function(data){
+    		console.log(data);
+    	});
+    })
+
      socket.on('newnotification', function (data) {
     	console.log(data);
-    	io.sockets.in(data.room).emit('message',data.body);
+    	addnotifications.saveNewNotification(data,function(datadb){
+    		console.log(datadb);
+    	});
+
+    	console.log(data.room,data);
+    	io.sockets.in(data.room).emit('message',data);
   });
 });
 
@@ -162,8 +184,12 @@ app.get('/postbody/:postid',addForumPosts.getPostBody);
 app.get('/forumcomment/:postid',addForumComments.findPostComments);
 app.post('/forumcomment/',addForumComments.saveNewForumComments);
 app.get('/userchannels/:username',addUserChannels.getUserChannels);
+app.post('/notificationsindb',addnotifications.getnotifications);
+app.post('/notificationsindbafterlogout',addnotifications.getnotificationsafterlogout);
+app.get('/updateprofile/:username',addUser.updateuser);
+app.post('/updatedprofile/:username',addUser.updateduser);
 app.get('*', function (req, res) {
-  res.sendfile(__dirname + '/public/main.html');
+  res.sendfile(__dirname + '/public/index1.html');
 });
 
 console.log('There will be dragons: http://localhost:' + port);

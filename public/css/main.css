@@ -1,4 +1,4 @@
- header, main, footer  {
+  main, footer  {
       padding-left: 240px;
     }
 
@@ -7,19 +7,6 @@
         padding-left: 0;
       }
     }
-.side-nav a{
-	
-	font-family: 'Open Sans', sans-serif;
-font-size: 12px;
-font-weight: 700;
-line-height: 40px;
-letter-spacing: 0.1em;
-text-transform: uppercase;
-color: #808080;
-}
-.side-nav a:hover{
-	color:white;
-}
 @keyframes rotateFall {
     0%      { transform: rotateZ(0deg); }
     20%     { transform: rotateZ(10deg); animation-timing-function: ease-out; }

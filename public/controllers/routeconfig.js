@@ -61,7 +61,7 @@ app.config(function($routeProvider){
 		templateUrl:'newtopic.html',
 		controller:'TopicCreator'
 	})
-	.when('/notificationreceiver',{
+	.when('/notifications',{
 		templateUrl:'notificationreceiver.html',
 		controller:'NotificationReceiver'
 	})
@@ -90,6 +90,10 @@ app.config(function($routeProvider){
 	.when('/testresultsfaculty/:testid',{
 		templateUrl:'testresultsfaculty.html',
 		controller:'facultyresults'
+	})
+	.when('/profile',{
+		templateUrl:'yourprofile.html',
+		controller:'YourProfile'
 	})
 	.when('/userstats',{
 		templateUrl:'userstats.html',

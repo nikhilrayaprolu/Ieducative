@@ -1,6 +1,5 @@
 
 app.controller('facultyresults',['$location','$scope','$http','$routeParams',function($location,$scope,$http,$routeParams){
-	
 	$scope.facultyid=window.localStorage.user;
 	$scope.testid=$routeParams.testid;
 	$scope.response=[];
@@ -23,7 +22,7 @@ app.controller('facultyresults',['$location','$scope','$http','$routeParams',fun
 	}
 
 	$scope.results=function(marksid){
-		$location.path('/testresults/'+marksid);
+		$location.path('/testresult/'+marksid);
 		//window.location="http://localhost:8080/testresults.html?marksid="+marksid;
 	}
 

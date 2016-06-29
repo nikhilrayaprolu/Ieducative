@@ -1,0 +1,73 @@
+<main>
+				<h3>SignUp</h3>
+				{{profile}}
+					<form class="" >
+					<div class="row">
+						<div class="input-field col s12">
+							<i class="material-icons prefix">account_circle</i>
+							<input type="text" placeholder="Placeholder" id="user_name" class="validate" ng-model="profile.name">
+							<label for="user_name">User Name</label>
+						</div>
+					</div>
+
+						<div class="row">
+							<div class="input-field col s6">
+							
+								<input placeholder="Placeholder" id="first_name" type="text" class="validate" ng-model="profile.FirstName">
+								<label for="first_name">First Name</label>
+							</div>
+							<div class="input-field col s6">
+								<input id="last_name" type="text" class="validate" ng-model="profile.LastName">
+								<label for="last_name">Last Name</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s12">
+							<i class="material-icons prefix">phone</i>
+								<input id="phone" type="tel" class="validate" ng-model="profile.phone">
+								<label for="phone">Phone</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s12">
+							
+								<input id="group" type="text" class="validate" ng-model="profile.group">
+								<label for="phone">Group</label>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="input-field col s12">
+							<i class="material-icons prefix">email</i>
+								<input id="email" type="email" class="validate" ng-model="profile.email">
+								<label for="email">Email</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s12">
+							<i class="material-icons prefix">today</i>
+								<input id="bday" type="datetime-local" class="	validate" ng-model="profile.dob">
+								<label for="Date of Birth">Date of Birth</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s12" >
+							
+								<input id="presentclass" type="text" class="validate" ng-model="profile.studentclass">
+								<label for="present class">present class</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s12">
+							
+								<input id="school" type="text" class="validate" ng-model="profile.schoolname">
+								<label for="school">school</label>
+							</div>
+						</div>
+						
+						<button class="btn waves-effect waves-light" type="submit" name="action" ng-click="submit()">SignUp
+    					<i class="material-icons right">send</i>
+  						</button>
+        
+					</form>
+					</main>
