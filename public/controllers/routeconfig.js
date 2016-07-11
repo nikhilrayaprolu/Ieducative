@@ -3,6 +3,7 @@ app.config(function($routeProvider){
 		.when('/signup',{
 		templateUrl:'signup.html',
 		controller:'SignUpController'
+		
 	})
 	.when('/coursesfaculty',{
 		templateUrl:'coursesfaculty.html',
@@ -12,6 +13,14 @@ app.config(function($routeProvider){
 		templateUrl:'coursesstudent.html',
 		controller:'CourseStudent'
 
+	})
+	.when('/watchvideo/:id',{
+		templateUrl:'watchvideo.html',
+		controller:'WatchVideoController'
+	})
+	.when('/updatephoto',{
+		templateUrl:'updateprofilephoto.html',
+		controller:'myCtrl'
 	})
 	.when('/allcourses',{
 		templateUrl:'allcourses.html',
@@ -29,9 +38,10 @@ app.config(function($routeProvider){
 		templateUrl:'coursehome.html',
 		controller:'CourseHome'
 	})
-	.when('/createtest',{
+	.when('/createtest/:id?',{
 		templateUrl:'createtest.html',
-		controller:'TestCreator'
+		controller:'TestCreator',
+		controllerAs:'Creator'
 	})
 	.when('/doubtcreate/:courseid',{
 		templateUrl:'doubtcreate.html',
@@ -53,7 +63,7 @@ app.config(function($routeProvider){
 		templateUrl:'memberinfo.html',
 		controller:'MemberController'
 	})
-	.when('/newcourse',{
+	.when('/newcourse/:id?',{
 		templateUrl:'newcourse.html',
 		controller:'NewCourse'
 	})
@@ -78,7 +88,7 @@ app.config(function($routeProvider){
 		templateUrl:'testdisplay1.html',
 		controller:'TestDisplay'
 	})
-	.when('/testpaper',{
+	.when('/testpaper/:pageid?',{
 		templateUrl:'testpapers.html',
 		controller:'TestPaper'
 
@@ -94,6 +104,18 @@ app.config(function($routeProvider){
 	.when('/profile',{
 		templateUrl:'yourprofile.html',
 		controller:'YourProfile'
+	})
+	.when('/dashboarduser',{
+		templateUrl:'dashboarduser.html',
+		controller:'DashBoardController'
+	})
+	.when('/testpaperconditions/:testid',{
+		templateUrl:'testpaperconditions.html',
+		controller:'TestPaperConditions'
+	})
+	.when('/videoconference',{
+		templateUrl:'views/videoconferencelightweight.html',
+		controller:'VideoConference'
 	})
 	.when('/userstats',{
 		templateUrl:'userstats.html',

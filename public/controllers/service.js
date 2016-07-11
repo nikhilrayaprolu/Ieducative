@@ -9,15 +9,17 @@ app
 		var token =window.localStorage.getItem(LOCAL_TOKEN_KEY);
 		var group =window.localStorage.getItem(LOCAL_GROUP);
 		var user=window.localStorage.getItem(LOCAL_USER);
+		var profilepic=window.localStorage.getItem('profilepic')
 		if(token){
 			useCredentials(token,group);
 		}
 	}
-	function storeUserCredentials(token,group,user){
+	function storeUserCredentials(token,group,user,profilepic){
 		console.log(user);
 		window.localStorage.setItem(LOCAL_TOKEN_KEY,token);
 		window.localStorage.setItem(LOCAL_GROUP,group);
 		window.localStorage.setItem(LOCAL_USER,user);
+		window.localStorage.setItem('profilepic',profilepic);
 		useCredentials(token);
 	}
 	function useCredentials(token){
@@ -51,7 +53,7 @@ app
 				console.log(result);
 				if(result.data.success){
 					console.log(result.data);
-					storeUserCredentials(result.data.token,result.data.group,result.data.username);
+					storeUserCredentials(result.data.token,result.data.group,result.data.username,data.profilepic);
 					resolve(result.data.username);
 				}else{
 					reject(resolve.data.username);
@@ -63,7 +65,7 @@ app
 		destroyUserCredentials();
 	};
 	var usertoken = function(){
-	var token =window.localStorage.getItem(LOCAL_TOKEN_KEY);
+		var token =window.localStorage.getItem(LOCAL_TOKEN_KEY);
 		if(token){
 			useCredentials(token);
 		}	
@@ -92,5 +94,41 @@ app
 	$httpProvider.interceptors.push('AuthInterceptor');
 });
 app.config(function($locationProvider) {
- $locationProvider.html5Mode(true); 
+	$locationProvider.html5Mode(true); 
 });
+app.directive('fileModel', ['$parse', function ($parse) {
+	return {
+		restrict: 'A',
+		link: function(scope, element, attrs) {
+			var model = $parse(attrs.fileModel);
+			var modelSetter = model.assign;
+
+			element.bind('change', function(){
+				scope.$apply(function(){
+					modelSetter(scope, element[0].files[0]);
+				});
+			});
+		}
+	};
+}]);
+
+app.service('fileUpload', ['$http', function ($http) {
+	this.uploadFileToUrl = function(file, uploadUrl,uploaddata,cb){
+		var fd = new FormData();
+		fd.append('photo', file);
+		fd.append('Title',uploaddata.Title);
+		fd.append('Description',uploaddata.Description);
+		$http.post(uploadUrl, fd, {
+			transformRequest: angular.identity,
+			headers: {'Content-Type': undefined}
+		})
+
+		.success(function(response){
+			cb(null,response);
+		})
+
+		.error(function(err){
+			cb(err,null);
+		});
+	}
+}]);

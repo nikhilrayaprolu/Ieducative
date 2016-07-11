@@ -1,26 +1,71 @@
 
 <main>
-<div ng-controller="TestCreator" style="width: 50%">
-title:<input type="text" ng-model="title">
-uniqueno:<input type="text" ng-model="uniqueno">
-QuestionNumber:<input type="text" ng-model="QuestionNumber">
-Subject:<input type="text" name="" ng-model="subject">
-Class:<input type="text" name="" ng-model="class">
-<form novalidate class="simple-form" ng-submit="submit()">
-<div ng-repeat="i in getNumber(QuestionNumber) track by $index">
-	{{$index+1}}.Question:<input type="text" ng-model="Questions[$index].name"/><br/>
-	<div ng-repeat="j in getNumber(4)">
-	{{$index+1}}.option:<input type="text" ng-model="Questions[$parent.$index].options[$index]"/><br/>
-	</div>
-	Correctoption:<input type="text" ng-model="correct[$index]"/><br/>
+<div ng-controller="TestCreator as Creator">
+<div class="row">
+<div input-field class="col l3">
+    <input type="text" ng-model="data.title" length="150">
+    <label>Question Paper Title</label>
+</div>
+{{data.title}}
+<input-field class="col l3">   
+    <input type="text" ng-model="data.QuestionNumber" class="active">
+    <label>QuestionNumber</label>
+    
+</input-field>
+<div input-field class="col l3">
+    <input type="text" ng-model="data.subject" length="150">
+    <label>Subject</label>
+</div>
+<div input-field class="col l3">
+    <input type="text" ng-model="data.class" length="150">
+    <label>Class</label>
 
 </div>
-testrating:<input type="text" name="" ng-model="testrating"><br>
-let testrating be 1(easy)2(hard)3(difficult)<br>
-<input type="submit" id="submit" value="Submit" />
-</form>
 
- {{Questions}}
- {{correct}}
+</div>
+
+<form novalidate class="simple-form" ng-submit="submit()">
+<div class="row">
+ <ul class="collapsible popout" data-collapsible="accordion" watch>
+<li ng-repeat="i in getNumber(data.QuestionNumber)" class="">
+<div input-field class="collapsible-header ">
+    <input type="text" ng-model="Questions[$index].name" length="150">
+    <label>{{$index+1}}.Question:</label>
+</div>
+	<div class="collapsible-body">
+	<div ng-repeat="j in getNumber(4)">
+	<div input-field >
+    <input type="text" ng-model="Questions[$parent.$parent.$parent.$index].options[$parent.$parent.$index]" length="150">
+    <label>{{$index+1}}.option:</label>
+</div>
+
+</div>
+
+<div input-field>
+    <input type="text" ng-model="data.Correct[$parent.$parent.$index]" length="150">
+    <label>CorrectOption</label>
+</div>
+
+{{data.Correct}}
+	
+</div>
+
+</li>
+</ul>
+</div>
+
+<div input-field>
+    <select class="" ng-model="data.testrating" material-select watch>
+        <option ng-repeat="value in selectarray">{{value}}</option>
+
+    </select>
+    <label>testrating:</label>
+</div>
+{{data.testrating[0]}}
+<input type="submit" class="btn waves-effect waves-light" id="submit" value="Submit" />
+
+</form>
+<button class="btn waves-effect waves-light"  ng-click="Draft()" >Draft</button>
+
  </div>
 </main>

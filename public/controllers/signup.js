@@ -23,7 +23,24 @@ AuthService.register({
 	schoolname:$scope.schoolname,
 
 }).then(function(msg) {
-      alert("registration successfull Please Login to have the fun")
+   AuthService.login({
+	name:$scope.name,
+	password:$scope.password,
+
+}).then(function(msg) {
+	console.log(msg);
+      if(msg=='Faculty'){
+      	$location.path('/dashboarduser');
+      	//window.location="http://localhost:8080/coursesfaculty";
+
+      }else{
+      	//window.location="/coursesstudent";
+      	$location.path('/dashboarduser')
+      };
+
+    }, function(errMsg) {
+      alert("unsuccess");
+    });
     }, function(errMsg) {
       alert("registration is not successfull")
     });		
@@ -55,12 +72,12 @@ $scope.submit=function(){
 }).then(function(msg) {
 	console.log(msg);
       if(msg=='Faculty'){
-      	$location.path('/coursesfaculty');
+      	$location.path('/dashboarduser');
       	//window.location="http://localhost:8080/coursesfaculty";
 
       }else{
       	//window.location="/coursesstudent";
-      	$location.path('/coursesstudent')
+      	$location.path('/dashboarduser')
       };
 
     }, function(errMsg) {

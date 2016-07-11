@@ -15,6 +15,7 @@ app.controller('YourProfile',['$location','$scope','$http','$routeParams',functi
 	$scope.submit=function(){
 		$http.post('/updatedprofile/'+$scope.userid,{profile:$scope.profile}).then(function(response){
 			console.log(response);
+			$location.path('/updatephoto');
 		})
 	}
 

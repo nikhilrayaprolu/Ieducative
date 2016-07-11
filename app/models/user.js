@@ -25,7 +25,7 @@ var UserSchema = new Schema({
 		state:String,
 		address:String,
 		group:String,
-
+		profilephoto:String
 
 	});
 

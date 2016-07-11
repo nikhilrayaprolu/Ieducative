@@ -12,19 +12,20 @@ app.controller('TestDisplay',['$scope','$http','$location','$routeParams',functi
 	$scope.seconds=0;
 	localstorage=window.localStorage;
 	$scope.testid=$routeParams.id;
+	$scope.disabled=false;
 	$scope.getNumber=function(N){
 		return Array.apply(null, {length: N}).map(Number.call, Number);
 	};
 	var starttime=new Date();
-	if(!localstorage.endtime){
+//	if(!localstorage.endtime){
 	var endtime=new Date(starttime);
 
 	endtime.setHours(starttime.getHours()+$scope.NoOfHours);
-	localstorage.endtime=endtime;
-}
-else{
-	var endtime=localstorage.endtime;
-};
+	//localstorage.endtime=endtime;
+//}
+//else{
+//	var endtime=localstorage.endtime;
+//};
 	$scope.getTimeRemaining=function (endtime){
 		  var t = Date.parse(endtime) - Date.parse(new Date());
 		  var seconds = Math.floor( (t/1000) % 60 );
@@ -45,13 +46,13 @@ else{
 		  var timeinterval = setInterval(function(){
 		    var t = $scope.getTimeRemaining(endtime);
 		    $scope.days=t.days;
-		    localstorage.days=t.days;
+		    
 		    $scope.hours=t.hours;
 		    $scope.minutes=t.minutes;
+		    $scope.seconds=t.seconds;
 		    
-		    localstorage.seconds=t.seconds;
 
-		    $scope.seconds=localstorage.seconds;
+		    
 		    $scope.$digest();
 		    //console.log($scope.seconds,t.seconds);
 		    
@@ -60,7 +61,6 @@ else{
 		    }
 		  },1000);
 		}
-		
 	init=function(){
 
 	$http.post("/testpaper",{testid:$scope.testid}).then(function(response){
@@ -68,9 +68,19 @@ else{
 			$scope.Questions=response.data[0].Questions;
 			$scope.Questionid=response.data[0]._id;
 			$scope.QuestionNumber=response.data[0].QuestionNumber;
-			
+			$scope.Subject=response.data[0].subject;
+			$scope.class=response.data[0].class;
+			$scope.facultyname=response.data[0].facultyname;
+			if($scope.username==$scope.facultyname){
+				console.log("disabled");
+				$scope.disabled=true;
+			}
+			$scope.title=response.data[0].TestPaperTitle;
 			return response;
 		});
+	$http.post("/testpaperfilter/",{filters:{Testid:$scope.testid}}).then(function(response){
+		$scope.state=response.data.state;
+	})
 };
 init();
 $scope.initializeClock('clockdiv', endtime);

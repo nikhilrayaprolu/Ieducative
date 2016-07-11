@@ -1,23 +1,97 @@
 <main>
-<div ng-controller="TestResults" ng-init="yourtestresults()">
-<input type="text" name="" ng-model="rating">
-<button style="float: right;" class="btn waves-effect waves-light" type="submit" name="action" ng-click="submitrating()">Submit</button>
+	<div ng-controller="TestResults" ng-init="yourtestresults()">
+		<div>
+			<p>can you please rate this question paper on a scale of 10</p>
+		</div>
+		<div class="row">
+			<p>{{rating}}</p>
+			<p class="range-field">
+				<input type="range" ng-model="rating" id="test5" min="0" max="10" />
+			</p>
 
-	<p>welcome {{studentid}} see your marks below</p>
-	<p>these are your Answers for the question</p>
-	<div ng-repeat="question in Questions">
-	<p>{{$index+1}}.{{question.name}}</p>
+			<button  class="btn waves-effect waves-light" type="submit" name="action" ng-click="submitrating()">Submit</button>
+		</div>
+		<p>welcome {{studentid}} see your marks below</p>
+		<p>these are your Answers for the question</p>
+		<div ng-repeat="question in Questions">
+			<p>{{$index+1}}.{{question.name}}</p>
+
+			<div ng-repeat="option in question.options" ng-init="">
+
+				<input type="radio" name="{{$parent.$index}}" ng-value="$index+1" id="{{$parent.$index}}india{{$index+1}}" ng-model="Answers[$parent.$index]" ng-disabled="true">
+				<label for="{{$parent.$index}}india{{$index+1}}"  ng-class='{green:$index+1==CorrectAnswers[$index] && CorrectAnswers[$index]==Answers[$parent.$index], red: $index+1==Answers[$parent.$index] &&  CorrectAnswers[$index]!=Answers[$parent.$index] , yellow: $index+1==CorrectAnswers[$index] && CorrectAnswers[$index]!=Answers[$parent.$index]}'>{{$index+1}}.{{option}}</label>
+
+			</div>
+			<p>correctoption:{{CorrectAnswers[$index]}}</p>
+
+		</div>
+		<div class="col s12 m4 l12 enter">
+			<h4 class="header">Congratulations</h4>
+			<div class="card  light-blue">
+				<div class="card-content white-text">
+					<span class="card-title">Your Report Card</span>
+					<p>Your Total Marks:{{marks}}</p>
+					<p>Your Rank:{{presentRank}}</p>
+					<p>Total No of Attempted Students:{{NoofAttemptedStudents}}</p>
+				</div>
+				<button  class="btn waves-effect waves-light" type="submit" name="action" ng-click="">Share</button>
+
+
+			</div>
+		</div>
+
 	
-	<div ng-repeat="option in question.options" ng-init="">
 	
-	<input type="radio" name="{{$parent.$index}}" ng-value="$index+1" ng-model="Answers[$parent.$index]" ng-disabled="true">{{$index+1}}.{{option}}<br>
+	<div class="divider"></div>
+	<div id="striped-table">
+		<h4 class="header">Leader Board</h4>
+		<div class="row">
+			<div class="col s12 m4 l3">
+				<p>The Top  People At present on the platform on this test.for detailed information,</p>
+			</div>
+			<div class="col s12 m8 l9">
 	
+				<table class="striped">
+					<thead>
+						<tr>
+						<th data-field="id">UserName</th>
+							<th data-field="name">TotalMarks</th>
+							<th data-field="price">His Answers</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="person in topten">
+							<td>{{person.username}}</td>
+							<td>{{person.totalmarks}}</td>
+							<td>{{person.answersgiven}}</td>
+						</tr>
+						
+					</tbody>
+				</table>
+			</div>
+		</div>
 	</div>
-	<p>correctoption:{{CorrectAnswers[$index]}}</p>
-
-</div>
-<p>your marks are:{{marks}},your rank:{{presentRank}},out of {{NoofAttemptedStudents}}</p>
-{{CorrectAnswers}}
-the top ten are:{{topten}}
 </div>
 </main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

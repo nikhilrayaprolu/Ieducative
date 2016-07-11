@@ -2,11 +2,17 @@
 <div ng-controller="TestDisplay">
 <div class="container">
 <div class="stopwatch">
-{{}}
 <div class="clock  z-depth-1">
 	<span>{{days}}:{{hours}}:{{minutes}}:{{seconds}}</span>
 	<div class="overlay waves-effect"></div>
 </div>
+</div>
+<div>
+	<p>Class:{{class}}</p>
+	<p>Subject:{{Subject}}</p>
+	<p>FacultyName:{{facultyname}}</p>
+	<p>PaperTitle:{{title}}</p>
+
 </div>
 <form novalidate ng-submit="submit()">
 <div ng-repeat="question in Questions" >
@@ -14,7 +20,7 @@
 	
 	<p ng-repeat="option in question.options" >
 	
-	<input type="radio" name="{{$parent.$index}}" id="{{$parent.$index}}india{{$index+1}}" ng-value="$index+1" ng-model="Answers[$parent.$index]">
+	<input type="radio" name="{{$parent.$index}}" id="{{$parent.$index}}india{{$index+1}}" ng-value="$index+1" ng-model="Answers[$parent.$index]" ng-disabled="disabled">
 	<label for="{{$parent.$index}}india{{$index+1}}">{{$index+1}}.{{option}}</label>
 	
 	</p>
@@ -24,7 +30,11 @@
 </div>
 
 	{{Answers}}
-	<input type="submit" id="submit" value="Submit" />
+	
+	<button class="btn waves-effect waves-light" type="submit" name="action" >Submit
+    					<i class="material-icons right">send</i>
+  						</button>
+        
 	</form>
 </div>
 

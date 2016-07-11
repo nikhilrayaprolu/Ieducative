@@ -18,7 +18,7 @@ app.controller('NewCourse',['$location','$scope','$http','$routeParams',function
 		console.log($location.search().id);
 
 		$http.post("/findCourse",{
-			id:$location.search().id
+			id:$routeParams.id
 
 		}).then(function(response){
 			console.log(response.data[0]);

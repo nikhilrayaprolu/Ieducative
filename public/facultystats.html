@@ -1,30 +1,117 @@
 <main>
-<div ng-controller="facultystats" ng-init="facultystats()">
-{{response}}
- <table>
+        <div class="container" ng-controller="TestPaper" ng-init="TestPapers()">
+        <button style="float: right;" class="btn waves-effect waves-light" type="submit" name="action" ng-click="NewTestPaper()">NewTestPaper</button>
+            <a class='dropdown-button btn' href='javascript:void(0);' data-activates='demoDropdown' dropdown data-hover="false">
+::Class::{{class}}
+</a>
+
+<!-- Dropdown Structure -->
+<ul id='demoDropdown' class='dropdown-content'>
+    <li><a href="javascript:void(0);" ng-click="class=1">1</a></li>
+    <li><a href="javascript:void(0);" ng-click="class=2">2</a></li>
+    <li><a href="javascript:void(0);"  ng-click="class=3">3</a></li>
+    <li><a href="javascript:void(0);" ng-click="class=4">4</a></li>
+    <li><a href="javascript:void(0);" ng-click="class=5">5</a></li>
+    <li><a href="javascript:void(0);" ng-click="class=6">6</a></li>
+    <li><a href="javascript:void(0);" ng-click="class=7">7</a></li>
+    <li><a href="javascript:void(0);" ng-click="class=8">8</a></li>
+    <li><a href="javascript:void(0);" ng-click="class=9">9</a></li>
+    <li><a href="javascript:void(0);" ng-click="class=10">10</a></li>
+
+
+</ul>  
+<a class='dropdown-button btn' href='javascript:void(0);' data-activates='demoDropdown2' dropdown data-hover="false">
+Subject::{{subject}}::
+</a>
+
+<!-- Dropdown Structure -->
+<ul id='demoDropdown2' class='dropdown-content'>
+    <li><a href="javascript:void(0);" ng-click="subject='All'">All</a></li>
+    <li><a href="javascript:void(0);" ng-click="subject='English'">English</a></li>
+    <li><a href="javascript:void(0);" ng-click="subject='Math'">Math</a></li>
+    <li><a href="javascript:void(0);" ng-click="subject='Science'">Science</a></li>
+    <li><a href="javascript:void(0);" ng-click="subject='Social'">Social</a></li>
+    <li><a href="javascript:void(0);" ng-click="subject='Hindi'">Hindi</a></li>
+    
+    
+</ul>
+<a class='dropdown-button btn' href='javascript:void(0);' data-activates='demoDropdown3' dropdown data-hover="false">
+::Sort::{{Sort}}
+</a>
+
+<!-- Dropdown Structure -->
+<ul id='demoDropdown3' class='dropdown-content'>
+    <li><a href="javascript:void(0);" ng-click="SortChange(1)">Recent First</a></li>
+    <li><a href="javascript:void(0);" ng-click="SortChange(2)">Highest Rating</a></li>
+    <li><a href="javascript:void(0);" ng-click="SortChange(3)">Highest Attempts</a></li>
+    
+    
+</ul>
+<p> State:</p>
+<div input-field id="State">
+    <select class="" ng-model="select.value1" material-select watch>
+        <option ng-repeat="value in select.choices">{{value}}</option>
+    </select>
+</div>
+
+<a class='btn' ng-click="TestPapers()" >
+Filter
+</a>
+          
+        <table class="bordered highlight centered responsive-table">
         <thead>
           <tr>
-              <th data-field="id">TestPaperid</th>
-              <th data-field="averagemarks">average marks</th>
-              
-              <th data-field="totalmarks">totalmarks</th>
-              <th data-field="totalnoofstudents">number of attempts</th>
-              <th data-field="pagereferaltoseesubmissions">attempts</th>
-          </tr>
+                    <th datafield="id">Testid</th>
+            <th data-field="name">TestPaper Title </th>
+            <th data-field="syllabus">Subject</th>
+            <th data-field="studentclass" >Class</th>
+                    <th datafield="Total Marks">Total Marks</th>
+                    <th datafield="Avg-Marks">Avg-Marks</th>
+                    <th datafield="totalno.ofattemps">Attempts till now</th>
+                    <th datafield="Rating">Difficulty Rating</th>
+                    <th datafield="Faculty">Faculty</th>
+                    <th datafield="State">State</th>
+                    <th datafield="result">Results</th>
+            <th datafield="view">View</th>   
+            <th datafield="edit"></th>
+              </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="data in response">
-          
-            <td>{{data.Testid}}</td>
-            <td>{{data.avgmarks}}</td>
-            
-            <td>{{data.completemarks}}</td>
-            
-            <td>{{data.totalNoOfStudentsAttempted}}</td>
-            <td><button class="btn waves-effect waves-light" type="submit" name="action" ng-click="results(data.Testid)">result</button>
-</td>
-            
-          </tr>
-        </tbody>
-      </table>
-</main>
+                    
+                    <tr ng-repeat="testpaper in TestPaper"  >
+                      <td>{{testpaper._id}}</td>
+                        <td><a ng-click="testpaperhome(testpaper._id)">{{testpaper.title}}</a></td>
+                        <td>{{testpaper.subject}}</td>
+                        <td>{{testpaper.class}}</td>
+                        <td>{{testpaper.completemarks}}</td>
+                                        <td>{{testpaper.avgmarks}}</td>
+                                        <td>{{testpaper.totalNoOfStudentsAttempted}}</td>
+                                        <td>{{testpaper.RatingAvg}}</td>
+                                        <td>{{testpaper.facultyname}}</td>
+                                        <td>{{testpaper.State}}</td>
+                                        <td><button class="btn waves-effect waves-light" type="submit" name="action" ng-click="result(testpaper._id)">Results
+        </button></td>
+
+                      <td><button class="btn waves-effect waves-light" type="submit" name="action" ng-click="testpaperhome(testpaper._id)">View
+        </button></td>
+        <td><button class="btn waves-effect waves-light" type="submit" name="action" ng-click="edittesthome(testpaper._id)">Edit
+        </button></td>
+
+            </tr>
+            </tbody>
+            </table>    
+   
+  <pagination 
+
+    page="pageno"
+    page-size="1"
+    total="pages"
+    show-prev-next="true"
+    use-simple-prev-next="false"
+    dots="...."
+    hide-if-empty="false"
+    adjacent="2"
+    scroll-top="false"
+    pagination-action="changePage(page)" />
+    </div>
+        </main>

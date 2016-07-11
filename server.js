@@ -1,7 +1,9 @@
+var nodemailer = require('nodemailer');
 var express = require('express');
-var multer  = require('multer');
-var upload = multer({ dest: './uploads' });
 var app = express();
+var multer  = require('multer');
+var upload = multer({ dest: './public/images' });
+var uploaddocument=multer({dest:'./public/documents'})
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var mongoose = require('mongoose');
@@ -10,6 +12,8 @@ var config = require('./config/database');
 var User = require('./app/models/user');
 var port = process.env.PORT || 8080;
 var jwt = require('jwt-simple');
+
+
 var addCourse=require("./app/models/course");
 var addTopic=require("./app/models/topic");
 var addTestPaper=require("./app/models/testpaper");
@@ -22,6 +26,8 @@ var addUserChannels=require("./app/models/userchannels");
 var addnotifications=require("./app/models/notifications");
 var addlogout=require("./app/models/logoutdetails");
 var addUser=require("./app/models/userchanges");
+var addCourseVideo=require("./app/models/coursevideo")
+var addCourseDocument=require("./app/models/coursedocument")
 //var facultyPage=require("./app/models/facultyPage")
 var server = require('http').Server(app).listen(port);
 var io = require('socket.io')(server);
@@ -40,9 +46,9 @@ io.sockets.on('connection', function(socket) {
     	socket['username']=username;
     });
     socket.on('disconnect',function(){
-    	addlogout.saveNewLogoutDetails(socket['username'],function(data){
+    	/*addlogout.saveNewLogoutDetails(socket['username'],function(data){
     		console.log(data);
-    	});
+    	});*/
     })
 
      socket.on('newnotification', function (data) {
@@ -57,6 +63,24 @@ io.sockets.on('connection', function(socket) {
 });
 
 // now, it's easy to send a message to just the clients in a given room
+var smtpConfig={
+  host:'smtp.gmail.com',
+  port:465,
+  secure:true,
+  
+  auth:{
+    user:'nikhil684',
+    pass:'rayaprolu'
+  }
+}
+var transporter=nodemailer.createTransport(smtpConfig);
+var mailOptions = {
+    from: 'nikhil684@gmail.com', // sender address 
+    to: 'nikhil684@gmail.com, nikhil13.prs@gmail.com', // list of receivers 
+    subject: 'Hello ', // Subject line 
+    text: 'Hello world ', // plaintext body 
+    html: '<b>Hello world </b>' // html body 
+};
 
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
@@ -66,6 +90,25 @@ app.use(express.static('public'));
 mongoose.connect(config.database);
 require('./config/passport')(passport);
 var apiRoutes =express.Router();
+
+app.post('/sendmail',function(req,res){
+
+  transporter.sendMail({
+    from: 'nikhil684@gmail.com', // sender address 
+    to: req.body.sendto, // list of receivers 
+    subject: req.body.subject, // Subject line 
+    text: req.body.text, // plaintext body 
+    html: req.body.htmlbody // html body 
+}, function(error, info){
+    if(error){
+        return console.log(error);
+        res.send(err);
+    }
+    console.log('Message sent: ' + info.response);
+    res.send("Message sent");
+});
+
+})
 apiRoutes.post('/signup',function(req,res){
 	console.log(req)
 	if(!req.body.name || !req.body.password){
@@ -110,7 +153,7 @@ apiRoutes.post('/authenticate',function(req,res){
 			user.comparePassword(req.body.password,function(err,isMatch){
 				if(isMatch && !err){
 					var token = jwt.encode(user,config.secret);
-					res.json({success:true,token:'JWT '+ token,group:user.group,username:user.name});
+					res.json({success:true,token:'JWT '+ token,group:user.group,username:user.name,profilepic:user.profilephoto});
 				}else{
 					res.send({success:false,msg:'Authentication failed.wrong Password.'});
 				}
@@ -140,7 +183,50 @@ apiRoutes.get('/memberinfo', passport.authenticate('jwt', { session: false}), fu
     return res.status(403).send({success: false, msg: 'No token provided.'});
   }
 });
- 
+getAuthorisedFaculty=function(req,res,next){
+var token=getToken(req.headers);
+if(token){
+  var decoded=jwt.decode(token,config.secret);
+  User.findOne({
+    name:decoded.name
+  },function(err,user){
+    if(err) throw err;
+    if(user.group=="Faculty"){
+      next();
+    }else{
+      res.status(403).send({success:false,msg:'Incorrect Token'})
+    }
+  })
+}else{
+  return res.status(403).send({success:false,msg:'No token provided'});
+}
+} 
+function HasRole(role) {
+  return function(req, res, next) {
+    if (role !== req.user.role) res.redirect(...);
+    else next();
+  }
+}
+getAuthorisedAdmin=function(req,res,next){
+  var token=getToken(req.headers);
+if(token){
+  var decoded=jwt.decode(token,config.secret);
+  User.findOne({
+    name:decoded.name
+  },function(err,user){
+    if(err) throw err;
+    if(user.group==""){
+      next();
+    }else{
+      res.status(403).send({success:false,msg:'Incorrect Token'})
+    }
+  })
+}else{
+  return res.status(403).send({success:false,msg:'No token provided'});
+}
+
+
+}
 getToken = function (headers) {
   if (headers && headers.authorization) {
     var parted = headers.authorization.split(' ');
@@ -188,6 +274,12 @@ app.post('/notificationsindb',addnotifications.getnotifications);
 app.post('/notificationsindbafterlogout',addnotifications.getnotificationsafterlogout);
 app.get('/updateprofile/:username',addUser.updateuser);
 app.post('/updatedprofile/:username',addUser.updateduser);
+app.post('/updateprofilphoto/:username',upload.single('photo'),addUser.updateprofilephoto);
+app.post('/testpaperfilter',addTestStats.findallteststats);
+app.post('/updatevideo/:courseid',upload.single('photo'),addCourseVideo.saveNewVideo);
+app.post('/loadvideos/:courseid',addCourseVideo.getCourseVideos)
+app.post('/updatedocument/:courseid',uploaddocument.single('photo'),addCourseDocument.saveNewDocument);
+app.post('/loaddocuments/:courseid',addCourseDocument.getCourseDocument);
 app.get('*', function (req, res) {
   res.sendfile(__dirname + '/public/index1.html');
 });

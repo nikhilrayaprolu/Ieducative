@@ -9,6 +9,9 @@ app.controller('CourseFaculty',['$scope','$http','$location','AuthService',funct
 		$location.path('/newcourse/');
 		//window.location="http://localhost:8080/newcourse.html?id="+id;
 		};
+	$scope.editcourse=function(id){
+		$location.path('/newcourse/'+id);
+	}
 	$scope.coursesfaculty=function(){
 		AuthService.usertoken();
 		$http.get("/faculty/"+$scope.facultyid).then(function(response){

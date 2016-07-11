@@ -1,12 +1,16 @@
 <main>
 
 <div ng-controller="NotificationReceiver" ng-init="">
-{{channels}}<br>
-{{notifications}}
-	<div class="card blue-grey darken-1" ng-repeat="notification in notifications">
+<div class="row">
+	<div class="card blue darken-1 col l5" ng-repeat="notification in notifications" style="margin-left: 10px">
     	<div class="card-content white-text">
-    		{{notification}}
+    		{{notification.NotificationText}}
     	</div>
+    	<div class="card-action">
+    		<span class="btn">{{notification.room}}</span>
+    		<span class="btn">{{notification.datesubmitted}}</span>
+    	</div>
+    </div>
     </div>
 </div>
 </main>

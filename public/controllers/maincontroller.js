@@ -1,11 +1,11 @@
-var app=angular.module('Ieducative',['ngRoute','ngAnimate']);
-app.controller('MainController',['$location','$scope','$http','$routeParams',function($location,$scope,$http,$routeParams){
+var app=angular.module('Ieducative',['ngRoute','ngAnimate','ui.materialize']);
+app.controller('MainController',['$location','$scope','$http','$routeParams','AuthService',function($location,$scope,$http,$routeParams,AuthService){
 	$scope.channels=[];
 	$scope.notificationscount=0;
 	console.log($scope.notificationscount);
 	$scope.username=window.localStorage.user;
+	$scope.profilepic=window.localStorage.profilepic;
 	
-	//$scope.username="nik";
 	$scope.group=window.localStorage.group;
 	
 	$scope.notifications=[];
@@ -20,10 +20,14 @@ app.controller('MainController',['$location','$scope','$http','$routeParams',fun
 			
 		}
 	});
-
+	
+	AuthService.usertoken();
 	$http.get('/userchannels/'+$scope.username).then(function(response){
 		console.log(response);
-		$scope.channels=response.data.channels;
+		if(response.data.channels){
+		$scope.channels=response.data.channels;	
+		}
+		
 		console.log($scope.channels);
 		$scope.channels.push('all');
 		$scope.channels.push($scope.username);
@@ -43,7 +47,12 @@ app.controller('MainController',['$location','$scope','$http','$routeParams',fun
 	   }});
 		socket.on('message', function(data) {
 			console.log('Incoming message:', data);
-			$scope.notifications.push(data);
+			notification={
+				text:data.body,
+				room:data.room,
+				time:new Date()
+			}
+			$scope.notifications.push(notification);
 			Materialize.toast(data.body, 10000) 
 			$scope.notificationscount=$scope.notificationscount+1;
 			console.log($scope.notificationscount);

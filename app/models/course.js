@@ -61,8 +61,6 @@ exports.deleteCourse=function(req,res){
 exports.saveNewCourse=function(req,res){
 if(req.body.id){
 	addCourse.findOne({_id:req.body.id},function(err,course){
-		
-		
 		course.name=req.body.name;
 		course.syllabus=req.body.syllabus;
 		course.fees=req.body.fees;
@@ -83,7 +81,7 @@ if(req.body.id){
 	});
 }
 else{
-	console.log(req.body);
+	console.log(req);
 	var courseData=new addCourse(req.body);
 	if(req.file){
 	courseData.set('profilephoto',req.file.filename);}
@@ -123,6 +121,7 @@ exports.Subscribe=function(req,res){
 		if(req.body.username==decoded.name){
 			query={'_id':req.body.courseid};
 			addCourse.findOneAndUpdate(query,{$addToSet:{student:req.body.username}},{upsert:true},function(err,doc){
+
 				if(err)return res.send(500,{error:err});
 				data={
 					username:req.body.username,

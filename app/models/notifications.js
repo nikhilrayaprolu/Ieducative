@@ -19,7 +19,7 @@ exports.saveNewNotification=function(data,cb){
 	var Notifications=new addNotifications({
 		room:data.room,
 		NotificationText:data.body,
-		date:new Date(),
+		datesubmitted:new Date(),
 	});
 	Notifications.save({},function(err,data){
 		if(!err){
@@ -58,7 +58,7 @@ exports.getnotifications=function(req,res){
 		addLogout.saveNewLogoutDetails(req.body.username,function(data){
 			console.log(data);
 		});
-		addNotifications.find().where('room').in(req.body.channels).exec(function(err,data){
+		addNotifications.find().sort({datesubmitted:-1}).where('room').in(req.body.channels).exec(function(err,data){
 			if(err){
 				res.send(err);
 
