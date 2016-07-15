@@ -35,6 +35,15 @@ exports.saveNewForumPosts=function(req,res){
 		}
 	});
 }
+exports.getrecentdoubts=function(req,res){
+	addForumPosts.find({},null,{sort:{submitted:-1},limit:5},function(err,data){
+		if(err){
+			res.send(err);
+		}else{
+			res.send(data);
+		}
+	})
+}
 exports.getPostBody=function(req,res){
 	addForumPosts.findOne({_id:req.params.postid},function(err,data){
 		if(!err){
@@ -44,6 +53,7 @@ exports.getPostBody=function(req,res){
 		}
 	})
 }
+
 exports.getForumPosts=function(req,res){
 	addForumPosts.find({course:req.params.courseid},function(err,data){
 		if(!err){

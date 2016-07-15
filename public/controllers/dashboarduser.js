@@ -1,9 +1,21 @@
 app.controller('DashBoardController',['$scope','$http','$location','$routeParams',function($scope,$http,$location,$routeParams){
 	$scope.username=window.localStorage.user;
 	$scope.topics=[];
-	
+	$scope.class=window.localStorage.studentclass;
+	$scope.completedtests=window.localStorage.completedtests;
+	$scope.studentrating=window.localStorage.studentrating;
+	$scope.nextcontestdetails=function(){
+		$http.post("/Recommended").then(function(response){
+			Recommended=response.data;
+		})
+	}
 	$scope.getNumber=function(N){
 		return Array.apply(null, {length: N}).map(Number.call, Number);
 	};
-	
+	$scope.getrecentfivedoubts=function(){
+		$http.get('/getrecentfivedoubts').then(function(response){
+			$scope.Doubts=response.data;
+		})
+	}
+	$scope.getrecentfivedoubts();
 }]);

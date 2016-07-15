@@ -18,6 +18,12 @@ $scope.class=$location.search().class;
 	$scope.NewTestPaper=function(){
 		$location.path('/createtest/');
 	}
+	$scope.loadAccordion=function(){
+		 $('.collapsible').collapsible({
+      accordion : true // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+    });
+	}
+	$scope.loadAccordion();
 	$scope.SortChange=function(num){
 		$scope.num=num;
 		if(num==1){

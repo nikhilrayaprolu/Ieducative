@@ -14,12 +14,15 @@ app
 			useCredentials(token,group);
 		}
 	}
-	function storeUserCredentials(token,group,user,profilepic){
+	function storeUserCredentials(token,group,user,profilepic,userfull){
 		console.log(user);
 		window.localStorage.setItem(LOCAL_TOKEN_KEY,token);
 		window.localStorage.setItem(LOCAL_GROUP,group);
 		window.localStorage.setItem(LOCAL_USER,user);
 		window.localStorage.setItem('profilepic',profilepic);
+		window.localStorage.setItem('studentclass',userfull.studentclass);
+		window.localStorage.setItem('completedtests',userfull.completedtests);
+		window.localStorage.setItem('studentrating',userfull.studentrating);
 		useCredentials(token);
 	}
 	function useCredentials(token){
@@ -34,6 +37,7 @@ app
 		window.localStorage.removeItem(LOCAL_TOKEN_KEY);
 		window.localStorage.removeItem(LOCAL_GROUP);
 		window.localStorage.removeItem(LOCAL_USER);
+		window.localStorage.removeItem('profilepic');
 	}
 	var register = function(user){
 		return $q(function(resolve,reject){
@@ -53,7 +57,7 @@ app
 				console.log(result);
 				if(result.data.success){
 					console.log(result.data);
-					storeUserCredentials(result.data.token,result.data.group,result.data.username,data.profilepic);
+					storeUserCredentials(result.data.token,result.data.group,result.data.username,result.data.profilepic,result.data.user);
 					resolve(result.data.username);
 				}else{
 					reject(resolve.data.username);
@@ -76,7 +80,10 @@ app
 		register:register,
 		logout:logout,
 		usertoken : usertoken,
-		isAuthenticated:function(){return isAuthenticated;},
+		isAuthenticated:function(){
+			console.log("yes");
+			console.log(isAuthenticated);
+			return isAuthenticated;},
 	};
 
 })

@@ -20,8 +20,6 @@ TestMarks.plugin(autoIncrement.plugin,'TestMarks');
 
 var addTestMarks=mongoose.model('addTestMarks',TestMarks);
 exports.saveNewTestMarks=function(testdata,cb){
-	console.log(testdata);
-	console.log(Schema.ObjectId(testdata.Testid));
 	var TestMarks=new addTestMarks({
 		answersgiven:testdata.answersgiven,
 		totalmarks:testdata.totalmarks,

@@ -1,4 +1,3 @@
-
 app.controller('EditCourse',['$scope','$http',function($scope,$http){
 	$scope.name="";
 	$scope.syllabus="";

@@ -38,9 +38,19 @@ exports.getnotificationsafterlogout=function(req,res){
 				console.log(err+"no");
 				res.send(err);
 
-			}else{
+			}else if(data){
 				console.log(data+"yes");
-				addNotifications.count({room:{$in:req.body.channels},datesubmitted:{$gt:data.Logout}},function(error,data){
+				addNotifications.count({room:{$in:req.body.channels},datesubmitted:{$gt:data.Logout||new Date()}},function(error,data){
+					if(error){
+						console.log(error);
+						res.send(error);
+					}else{
+						console.log(data);
+						res.json(data);
+					}	
+				})
+			}else{
+				addNotifications.count({room:{$in:req.body.channels},datesubmitted:{$gt:new Date()}},function(error,data){
 					if(error){
 						console.log(error);
 						res.send(error);

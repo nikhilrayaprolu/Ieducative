@@ -8,13 +8,14 @@
 	<div class="overlay waves-effect"></div>
 </div>
 </div>
+
 <form novalidate ng-submit="submit()">
-<div ng-repeat="question in Questions">
+<div ng-repeat="(questionindex,question) in Questions" ng-show="">
 	<p>{{$index+1}}.{{question.name}}</p>
 	
-	<div ng-repeat="option in question.options" style="display: block">
+	<div ng-repeat="option in question.options" style="display: block" ">
 	
-	<input type="radio" name="{{$parent.$index}}" id="{{$parent.$index}}india{{$index+1}}" ng-value="$index+1" ng-model="Answers[$parent.$index]">
+	<input type="radio" name="{{$parent.$index}}" id="{{$parent.$index}}india{{$index+1}}" ng-value="$index+1" ng-model="Answers[$parent.$index]" ng-disabled="disabled">
 	<label for="{{$parent.$index}}india{{$index+1}}">{{$index+1}}.{{option}}</label>
 	</div>
 	

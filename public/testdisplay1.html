@@ -14,8 +14,20 @@
 	<p>PaperTitle:{{title}}</p>
 
 </div>
+    <nav>
+      <div class="nav-wrapper">
+        <ul id="nav-mobile">
+          <li  ng-repeat="question in Questions" ng-class="{ active: isSet($index) }">
+            <a href ng-click="setTab($index)">{{$index+1}}</a>
+          </li>
+          
+        </ul>
+      </div>
+
+    </nav>
+
 <form novalidate ng-submit="submit()">
-<div ng-repeat="question in Questions" >
+<div ng-repeat="question in Questions" ng-show="isSet($index)">
 	<p>{{$index+1}}.{{question.name}}</p>
 	
 	<p ng-repeat="option in question.options" >

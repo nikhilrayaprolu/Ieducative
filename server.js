@@ -12,7 +12,7 @@ var config = require('./config/database');
 var User = require('./app/models/user');
 var port = process.env.PORT || 8080;
 var jwt = require('jwt-simple');
-
+var mailer=require('./app/models/mailer');
 
 var addCourse=require("./app/models/course");
 var addTopic=require("./app/models/topic");
@@ -28,6 +28,7 @@ var addlogout=require("./app/models/logoutdetails");
 var addUser=require("./app/models/userchanges");
 var addCourseVideo=require("./app/models/coursevideo")
 var addCourseDocument=require("./app/models/coursedocument")
+var addKhan=require("./app/models/khan");
 //var facultyPage=require("./app/models/facultyPage")
 var server = require('http').Server(app).listen(port);
 var io = require('socket.io')(server);
@@ -62,25 +63,6 @@ io.sockets.on('connection', function(socket) {
   });
 });
 
-// now, it's easy to send a message to just the clients in a given room
-var smtpConfig={
-  host:'smtp.gmail.com',
-  port:465,
-  secure:true,
-  
-  auth:{
-    user:'nikhil684',
-    pass:'rayaprolu'
-  }
-}
-var transporter=nodemailer.createTransport(smtpConfig);
-var mailOptions = {
-    from: 'nikhil684@gmail.com', // sender address 
-    to: 'nikhil684@gmail.com, nikhil13.prs@gmail.com', // list of receivers 
-    subject: 'Hello ', // Subject line 
-    text: 'Hello world ', // plaintext body 
-    html: '<b>Hello world </b>' // html body 
-};
 
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
@@ -92,23 +74,27 @@ require('./config/passport')(passport);
 var apiRoutes =express.Router();
 
 app.post('/sendmail',function(req,res){
-
-  transporter.sendMail({
-    from: 'nikhil684@gmail.com', // sender address 
+  data={
+     // sender address 
     to: req.body.sendto, // list of receivers 
     subject: req.body.subject, // Subject line 
     text: req.body.text, // plaintext body 
-    html: req.body.htmlbody // html body 
-}, function(error, info){
-    if(error){
-        return console.log(error);
-        res.send(err);
+    htmlbody: req.body.htmlbody // html body 
+  }
+
+  mailer.mailer(data,function(err,data){
+    if(err){
+      console.log(err);
+      res.send(err);
+    }else{
+      console.log(data);
+      res.send(data);
     }
-    console.log('Message sent: ' + info.response);
-    res.send("Message sent");
+  })
+  
+
 });
 
-})
 apiRoutes.post('/signup',function(req,res){
 	console.log(req)
 	if(!req.body.name || !req.body.password){
@@ -123,7 +109,7 @@ apiRoutes.post('/signup',function(req,res){
 	email:req.body.email,
 	phone:req.body.phone,
 	dob:req.body.dob,
-	group:'Faculty',
+	group:'Student',
 	studentclass:req.body.studentclass,
 		schoolname:req.body.schoolname,
 		state:req.body.state,
@@ -153,7 +139,7 @@ apiRoutes.post('/authenticate',function(req,res){
 			user.comparePassword(req.body.password,function(err,isMatch){
 				if(isMatch && !err){
 					var token = jwt.encode(user,config.secret);
-					res.json({success:true,token:'JWT '+ token,group:user.group,username:user.name,profilepic:user.profilephoto});
+					res.json({success:true,token:'JWT '+ token,group:user.group,username:user.name,profilepic:user.profilephoto,user:user});
 				}else{
 					res.send({success:false,msg:'Authentication failed.wrong Password.'});
 				}
@@ -161,6 +147,21 @@ apiRoutes.post('/authenticate',function(req,res){
 		}
 	});
 });
+apiRoutes.post('/forgotpassword',function(req,res){
+  User.findOne({
+    name:req.body.name
+  },function(err,user){
+    if(err) throw err;
+    if(!user){
+      res.send({success:false,msg:'You are not a registered user'});
+    }else{
+      user.password=req.body.newpassword;
+      user.save({},function(err,data){
+        res.send("success");
+      })
+    }
+  })
+})
 apiRoutes.get('/memberinfo', passport.authenticate('jwt', { session: false}), function(req, res) {
 	console.log("success")
   var token = getToken(req.headers);
@@ -203,7 +204,7 @@ if(token){
 } 
 function HasRole(role) {
   return function(req, res, next) {
-    if (role !== req.user.role) res.redirect(...);
+    if (role !== req.user.role) res.redirect("yes");
     else next();
   }
 }
@@ -280,8 +281,16 @@ app.post('/updatevideo/:courseid',upload.single('photo'),addCourseVideo.saveNewV
 app.post('/loadvideos/:courseid',addCourseVideo.getCourseVideos)
 app.post('/updatedocument/:courseid',uploaddocument.single('photo'),addCourseDocument.saveNewDocument);
 app.post('/loaddocuments/:courseid',addCourseDocument.getCourseDocument);
+app.post('/facultyrequestconfirm',addUser.changeroletofaculty);
+app.post('/forgotpasswordmailsend',addUser.forgotpasswordmailsend);
+app.post('/checkhashcorrect',addUser.userfindbytoken);
+app.get('/getrecentfivedoubts',addForumPosts.getrecentdoubts);
+
+//app.post('/updatekhanid',addKhan.addnewuser);
 app.get('*', function (req, res) {
   res.sendfile(__dirname + '/public/index1.html');
 });
 
 console.log('There will be dragons: http://localhost:' + port);
+
+

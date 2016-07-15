@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Materialize - Material Design Admin Template</title>
-
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,700' rel='stylesheet' type='text/css'>
     <!-- Favicons-->
     <link rel="icon" href="images/favicon/favicon-32x32.png" sizes="32x32">
     <!-- Favicons-->
@@ -64,12 +64,15 @@
     <script type="text/javascript" src="/controllers/edittopic.js"></script>
     <script type="text/javascript" src="/controllers/updateprofilephoto.js"></script>
     <script type="text/javascript" src="/controllers/watchvideo.js"></script>
+    <script type="text/javascript" src="/controllers/facultyrequest.js"></script>
+    <script type="text/javascript" src="/controllers/forgotpasswordrequest.js"></script>
+    <script type="text/javascript" src="/controllers/forgotpassword.js"></script>
     <base href="/">
     <script type="text/javascript" src="/controllers/service.js"></script>
     <script type="text/javascript" src="/controllers/constants.js"></script>
 
     <script type="text/javascript" src="/controllers/routeconfig.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular-route.min.js"></script>
   
 
 
@@ -83,10 +86,7 @@
                     <ul class="left">                      
                       <li><h1 class="logo-wrapper"><a href="index-2.html" class="brand-logo darken-1"><img src="images/logo.png" alt="materialize logo"></a> <span class="logo-text">Materialize</span></h1></li>
                   </ul>
-                  <div class="header-search-wrapper hide-on-med-and-down">
-                    <i class="mdi-action-search"></i>
-                    <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explore Materialize"/>
-                </div>
+                  
                 <ul class="right hide-on-med-and-down">
                     <li><a href="javascript:void(0);" class="waves-effect waves-block waves-light notification-button" data-activates="notifications-dropdown"><i class="mdi-social-notifications"><small class="notification-badge">{{notificationscount}}</small></i>
 
@@ -149,7 +149,7 @@
                             
                         </div>
                         <div class="col col s8 m8 l8">
-                            <ul id="profile-dropdown" class="dropdown-content">
+                            <ul id="profile-dropdown" class="dropdown-content" ng-show="isAuthenticated()">
                                 <li><a href="/profile/"><i class="mdi-action-face-unlock"></i> Profile</a>
                                 </li>
                                 <li><a href="#"><i class="mdi-action-settings"></i> Settings</a>
@@ -157,7 +157,7 @@
                                 <li><a href="#"><i class="mdi-communication-live-help"></i> Help</a>
                                 </li>
                                 <li class="divider"></li>
-                                <li><a href="#"><i class="mdi-hardware-keyboard-tab"></i> Logout</a>
+                                <li><a href="#"><i class="mdi-hardware-keyboard-tab" ng-click="LogOut()"></i> Logout</a>
                                 </li>
                             </ul>
                             <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="#" data-activates="profile-dropdown">{{username}}<i class="mdi-navigation-arrow-drop-down right"></i></a>
@@ -165,12 +165,12 @@
                         </div>
                     </div>
                 </li>
-                <li class="bold active"><a href="/dashboarduser/" class="waves-effect waves-cyan"><i class="mdi-action-dashboard"></i> Dashboard</a>
+                <li ng-show="isAuthenticated()" class="bold active"><a href="/dashboarduser/" class="waves-effect waves-cyan"><i class="mdi-action-dashboard"></i> Dashboard</a>
                 </li>
                 <li class="no-padding">
-                    <ul class="collapsible collapsible-accordion">
+                    <ul class="collapsible collapsible-accordion" >
                         <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-view-carousel"></i> TestPapers</a>
-                            <div class="collapsible-body">
+                            <div class="collapsible-body" ng-show="isAuthenticated()">
                                 <ul>
                                     <li><a href="/testpaper/">All TestPapers</a>
                                     </li>
@@ -185,14 +185,14 @@
                         </li>
                     </ul>
                 </li>
-                <li class="bold"><a href="/notifications/" class="waves-effect waves-cyan"><i class="mdi-communication-email"></i> Notifications <span class="new badge">{{notificationscount}}</span></a>
+                <li class="bold" ng-show="isAuthenticated()"><a href="/notifications/" class="waves-effect waves-cyan"><i class="mdi-communication-email"></i> Notifications <span class="new badge">{{notificationscount}}</span></a>
                 </li>
                 <li class="bold"><a href="app-calendar.html" class="waves-effect waves-cyan"><i class="mdi-editor-insert-invitation"></i> Calender</a>
                 </li>
-                <li class="no-padding">
+                <li class="no-padding" >
                     <ul class="collapsible collapsible-accordion">
                         <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-invert-colors"></i> Courses</a>
-                            <div class="collapsible-body">
+                            <div class="collapsible-body" ng-show="isAuthenticated()">
                                 <ul>
                                     <li><a href="/allcourses/">All courses</a>
                                     </li>
@@ -230,7 +230,7 @@
                             </div>
                         </li>
                         
-                        <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-account-circle"></i> User</a>
+                        <li ng-show="isAuthenticated()" class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-account-circle"></i> User</a>
                             <div class="collapsible-body">
                                 <ul>     
                                     <li><a href="user-profile-page.html">User Profile</a>
@@ -241,7 +241,7 @@
                                     </li>
                                     <li><a href="user-forgot-password.html">Forgot Password</a>
                                     </li>
-                                    <li><a href="user-lock-screen.html">Lock Screen</a>
+                                    <li><a ng-click="LogOut()">LogOut</a>
                                     </li>                                        
                                     <li><a href="user-session-timeout.html">Session Timeout</a>
                                     </li>

@@ -5,6 +5,22 @@ app.config(function($routeProvider){
 		controller:'SignUpController'
 		
 	})
+		.when('/termsandconditions',{
+			templateUrl:'termsandconditions.html',
+			controller:'TermsAndConditions'
+		})
+	.when('/facultyrequest',{
+		templateUrl:'facultyrequest.html',
+		controller:'facultyrequestcontroller'
+	})
+	.when('/forgotpasswordrequest',{
+		templateUrl:'forgotpasswordrequest.html',
+		controller:'ForgotPasswordRequest'
+	})
+	.when('/forgotpassword/:hashid',{
+		templateUrl:'forgotpassword.html',
+		controller:'ForgotPassword'
+	})
 	.when('/coursesfaculty',{
 		templateUrl:'coursesfaculty.html',
 		controller:'CourseFaculty'

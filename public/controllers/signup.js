@@ -1,5 +1,5 @@
 
-app.controller('SignUpController',['$scope','$http','AuthService',function($scope,$http,AuthService){
+app.controller('SignUpController',['$scope','$http','AuthService','$location',function($scope,$http,AuthService,$location){
 	$scope.pageClass = 'page-home';
 	$scope.name='',
 	$scope.password='',
@@ -56,13 +56,16 @@ AuthService.register({
 		
 
 app.controller('SignInController',['$scope','$http','AuthService','$location',function($scope,$http,AuthService,$location){
-	$scope.name='',
+	
 	$scope.password='',
 			$scope.user={
 	name:$scope.name,
 	password:$scope.password,
 
 };
+$scope.forgotpassword=function(){
+	$location.path('/forgotpasswordrequest');
+}
 $scope.submit=function(){
 
     AuthService.login({
@@ -70,14 +73,18 @@ $scope.submit=function(){
 	password:$scope.password,
 
 }).then(function(msg) {
+	$scope.username=window.localStorage.user;
+	$scope.profilepic=window.localStorage.profilepic;
+	$scope.group=window.localStorage.group;
+	$scope.$digest();
 	console.log(msg);
       if(msg=='Faculty'){
-      	$location.path('/dashboarduser');
-      	//window.location="http://localhost:8080/coursesfaculty";
+      	//$location.path('/dashboarduser');
+      	window.location="http://localhost:8080/dashboarduser";
 
       }else{
-      	//window.location="/coursesstudent";
-      	$location.path('/dashboarduser')
+      	window.location="/dashboarduser";
+      	//$location.path('/dashboarduser')
       };
 
     }, function(errMsg) {

@@ -118,10 +118,11 @@ exports.saveontestattempt=function(data){
 		addTestStats.findOne({Testid:data.Testid},function(err,teststats){
 			teststats.avgmarks=(teststats.avgmarks*teststats.totalNoOfStudentsAttempted+data.totalmarks)/(teststats.totalNoOfStudentsAttempted+1);
 			teststats.totalNoOfStudentsAttempted=teststats.totalNoOfStudentsAttempted+1;
-			teststats.save(function(err){
+			teststats.save(function(err,testdata){
 				if(err){
 					console.log(err);
 				}else{
+					addUser.savenewrating(data.username,data.totalmarks,testdata.completemarks,testdata.RatingAvg);
 					console.log("success");
 				}
 			});

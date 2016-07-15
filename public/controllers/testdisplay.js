@@ -12,7 +12,8 @@ app.controller('TestDisplay',['$scope','$http','$location','$routeParams',functi
 	$scope.seconds=0;
 	localstorage=window.localStorage;
 	$scope.testid=$routeParams.id;
-	$scope.disabled=false;
+	$scope.disabled=true;
+	$scope.tab=0;
 	$scope.getNumber=function(N){
 		return Array.apply(null, {length: N}).map(Number.call, Number);
 	};
@@ -26,6 +27,13 @@ app.controller('TestDisplay',['$scope','$http','$location','$routeParams',functi
 //else{
 //	var endtime=localstorage.endtime;
 //};
+	$scope.setTab=function(N){
+		$scope.tab=N;
+	}
+	$scope.isSet = function(tabNum){
+      return $scope.tab === tabNum;
+    };
+	
 	$scope.getTimeRemaining=function (endtime){
 		  var t = Date.parse(endtime) - Date.parse(new Date());
 		  var seconds = Math.floor( (t/1000) % 60 );

@@ -11,7 +11,7 @@
           <img class="activator" src="images/user-profile-bg.jpg" alt="user background">                    
         </div>
         <figure class="card-profile-image">
-          <img src="images/avatar.jpg" alt="profile image" class="circle z-depth-2 responsive-img activator">
+          <img src="images/{{profilepic}}" alt="profile image" class="circle z-depth-2 responsive-img activator">
         </figure>
         <div class="card-content">
           <div class="row">                    
@@ -20,15 +20,15 @@
               <p class="medium-small grey-text">{{group}}</p>                        
             </div>
             <div class="col s2 center-align">
-              <h4 class="card-title grey-text text-darken-4">9</h4>
+              <h4 class="card-title grey-text text-darken-4">{{class}}</h4>
               <p class="medium-small grey-text">Class</p>                        
             </div>
             <div class="col s2 center-align">
-              <h4 class="card-title grey-text text-darken-4">6</h4>
+              <h4 class="card-title grey-text text-darken-4">{{completedtests}}</h4>
               <p class="medium-small grey-text">Completed Tests</p>                        
             </div>                    
             <div class="col s2 center-align">
-              <h4 class="card-title grey-text text-darken-4">1,253,000</h4>
+              <h4 class="card-title grey-text text-darken-4">{{studentrating}}</h4>
               <p class="medium-small grey-text">Rating</p>                        
             </div>                    
             <div class="col s1 right-align">
@@ -62,64 +62,47 @@
       <div id="flight-card" class="col s12 m5 l4 card">
         <div class="card-header amber darken-2">
           <div class="card-title">
-            <h4 class="flight-card-title">Your Next Contest</h4>
-            <p class="flight-card-date">June 18, Thu 04:50</p>
+            <h4 class="flight-card-title">Recommended Next Exam</h4>
+            <p class="flight-card-date">{{Recommended.Date}}</p>
           </div>
         </div>
         <div class="card-content-bg white-text">
           <div class="card-content">
             <div class="row flight-state-wrapper">
-              English SA1 Sample Paper
+              {{Recommended.Title}}
             </div>
             <div class="row">
-              <div class="col s6 m6 l6 center-align">
-                <div class="flight-info">
-                  <p class="small"><span class="grey-text text-lighten-4">Depart:</span> 04.50</p>
-                  <p class="small"><span class="grey-text text-lighten-4">Flight:</span> IB 5786</p>
-                  <p class="small"><span class="grey-text text-lighten-4">Terminal:</span> B</p>
-                </div>
-              </div>
-              <div class="col s6 m6 l6 center-align flight-state-two">
-                <div class="flight-info">
-                  <p class="small"><span class="grey-text text-lighten-4">Arrive:</span> 08.50</p>
-                  <p class="small"><span class="grey-text text-lighten-4">Flight:</span> IB 5786</p>
-                  <p class="small"><span class="grey-text text-lighten-4">Terminal:</span> C</p>
-                </div>
-              </div>
+            {{Recommended.Details}}
             </div>
           </div>
         </div>
       </div>
 
       <div id="email-details" class="col s12 m7 l7 card-panel">
-        <p class="email-subject truncate">Trending Doubt <span class="email-tag grey lighten-3">inbox</span> <span class="email-tag  light-blue lighten-4">projects</span> <i class="mdi-action-star-rate yellow-text text-darken-3 right"></i>
-        </p>
-        <hr class="grey-text text-lighten-2">
-        <div class="email-content-wrap">
-          <div class="row">
-            <div class="col s10 m10 l10">
-              <ul class="collection">
-                <li class="collection-item avatar">
-                  <img src="images/avatar.jpg" alt="" class="circle">
-                  <span class="email-title">Nikhil Rayaprolu</span>
-                  <p class="truncate grey-text ultra-small">Yes</p>
-                  <p class="grey-text ultra-small">Yesterday</p>
-                </li>
-              </ul>
-            </div>
-            <div class="col s2 m2 l2 email-actions">
-              <a href="#!"><span><i class="mdi-content-reply"></i></span></a>
-              <a href="#!"><span><i class="mdi-navigation-more-vert"></i></span></a>
-            </div>
-          </div>
-          <div class="email-content">
-            <p>Hi Mike,</p>
-            <p>What is the color of Sun</p>
-            <p>Cheers!
-              <br>Nikhil Rayaprolu</p>
-            </div>
-          </div>
+      <table>
+        <thead>
+          <th>Doubt Title</th>
+          <th>Doubt Date</th>
+          <th>Topic</th>
+          <th>noofcomment</th>
+          <th>user</th>
+          <th>course</th>
+          <th>Read</th>
+        </thead>
+        <tbody>
+          <tr ng-repeat="Doubt in Doubts">
+            <td>{{Doubt.Title}}</td>
+            <td>{{Doubt.submitted}}</td>
+            <td>{{Doubt.Topic}}</td>
+            <td>{{Doubt.noofcomment}}</td>
+            <td>{{Doubt.user}}</td>
+            <td>{{Doubt.course}}</td>
+            <td><button class="btn"><a ng-href="/doubt/{{Doubt._id}}">Read</a></button></td>
+          </tr>
+        </tbody>
+      </table>
         </div>
+      
       </div>
       <div class="divider"></div>
       <div id="striped-table">

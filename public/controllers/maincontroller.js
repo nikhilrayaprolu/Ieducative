@@ -1,5 +1,7 @@
 var app=angular.module('Ieducative',['ngRoute','ngAnimate','ui.materialize']);
 app.controller('MainController',['$location','$scope','$http','$routeParams','AuthService',function($location,$scope,$http,$routeParams,AuthService){
+	$scope.isAuthenticated=function(){
+		return AuthService.isAuthenticated()};
 	$scope.channels=[];
 	$scope.notificationscount=0;
 	console.log($scope.notificationscount);
@@ -64,6 +66,9 @@ app.controller('MainController',['$location','$scope','$http','$routeParams','Au
     });
 
 	});
-
+	$scope.LogOut=function(){
+		AuthService.logout();
+		window.location='http://localhost:8080'
+	}
 
 	}]);
