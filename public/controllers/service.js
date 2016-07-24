@@ -9,15 +9,20 @@ app
 		var token =window.localStorage.getItem(LOCAL_TOKEN_KEY);
 		var group =window.localStorage.getItem(LOCAL_GROUP);
 		var user=window.localStorage.getItem(LOCAL_USER);
+		var profilepic=window.localStorage.getItem('profilepic')
 		if(token){
 			useCredentials(token,group);
 		}
 	}
-	function storeUserCredentials(token,group,user){
+	function storeUserCredentials(token,group,user,profilepic,userfull){
 		console.log(user);
 		window.localStorage.setItem(LOCAL_TOKEN_KEY,token);
 		window.localStorage.setItem(LOCAL_GROUP,group);
 		window.localStorage.setItem(LOCAL_USER,user);
+		window.localStorage.setItem('profilepic',profilepic);
+		window.localStorage.setItem('studentclass',userfull.studentclass);
+		window.localStorage.setItem('completedtests',userfull.completedtests);
+		window.localStorage.setItem('studentrating',userfull.studentrating);
 		useCredentials(token);
 	}
 	function useCredentials(token){
@@ -32,6 +37,7 @@ app
 		window.localStorage.removeItem(LOCAL_TOKEN_KEY);
 		window.localStorage.removeItem(LOCAL_GROUP);
 		window.localStorage.removeItem(LOCAL_USER);
+		window.localStorage.removeItem('profilepic');
 	}
 	var register = function(user){
 		return $q(function(resolve,reject){
@@ -51,10 +57,11 @@ app
 				console.log(result);
 				if(result.data.success){
 					console.log(result.data);
-					storeUserCredentials(result.data.token,result.data.group,result.data.username);
-					resolve(result.data.username);
+					storeUserCredentials(result.data.token,result.data.group,result.data.username,result.data.profilepic,result.data.user);
+					resolve(result.data.group);
 				}else{
-					reject(resolve.data.username);
+					resolve(result.data.msg);
+
 				}
 			});
 		});
@@ -63,7 +70,7 @@ app
 		destroyUserCredentials();
 	};
 	var usertoken = function(){
-	var token =window.localStorage.getItem(LOCAL_TOKEN_KEY);
+		var token =window.localStorage.getItem(LOCAL_TOKEN_KEY);
 		if(token){
 			useCredentials(token);
 		}	
@@ -74,7 +81,8 @@ app
 		register:register,
 		logout:logout,
 		usertoken : usertoken,
-		isAuthenticated:function(){return isAuthenticated;},
+		isAuthenticated:function(){
+			return isAuthenticated;},
 	};
 
 })
@@ -91,3 +99,45 @@ app
 .config(function($httpProvider){
 	$httpProvider.interceptors.push('AuthInterceptor');
 });
+app.config(function($locationProvider) {
+	$locationProvider.html5Mode(true); 
+});
+app.directive('fileModel', ['$parse', function ($parse) {
+	return {
+		restrict: 'A',
+		link: function(scope, element, attrs) {
+			var model = $parse(attrs.fileModel);
+			var modelSetter = model.assign;
+
+			element.bind('change', function(){
+				scope.$apply(function(){
+					modelSetter(scope, element[0].files[0]);
+				});
+			});
+		}
+	};
+}]);
+
+app.service('fileUpload', ['$http', function ($http) {
+	this.uploadFileToUrl = function(file, uploadUrl,uploaddata,cb){
+		var fd = new FormData();
+		fd.append('photo', file);
+		if(uploaddata){
+		fd.append('Title',uploaddata.Title);
+		fd.append('Description',uploaddata.Description);
+			
+		}
+		$http.post(uploadUrl, fd, {
+			transformRequest: angular.identity,
+			headers: {'Content-Type': undefined}
+		})
+
+		.success(function(response){
+			cb(null,response);
+		})
+
+		.error(function(err){
+			cb(err,null);
+		});
+	}
+}]);

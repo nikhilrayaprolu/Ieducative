@@ -16,18 +16,27 @@ var UserSchema = new Schema({
 	},
 	
 	LastName:String,
-	email:String,
+	email:{
+		type:String,
+		unique:true,
+		required:true
+	},
 	phone:Number,
-	dob:{type:Date,
-		default:Date.now},
-		studentclass:Number,
-		schoolname:String,
-		state:String,
-		address:String,
-		group:String,
-	
+	dob:{
+		type:String,
+		default:Date.now
+	},
+	studentclass:Number,
+	schoolname:String,
+	state:String,
+	address:String,
+	group:String,
+	profilephoto:String,
+	studentrating:Number,
+	completedtests:Number,
 
 });
+
 
 UserSchema.pre('save',function(next){
 	var user =this;
@@ -43,7 +52,7 @@ UserSchema.pre('save',function(next){
 				}
 				user.password = hash;
 				next();
-			
+
 
 			});
 		});
@@ -53,6 +62,7 @@ UserSchema.pre('save',function(next){
 
 	}
 });
+
 UserSchema.methods.comparePassword = function(passw,cb){
 	bcrypt.compare(passw,this.password,function(err,isMatch){
 		if(err){

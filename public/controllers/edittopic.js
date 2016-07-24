@@ -1,6 +1,6 @@
-var app=angular.module('Ieducative',['ngRoute']);
+
 app.controller('TopicEditor',['$location','$scope','$http','$routeParams',function($location,$scope,$http,$routeParams){
-	$scope.id=$location.search().id;
+	$scope.id=$routeParams.id;
 	$scope.topictitle='';
 	$scope.topictext='';
 	$scope.Course='';
@@ -41,7 +41,4 @@ app.controller('TopicEditor',['$location','$scope','$http','$routeParams',functi
 	};
 
 }]);
-app.config(function($locationProvider) {
- $locationProvider.html5Mode(true); 
-});
 

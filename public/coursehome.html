@@ -1,41 +1,145 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Course Home</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
-	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<!-- Compiled and minified JavaScript -->
-	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
-<script type="text/javascript" src="/controllers/coursehome.js"></script>
-<base href="/">
-</head>
-<body ng-app="Ieducative">
-<div class="container" ng-controller="CourseHome">
-{{topics}}
-		<button style="float: right;" class="btn waves-effect waves-light" type="submit" name="action" ng-click="newtopic()">AddNewTopic
-		</button>
+<main>
+  <div class="container" ng-controller="CourseHome">
+
+    <button style="float: right;" ng-show="group=='Faculty'" class="btn waves-effect waves-light" type="submit" name="action" ng-click="newtopic()">AddNewTopic
+    </button>
     <button style="float: right;" class="btn waves-effect waves-light" type="submit" name="action" ng-click="Blog()">Blog</button>
-    
-    		
- <div class="row" ng-repeat="topic in topics">
- {{topic}}
-        <div class="col s12">
-          <div class="card blue-grey darken-1">
-            <div class="card-content white-text">
-              <span class="card-title">{{topic.topictitle}}</span>
-              <p>{{topic.topictext}}</p>
-            </div>
-            <div class="card-action">
-              <a href="#">This is a link</a>
-              <a href="#">This is a link</a>
-            </div>
-          </div>
-        </div>
-      </div>
+    <nav>
+      <div class="nav-wrapper">
+        <ul id="nav-mobile">
+          <li ng-class="{ active: isSet(1) }">
+            <a href ng-click="setTab(1)">Home</a>
+          </li>
+          <li ng-class="{ active: isSet(2) }" ng-click="loadvideos()">
+            <a href ng-click="setTab(2)">Videos</a>
+          </li>
+          <li ng-class="{ active: isSet(3) }" ng-click="loaddocuments()">
+            <a href ng-click="setTab(3)">Documents</a>
+          </li>
+        </ul>
       </div>
 
-</body>
-</html>
+    </nav>
+    <!--Topics Page-->
+    <div ng-show="isSet(1)">
+     <div class="row" ng-repeat="topic in topics">
+
+      <div class="col s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text">
+            <span class="card-title">{{topic.topictitle}}</span>
+            <p>{{topic.topictext}}</p>
+          </div>
+          <div class="card-action">
+           <a ng-href="/edittopic/{{topic._id}}">Edit</a>
+         </div>
+
+       </div>
+     </div>
+   </div>
+ </div>      
+ <div ng-show="isSet(2)">
+
+   <form action="#" ng-show="group=='Faculty'">
+    <div class="file-field input-field">
+      <div class="btn" >
+        <span>File</span>
+        <input type="file" file-model="myFile">
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text">
+      </div>
+    </div>
+    <div input-field>
+      <input type="text" ng-model="data.VideoTitle" length="150">
+      <label>Video Title</label>
+    </div>
+    <div input-field>
+      <input type="text" ng-model="data.VideoDesciption" length="150">
+      <label>Video Description</label>
+    </div>
+
+  </form>
+  <button class="btn" ng-click = "uploadFile()" ng-show="group=='Faculty'">upload Video</button>    
+
+ <div class="progress" ng-show="uploadprogress">
+      <div class="indeterminate"></div>
+  </div>
+        
+  <table>
+    <thead>
+      <th>Video Title</th>
+      <th>Video Published</th>
+      <th>Video Description</th>
+      <th>VideoLength</th>
+      <th>VideoThumbnail</th>
+      <th>VideoLink</th>
+    </thead>
+    <tbody>
+      <tr ng-repeat="video in videos">
+        <td>{{video.VideoTitle}}</td>
+        <td>{{video.VideoPublished}}</td>
+        <td>{{video.VideoDescription}}</td>
+        <td>{{video.VideoLenghth}}</td>
+        <td><img src="{{video.VideoThumbnail.url}}"></td>
+        <td><button class="btn waves-effect" ng-click="videowatch(video.Video)">Watch</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="row" ng-repeat="video in videos"></div>
+</div>
+
+<div ng-show="isSet(3)">
+
+<form action="#" ng-show="group=='Faculty'">
+    <div class="file-field input-field">
+      <div class="btn" >
+        <span>File</span>
+        <input type="file" file-model="myDocument">
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text">
+      </div>
+    </div>
+    <div input-field>
+      <input type="text" ng-model="data.DocumentTitle" length="150">
+      <label>Document Title</label>
+    </div>
+    <div input-field>
+      <input type="text" ng-model="data.DocumentDescription" length="150">
+      <label>Document Description</label>
+    </div>
+  </form>
+  <button ng-click = "uploadDocument()" ng-show="group=='Faculty'">upload Document</button>    
+  <table>
+    <thead>
+      <th>Documents Title</th>
+      <th>Documents Published</th>
+      <th>Documents Description</th>
+      <th>VideoLink</th>
+    </thead>
+    <tbody>
+      <tr ng-repeat="document in documents">
+        <td>{{document.DocumentTitle}}</td>
+        <td>{{document.createdAt}}</td>
+        <td>{{document.DocumentDescription}}</td>
+      <td><button class="btn waves-effect" ng-click="Documentwatch(document.Document)">Read</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

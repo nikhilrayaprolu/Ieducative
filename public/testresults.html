@@ -1,45 +1,115 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Your Test Marks</title>
-			 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
-	<script type="text/javascript" src="/controllers/testresults.js"></script>
-<script type="text/javascript" src="/controllers/service.js"></script>
-	<script type="text/javascript" src="/controllers/constants.js"></script>
+<main>
+	<div ng-controller="TestResults" ng-init="yourtestresults()" class="row">
+
+	<div class="col l6">
+		<p>welcome {{studentid}} see your marks below</p>
+		<p>these are your Answers for the question</p>
+<div>
+<svg height="25" width="25">
+  <circle cx="12" cy="12" r="10" stroke="black" stroke-width="0" fill="red" />
+  Sorry, your browser does not support inline SVG.  
+</svg> wrong answer
+
+<svg height="25" width="25">
+  <circle cx="12" cy="12" r="10" stroke="black" stroke-width="0" fill="yellow" />
+  Sorry, your browser does not support inline SVG.  
+</svg> correct answer
+<svg height="25" width="25">
+  <circle cx="12" cy="12" r="10" stroke="black" stroke-width="0" fill="green" />
+  Sorry, your browser does not support inline SVG.  
+</svg> correctly answered
+</div>
+
+		<div ng-repeat="question in Questions" class="card">
+			<p align="left">{{$index+1}}.{{question.name}}</p>
+			<form action="#">
+			<p ng-repeat="option in question.options" ng-init="">
+
+				<input type="radio" name="{{$parent.$index}}" ng-value="$index+1" id="{{$parent.$index}}india{{$index+1}}" ng-model="Answers[$parent.$index]" ng-disabled="true">
+				<label for="{{$parent.$index}}india{{$index+1}}"  ng-class='{green:$index+1==CorrectAnswers[0][$index] && CorrectAnswers[0][$index]==Answers[$parent.$index], red: $index+1==Answers[$parent.$index] &&  CorrectAnswers[0][$index]!=Answers[$parent.$index] , yellow: $index+1==CorrectAnswers[0][$index] && CorrectAnswers[0][$index]!=Answers[$parent.$index]}'>{{$index+1}}.{{option}}</label>
+
+			</p>
+			</form>
+			<p class="card-action">correctoption:{{CorrectAnswers[0][$index]}}</p>
+
+		</div>
+		</div>
+		<div class="col l6">
+		<div class="col s12 m4 l12 enter">
+			<h4 class="header">Congratulations</h4>
+			<div class="card  light-blue">
+				<div class="card-content white-text">
+					<span class="card-title">Your Report Card</span>
+					<p>Your Total Marks:{{marks}}</p>
+					<p>Your Rank:{{presentRank}}</p>
+					<p>Total No of Attempted Students:{{NoofAttemptedStudents}}</p>
+				</div>
+				<button ng-hide="group=='Faculty '" class="btn waves-effect waves-light" type="submit" name="action" ng-click="">Share</button>
+
+</div>
+			</div>
+		</div>
+
 	
 		
-		  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  		<!-- Compiled and minified JavaScript -->
-		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="css/main.css">\
-		<base href="/">
-</head>
-<body ng-app="Ieducative">
+		
+			<div class="col l6">
+			<h4 class="header">Leader Board</h4>
+			<p>The Top  People At present on the platform on this test.for detailed information,</p>
+				<table class="striped">
+					<thead>
+						<tr>
+						<th data-field="id">UserName</th>
+							<th data-field="name">TotalMarks</th>
+							<th data-field="price">His Answers</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="person in topten">
+							<td>{{person.username}}</td>
+							<td>{{person.totalmarks}}</td>
+							<td>{{person.answersgiven}}</td>
+						</tr>
+						
+					</tbody>
+				</table>
+			</div>
+		
 
-<div ng-controller="TestResults" ng-init="yourtestresults()">
-<input type="text" name="" ng-model="rating">
-<button style="float: right;" class="btn waves-effect waves-light" type="submit" name="action" ng-click="submitrating()">Submit</button>
+	
+	<div class="col l4 right" ng-disabled="rated" ng-disabled="group=='Faculty'">
+			<p>can you please rate this question paper on a scale of 10</p>
+		
+		<div class="row">
+			<p>{{rating}}</p>
+			<p class="range-field">
+				<input type="range" ng-model="rating" id="test5" min="0" max="10" />
+			</p>
 
-	<p>welcome {{studentid}} see your marks below</p>
-	<p>these are your Answers for the question</p>
-	<div ng-repeat="question in Questions">
-	<p>{{$index+1}}.{{question.name}}</p>
-	
-	<div ng-repeat="option in question.options" ng-init="">
-	
-	<input type="radio" name="{{$parent.$index}}" ng-value="$index+1" ng-model="Answers[$parent.$index]" ng-disabled="true">{{$index+1}}.{{option}}<br>
-	
-	</div>
-	<p>correctoption:{{CorrectAnswers[$index]}}</p>
-
+			<button  class="btn waves-effect waves-light" type="submit" name="action" ng-click="submitrating()">Submit</button>
+		</div>
+		</div>
 </div>
-<p>your marks are:{{marks}},your rank:{{presentRank}},out of {{NoofAttemptedStudents}}</p>
-{{CorrectAnswers}}
-the top ten are:{{topten}}
-</div>
+</main>
 
-</body>
-</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,68 +1,165 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Test Papers</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
-	<script type="text/javascript" src="/controllers/testpapers.js"></script>
-<script type="text/javascript" src="/controllers/service.js"></script>
-	<script type="text/javascript" src="/controllers/constants.js"></script>
-		<title>Sign Up</title>
-		 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
-		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
-		<base href="/">
-</head>
-<body ng-app="Ieducative">
-		<nav>
-			<div class="nav-wrapper nav-fixed">
-				<a href="#" class="brand-logo">IEducative</a>
-				<ul id="nav-mobile" class="right hide-on-med-and-down">
+<main>
+<div class="row">
 
-					<li><a href="sass.html">Testseries</a></li>
-					<li><a href="badges.html">Courses</a></li>
-					<li><a href="collapsible.html">Blog</a></li>
-					<li><a href="collapsible.html">Your Profile</a></li>
-					<li class="active"><a href="Login.html">User</a></li>
-				</ul>
-					
-        
-			</div>
-		</nav> 
+<div class="col l3">
 
-		<div class="container" ng-controller="TestPaper" ng-init="TestPapers()">
-			<div ng-repeat="testpaper in TestPaper">
-    		{{testpaper}}
-			</div>
+   <ul class="collapsible" data-collapsible="accordion">
+   <a class='btn' ng-click="TestPapers()" style="width: 100%">
+    <i class="material-icons">input</i>Filter
+</a>   
+            
 
-    		<table class="bordered highlight centered responsive-table">
-    		<thead>
-    			<tr>
-    				<th data-field="name">TestPaper Title </th>
-    				<th data-field="syllabus">Subject</th>
-    				<th data-field="studentclass" >Class</th>
-    				<th datafield="edit">Attempt</th>		
-    					</tr>
-    		</thead>
-    		<tbody>
-    				    		
-					    			<tr ng-repeat="testpaper in TestPaper"  >
-    				    			
-    				    				<td><a ng-click="testpaperhome(testpaper._id)">{{testpaper.title}}</a></td>
-    				    				<td>{{testpaper.subject}}</td>
-    				    				<td>{{testpaper.class}}</td>
-    				    				
+       <li>
+           <div class="collapsible-header"><i class="material-icons">place</i>Class</div>
+           <div class="collapsible-body">
+            <form action="#">
+            <p  >
+                  <input name="1" type="radio" id="test1" value="1" ng-model="class"/>
+                  <label for="test1">1</label>
+              </p>
+              <p >
+                  <input name="2" type="radio" id="test2" ng-model="class" value="2"/>
+                  <label for="test2">2</label>
+              </p>
+              <p >
+                  <input name="3" type="radio" id="test3" value="3" ng-model="class" />
+                  <label for="test3">3</label>
+              </p>
+              <p >
+                  <input name="4" type="radio" id="test4" ng-model="class" value="4"/>
+                  <label for="test4">4</label>
+              </p>
+              <p >
+                  <input name="5" type="radio" value="5" id="test5" ng-model="class"/>
+                  <label for="test5">5</label>
+              </p>
+              <p >
+                  <input name="6" type="radio" id="test6" value="6" ng-model="class"/>
+                  <label for="test6">6</label>
+              </p>
+              <p >
+                  <input name="7" type="radio" id="test7" ng-model="class" value="7" />
+                  <label for="test7">7</label>
+              </p>
+              <p >
+                  <input name="8" type="radio" id="test8" ng-model="class" value="8" />
+                  <label for="test8">8</label>
+              </p>
+              <p >
+                  <input name="9" type="radio" id="test9" ng-model="class" value="9" />
+                  <label for="test9">9</label>
+              </p>
+              <p >
+                  <input name="10" type="radio" id="test10" ng-model="class" value="10" />
+                  <label for="test10">10</label>
+              </p>
+          </form>
+      </div>
+  </li>
+ <li>
+      <div class="collapsible-header"><i class="material-icons">place</i>Subject</div>
+      <div class="collapsible-body">
+      <form action="#">
+        <p >
+          <input name="subject" type="radio" id="subject2" value="All" ng-model="subject"/>
+          <label for="subject2">All</label>
+      </p>  
+      <p >
+          <input name="subject" type="radio" id="subject3" ng-model="subject" value="Science"/>
+          <label for="subject3">Science</label>
+      </p>  
+      <p >
+          <input name="subject" type="radio" id="subject4" ng-model="subject" value="English"/>
+          <label for="subject4">English</label>
+      </p>  
+      <p >
+          <input name="subject" type="radio" id="subject5" ng-model="subject" value="Math"/>
+          <label for="subject5">Math</label>
+      </p>  
+      <p >
+          <input name="subject" type="radio" id="subject6" ng-model="subject" value="Social"/>
+          <label for="subject6">Social</label>
+      </p>
+</form>
+  </div>
+</li>
 
-	 				    				<td><button class="btn waves-effect waves-light" type="submit" name="action" ng-click="testpaperhome(testpaper._id)">Attempt
-    		</button></td>
+<li>
+      <div class="collapsible-header"><i class="material-icons">place</i>Sort</div>
+      <div class="collapsible-body">
+      <form action="#">
+            <p >
+          <input name="sort" type="radio" id="sort2" value="1" ng-model="sortcount" ng-click="SortChange(1)" />
+          <label for="sort2">Recent</label>
+      </p>  
+      <p >
+          <input name="sort" type="radio" id="sort3" value="2" ng-model="sortcount" ng-click="SortChange(2)" />
+          <label for="sort3">Highest Rating</label>
+      </p>  
+      <p >
+          <input name="sort" type="radio" id="sort3" value="2" ng-model="sortcount" ng-click="SortChange(2)" />
+          <label for="sort3">Highest Attempts</label>
+      </p>  
+      </div>
+    </form>
+</li>
+    
+</ul>
+</div>
 
-    				</tr>
-    				</tbody>
-    				</table>    
+<div class="container col l9" ng-controller="TestPaper" ng-init="TestPapers()">
+   <button style="float: right;" ng-show="group=='Faculty'" class="btn waves-effect waves-light" type="submit" name="action" ng-click="NewTestPaper()">NewTestPaper</button>
+   
 
+<table class="bordered highlight centered responsive-table">
+  <thead>
+     <tr>
+        <th datafield="id">Testid</th>
+        <th data-field="name">TestPaper Title </th>
+        <th data-field="syllabus">Subject</th>
+        <th data-field="studentclass" >Class</th>
+        <th datafield="Total Marks">Total Marks</th>
+        <th datafield="Avg-Marks">Avg-Marks</th>
+        <th datafield="totalno.ofattemps">Attempts till now</th>
+        <th datafield="Rating">Difficulty Rating</th>
+        <th datafield="Faculty">Faculty</th>
+        <th datafield="edit">Attempt</th>		
+    </tr>
+</thead>
+<tbody>
 
+    <tr ng-repeat="testpaper in TestPaper"  >
+     <td>{{testpaper._id}}</td>
+     <td><a ng-click="testpaperhome(testpaper._id)">{{testpaper.title}}</a></td>
+     <td>{{testpaper.subject}}</td>
+     <td>{{testpaper.class}}</td>
+     <td>{{testpaper.completemarks}}</td>
+     <td>{{testpaper.avgmarks}}</td>
+     <td>{{testpaper.totalNoOfStudentsAttempted}}</td>
+     <td>{{testpaper.RatingAvg}}</td>
+     <td>{{testpaper.facultyname}}</td>
 
-		</div>
+     <td><button ng-show="group=='Student'" class="btn waves-effect waves-light" type="submit" name="action" ng-click="testpaperhome(testpaper._id)">Attempt
+     </button></td>
+     <td><button ng-show="group=='Faculty'" class="btn waves-effect waves-light" type="submit" name="action" ng-click="testpaperhome(testpaper._id)">View
+     </button></td>
 
-		</body></html>
+ </tr>
+</tbody>
+</table>    
+
+<pagination 
+
+page="pageno"
+page-size="1"
+total="pages"
+show-prev-next="true"
+use-simple-prev-next="false"
+dots="...."
+hide-if-empty="false"
+adjacent="2"
+scroll-top="false"
+pagination-action="changePage(page)" />
+</div>
+</div>
+</main>

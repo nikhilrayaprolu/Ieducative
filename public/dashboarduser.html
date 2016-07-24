@@ -1,0 +1,147 @@
+<main>
+ <section id="content">        
+
+  <!--start container-->
+  <div class="container">
+
+    <div id="profile-page" class="section">
+      <!-- profile-page-header -->
+      <div id="profile-page-header" class="card">
+        <div class="card-image waves-effect waves-block waves-light">
+          <img class="activator" src="images/user-profile-bg.jpg" alt="user background">                    
+        </div>
+        <figure class="card-profile-image">
+          <img src="images/{{profilepic}}" alt="profile image" class="circle z-depth-2 responsive-img activator">
+        </figure>
+        <div class="card-content">
+          <div class="row">                    
+            <div class="col s3 offset-s2">                        
+              <h4 class="card-title grey-text text-darken-4">{{username}}</h4>
+              <p class="medium-small grey-text">{{group}}</p>                        
+            </div>
+            <div class="col s2 center-align">
+              <h4 class="card-title grey-text text-darken-4">{{class}}</h4>
+              <p class="medium-small grey-text">Class</p>                        
+            </div>
+            <div class="col s2 center-align">
+              <h4 class="card-title grey-text text-darken-4">{{completedtests}}</h4>
+              <p class="medium-small grey-text">Completed Tests</p>                        
+            </div>                    
+            <div class="col s2 center-align">
+              <h4 class="card-title grey-text text-darken-4">{{studentrating}}</h4>
+              <p class="medium-small grey-text">Rating</p>                        
+            </div>                    
+            <div class="col s1 right-align">
+              <a class="btn-floating activator waves-effect waves-light darken-2 right">
+                <i class="mdi-action-perm-identity"></i>
+              </a>
+            </div>
+          </div>
+        </div>      
+        <div class="card-reveal">
+          <p>
+            <span class="card-title grey-text text-darken-4">Nikhil Rayaprolu <i class="mdi-navigation-close right"></i></span>
+            <span><i class="mdi-action-perm-identity cyan-text text-darken-2"></i>{{group}}</span>
+          </p>
+
+          <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+
+          <p><i class="mdi-action-perm-phone-msg cyan-text text-darken-2"></i> +1 (612) 222 8989</p>
+          <p><i class="mdi-communication-email cyan-text text-darken-2"></i> mail@domain.com</p>
+          <p><i class="mdi-social-cake cyan-text text-darken-2"></i> 18th June 1990</p>
+          <p><i class="mdi-device-airplanemode-on cyan-text text-darken-2"></i> BAR - AUS</p>
+          <button class="btn waves-effect waves-light darken-2 right">Edit</button>
+        </div>
+      </div>
+
+
+
+
+    </div>
+    <div class="row">
+      <div id="flight-card" class="col s12 m5 l4 card">
+        <div class="card-header amber darken-2">
+          <div class="card-title">
+            <h4 class="flight-card-title">Recommended Next Exam</h4>
+            <p class="flight-card-date">{{Recommended.Date}}</p>
+          </div>
+        </div>
+        <div class="card-content-bg white-text">
+          <div class="card-content">
+            <div class="row flight-state-wrapper">
+              {{Recommended.Title}}
+            </div>
+            <div class="row">
+            {{Recommended.Details}}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="email-details" class="col s12 m7 l7 card-panel">
+      <table>
+        <thead>
+          <th>Doubt Title</th>
+          <th>Doubt Date</th>
+          <th>Topic</th>
+          <th>noofcomment</th>
+          <th>user</th>
+          <th>course</th>
+          <th>Read</th>
+        </thead>
+        <tbody>
+          <tr ng-repeat="Doubt in Doubts">
+            <td>{{Doubt.Title}}</td>
+            <td>{{Doubt.submitted}}</td>
+            <td>{{Doubt.Topic}}</td>
+            <td>{{Doubt.noofcomment}}</td>
+            <td>{{Doubt.user}}</td>
+            <td>{{Doubt.course}}</td>
+            <td><button class="btn"><a ng-href="/doubt/{{Doubt._id}}">Read</a></button></td>
+          </tr>
+        </tbody>
+      </table>
+        </div>
+      
+      </div>
+      <div class="divider"></div>
+      <div id="striped-table">
+        <h4 class="header">Leader Board</h4>
+        <div class="row">
+          <div class="col s12 m4 l3">
+            <p>The Top Rating People At present on the platform.for detailed information,you can visit click on more</p>
+          </div>
+          <div class="col s12 m8 l9">
+            <table class="striped">
+              <thead>
+                <tr>
+                  <th data-field="id">Name</th>
+                  <th data-field="name">Class</th>
+                  <th data-field="price">Rating</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="student in topstudents track by $index">
+                  <td>{{student.name}}</td>
+                  <td>{{student.studentclass}}</td>
+                  <td>{{student.studentrating}}</td>
+                </tr>
+                
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <div class="card-panel teal large">
+            <div>
+              <span class="card-title">Featured Article</span></div>x
+              <span class="white-text">Robert of Jumièges (died 1052–1055?) was the first Norman Archbishop of Canterbury. He had served as prior of the Abbey of St Ouen at Rouen in Normandy, before becoming abbot of Jumièges Abbey (pictured), near Rouen, in 1037. He was a friend and advisor to the king of England, Edward the Confessor, who appointed him Bishop of London in 1044, and then archbishop in 1051. Robert's time as archbishop lasted only about eighteen months. He had already come into conflict with the powerful Earl Godwin of Wessex, and had made attempts to recover lands lost to Godwin and his family. He also refused to consecrate Spearhafoc, Edward's choice to succeed Robert as Bishop of London. The rift between Robert and Godwin culminated in Robert's deposition and exile in 1052, and he died at Jumièges shortly after. Robert commissioned significant building work at Jumièges and was probably involved in the first Romanesque building in England, the church built in Westminster for Edward the Confessor, now known as Westminster Abbey. Robert's treatment by the English was used as one of the justifications of William the Conqueror for his invasion of England. (Full article...)
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    </main>

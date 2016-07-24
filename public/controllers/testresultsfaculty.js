@@ -1,8 +1,7 @@
-var app=angular.module('Ieducative',['ngRoute']);
+
 app.controller('facultyresults',['$location','$scope','$http','$routeParams',function($location,$scope,$http,$routeParams){
-	
 	$scope.facultyid=window.localStorage.user;
-	$scope.testid=$location.search().testid;
+	$scope.testid=$routeParams.testid;
 	$scope.response=[];
 	$scope.getNumber=function(N){
 		return Array.apply(null, {length: N}).map(Number.call, Number);
@@ -23,10 +22,8 @@ app.controller('facultyresults',['$location','$scope','$http','$routeParams',fun
 	}
 
 	$scope.results=function(marksid){
-		window.location="http://localhost:8080/testresults.html?marksid="+marksid;
+		$location.path('/testresult/'+marksid);
+		//window.location="http://localhost:8080/testresults.html?marksid="+marksid;
 	}
 
 }]);
-app.config(function($locationProvider) {
- $locationProvider.html5Mode(true); 
-});

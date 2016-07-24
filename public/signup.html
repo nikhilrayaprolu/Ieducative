@@ -1,159 +1,125 @@
-<!DOCTYPE html>
-<html>
-	<head>
-			 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
-	<script type="text/javascript" src="/controllers/signup.js"></script>
-<script type="text/javascript" src="/controllers/service.js"></script>
-	<script type="text/javascript" src="/controllers/constants.js"></script>
-		<title>Sign Up</title>
+<main class="" style="" >
+ 
+ <div  id="login-page" style="display: table" class="row" >
+  <div class="col s12 z-depth-4 card-panel" style="width: fit-content ;display:table-cell">
+    <form class="login-form" ng-controller="SignInController">
+      <div class="row">
+        <div class="input-field col s12 center">
+          <img src="images/logo-1437554188.png" alt="" class="circle responsive-img valign profile-image-login">
+          <p class="center login-form-text">Login</p>
+        </div>
+      </div>
+      <div class="row margin">
+        <div class="input-field col s12">
+          <i class="mdi-social-person-outline prefix"></i>
+          <input id="username" ng-model="name" type="text">
+          <label for="username" class="center-align">Username</label>
+        </div>
+      </div>
+      <div class="row margin">
+        <div class="input-field col s12">
+          <i class="mdi-action-lock-outline prefix"></i>
+          <input id="password" type="password" ng-model="password">
+          <label for="password">Password</label>
+        </div>
+      </div>
+      <div class="row">          
+        <div class="input-field col s12 m12 l12  login-text">
+          <input type="checkbox" id="remember-me" />
+          <label for="remember-me">Remember me</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12" ng-click="submit()">
+          <a href="index.html" class="btn waves-effect waves-light col s12">Login</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s6 m6 l6">
+          <p class="margin right-align medium-small"><a href="#" ng-click="forgotpassword()">Forgot password ?</a></p>
+        </div>          
+      </div>
 
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
-		  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
+    </form>
+  </div>
 
-		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-		<!-- Compiled and minified JavaScript -->
-		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="css/main.css">
-	</head>
-	<body ng-app="SignUp">
-	<header>
+  <div class="col s12 z-depth-4 card-panel" style="width: fit-content;margin-left:100px;display:table-cell">
+    <form class="login-form" ng-controller="SignUpController">
+      <div class="row">
+        <div class="input-field col s12 center">
+          <h4>Register</h4>
+          <p class="center">Join to our community now !</p>
+        </div>
+      </div>
+      <div class="row margin">
+        <div class="input-field col s12">
+          <i class="mdi-social-person-outline prefix"></i>
+          <input id="username" type="text" ng-model="name">
+          <label for="username" class="center-align">Username</label>
+        </div>
+      </div>
+      <div class="row margin">
+        <div class="input-field col s12">
+          <i class="mdi-social-person-outline prefix"></i>
+          <input id="username" type="text" ng-model="FirstName">
+          <label for="username" class="center-align">FirstName</label>
+        </div>
+      </div>
 
-<nav class="">
-      <object width="auto" class="" height="100%" style="float: right" id="front-page-logo" type="image/png" data="logo.png"></object></a></li>
+      <div class="row margin">
+        <div class="input-field col s12">
+          <i class="mdi-social-person-outline prefix"></i>
+          <input id="username" type="text" ng-model="LastName">
+          <label for="username" class="center-align">LastName</label>
+        </div>
+      </div>
+      
+      <div class="row margin">
+        <div class="input-field col s12">
+          <i class="mdi-communication-email prefix"></i>
+          <input id="email" type="email" ng-model="email">
+          <label for="email" class="center-align">Email</label>
+        </div>
+      </div>
+      <div class="row margin">
+        <div class="input-field col s12">
+          <i class="mdi-action-lock-outline prefix"></i>
+          <input id="password" type="password" ng-model="password">
+          <label for="password">Password</label>
+        </div>
+      </div>
+      <div class="row margin">
+        <div class="input-field col s12">
+          <i class="mdi-action-lock-outline prefix"></i>
+          <input id="password-again" type="password" ng-model="password2">
+          <label for="password-again">Password again</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12" ng-click="submit()">
+          <a href="index.html" class="btn waves-effect waves-light col s12">Register Now</a>
+        </div>
+        <a href="/termsandconditions">termsandconditions</a>
+      </div>
+      
+    </form>
 
-        <ul id="slide-out" class="side-nav">
+  </div>
+  
+</div>
 
-            <li  class="logo"><a id="logo-container" href="#!" class=""><object width="100%" class="" height="100%" id="front-page-logo" type="image/png" data="logo-1437554188.png"></object></a></li>
 
-            <li><a href="#!">Courses</a></li>
-            <li><a href="#!">TestPapers</a></li>
-            <li><a href="#!">User</a></li>
-            <li class="no-padding">
-        <ul class="collapsible collapsible-accordion">
-          <li>
-            <a class="collapsible-header waves-effect waves-teal">User<i class="material-icons">play_arrow</i></a>
-            <div class="collapsible-body">
-              <ul>
-                <li><a href="#!">Your Profile</a></li>
-                <li><a href="#!">Your Rank</a></li>
-	                <li><a href="#!">Settings</a></li>
-                <li><a href="#!">Your wallet</a></li>
-                <li><a href="#!">LogOut</a></li>
-              </ul>
-            </div>
-          </li>
-        </ul>
-      </li>
-    </ul>
-        <a href="#" style="display: block" data-activates="slide-out" class="hide-on-large-only button-collapse"> <i class="mdi-navigation-menu"></i></a>
-
-       
-    </nav>
-    </header>
-      <script type="text/javascript" src="js/main.js"></script>
-<main>
-	<div class="container">
-			<div class="row">
-				<div class="col s6 pull-s1 card-panel red lighten-5" ng-controller="SignUpController">
-				{{name}}
-				<h3>SignUp</h3>
-					<form class="" >
-					<div class="row">
-						<div class="input-field col s12">
-							<i class="material-icons prefix">account_circle</i>
-							<input type="text" placeholder="Placeholder" id="user_name" class="validate" ng-model="name">
-							<label for="user_name">User Name</label>
-						</div>
-					</div>
-
-						<div class="row">
-							<div class="input-field col s6">
-							
-								<input placeholder="Placeholder" id="first_name" type="text" class="validate" ng-model="FirstName">
-								<label for="first_name">First Name</label>
-							</div>
-							<div class="input-field col s6">
-								<input id="last_name" type="text" class="validate" ng-model="LastName">
-								<label for="last_name">Last Name</label>
-							</div>
-						</div>
-						<div class="row">
-							<div class="input-field col s12">
-								<input id="password" type="password" class="validate" ng-model="password">
-								<label for="password">Password</label>
-							</div>
-						</div>
-						<div class="row">
-							<div class="input-field col s12">
-							<i class="material-icons prefix">phone</i>
-								<input id="phone" type="tel" class="validate" ng-model="phone">
-								<label for="phone">Phone</label>
-							</div>
-						</div>
-						
-						<div class="row">
-							<div class="input-field col s12">
-							<i class="material-icons prefix">email</i>
-								<input id="email" type="email" class="validate" ng-model="email">
-								<label for="email">Email</label>
-							</div>
-						</div>
-						<div class="row">
-							<div class="input-field col s12">
-							<i class="material-icons prefix">today</i>
-								<input id="bday" type="datetime-local" class="	validate" ng-model="dob">
-								<label for="Date of Birth">Date of Birth</label>
-							</div>
-						</div>
-						<div class="row">
-							<div class="input-field col s12">
-							
-								<input id="presentclass" type="text" class="validate" ng-model="studentclass">
-								<label for="present class">present class</label>
-							</div>
-						</div>
-						<div class="row">
-							<div class="input-field col s12">
-							
-								<input id="school" type="text" class="validate" ng-model="schoolname">
-								<label for="school">school</label>
-							</div>
-						</div>
-						
-						<button class="btn waves-effect waves-light" type="submit" name="action" ng-click="submit()">SignUp
-    					<i class="material-icons right">send</i>
-  						</button>
-        
-					</form>
-				</div>
-				<div class=" col s6 card-panel red lighten-5" ng-controller="SignInController">
-				<h3>LogIn</h3>
-
-					<form  class=""> 
-					<div class="input-field col s12">
-							<i class="material-icons prefix">account_circle</i>
-							<input type="text" placeholder="Placeholder" id="user_name" class="validate" ng-model="name">
-							<label for="user_name">User Name</label>
-						</div>
-						<div class="row">
-							<div class="input-field col s12">
-								<input id="password" type="password" class="validate" ng-model="password">
-								<label for="password">Password</label>
-							</div>
-						</div>
-						<button class="btn waves-effect waves-light" type="submit" name="action" ng-click="submit()">Submit
-    					<i class="material-icons right">send</i>
-  						</button>
-        
-					</form>
-    					
-				</div>
-			</div>
-
-		</div>
-		</main>
-	</body>
-</html>
+</main>
+<style type="text/css">
+html{
+  height: 100% !important;
+}
+  div[ng-view]{
+    width:100%;
+    height: 100% ;
+  background: url('images/user-profile-bg.jpg');
+  background-repeat:no-repeat;
+  background-size: cover;
+  }
+  
+</style>

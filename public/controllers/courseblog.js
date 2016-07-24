@@ -1,6 +1,7 @@
-var app=angular.module('Ieducative',['ngRoute']);
+
 app.controller('CourseBlogController',['$location','$scope','$http','$routeParams',function($location,$scope,$http,$routeParams){
-	$scope.courseid=$location.search().courseid;
+	
+	$scope.courseid=$routeParams.id;
 	$scope.userid=window.localStorage.user;
 	$scope.Questions=[];
 	$scope.getNumber=function(N){
@@ -19,13 +20,11 @@ app.controller('CourseBlogController',['$location','$scope','$http','$routeParam
 		})
 	};
 	$scope.NewQuestion=function(){
-		window.location="http://localhost:8080/doubtcreate.html?courseid="+$scope.courseid;
+		$location.path('/doubtcreate/'+$scope.courseid);
+		//window.location="http://localhost:8080/doubtcreate.html?courseid="+$scope.courseid;
 	};
-	$scope.results=function(marksid){
-		window.location="http://localhost:8080/testresults.html?marksid="+marksid;
-	};
-
+	$scope.postmain=function(id){
+		$location.path('/doubt/'+id);
+		//window.location="http://localhost:8080/postbody.html?postid="+id;
+	}
 }]);
-app.config(function($locationProvider) {
- $locationProvider.html5Mode(true); 
-});

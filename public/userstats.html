@@ -1,51 +1,38 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>User Stats</title>
-		 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
-	<script type="text/javascript" src="/controllers/userstats.js"></script>
-<script type="text/javascript" src="/controllers/service.js"></script>
-	<script type="text/javascript" src="/controllers/constants.js"></script>
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.js"></script>
-	   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
-    
-		  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="css/main.css">\
-		<base href="/">
-</head>
-<body ng-app="Ieducative">
-
+<main>
 <div ng-controller="UserStats" ng-init="userstats()">
-{{response}}
  <table>
         <thead>
           <tr>
+          <th data-field="testpaper-title">Title</th>
               <th data-field="id">TestPaperid</th>
               <th data-field="averagemarks">average marks</th>
               <th data-field="yourmarks">marks</th>
               <th data-field="totalmarks">totalmarks</th>
               <th data-field="totalnoofstudents">number of attempts</th>
-              <th data-field="pagereferaltocheckanswers">checkanswers</th>
+             
+              <th data-field="RatingAvg">Average Rating</th>
+              <th data-field="State">State</th>
+              <th data-field="faculty">Faculty</th>
+              <th data-field="Subject">Subject</th>
+              <th data-field="pagereferaltocheckanswers">checkanswers</th> 
           </tr>
         </thead>
         <tbody>
           <tr ng-repeat="data in response">
+          <td>{{data[0].TestPaperTitle}}</td>
             <td>{{data[1].Testid}}</td>
             <td>{{data[0].avgmarks}}</td>
             <td>{{data[1].totalmarks}}</td>
             <td>{{data[0].completemarks}}</td>
-            
             <td>{{data[0].totalNoOfStudentsAttempted}}</td>
+            <td>{{data[0].RatingAvg}}</td>
+            <td>{{data[0].State}}</td>
+            <td>{{data[0].facultyname}}</td>
+            <td>{{data[0].subject}}</td>
             <td><button class="btn waves-effect waves-light" type="submit" name="action" ng-click="results(data[1]._id)">result</button>
 </td>
             
           </tr>
         </tbody>
       </table>
-
-</body>
-</html>
+</main>

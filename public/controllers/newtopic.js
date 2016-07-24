@@ -1,12 +1,12 @@
-var app=angular.module('Ieducative',['ngRoute']);
+
 app.controller('TopicCreator',['$location','$scope','$http','$routeParams',function($location,$scope,$http,$routeParams){
 	$scope.topictitle="";
 	$scope.topictext="";
-	$scope.Course='';
+	$scope.Course=$routeParams.courseid;
 	init=function(){
 		//console.log($location.search().id);
-		console.log($location.search());
-		$scope.Course=$location.search().id;
+		//console.log($location.search());
+	//	$scope.Course=$routeParams.courseid;
 	//console.log($location.search().id);
 	//Course=$location.search().id;
 };
@@ -16,17 +16,22 @@ init();
 		return Array.apply(null, {length: N}).map(Number.call, Number);
 	};
 	$scope.submit=function(){
+		if($scope.topictext){
 		console.log("submitted")
 		$http.post("/addtopic",{topictitle:$scope.topictitle,topictext:$scope.topictext,Course:$scope.Course}).then(function(response){
-			return response;
-		});
-
+			
+			$location.path('/coursehome/'+$scope.Course);
+		});	
+	}else{
+		
+alert("fill the required details");
 
 	};
+	};
+		 $('#textarea1').val('New Text');
+  $('#textarea1').trigger('autoresize');
+
 
 }]);
-app.config(function($locationProvider) {
- $locationProvider.html5Mode(true); 
-});
 
 

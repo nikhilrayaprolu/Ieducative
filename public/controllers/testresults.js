@@ -1,7 +1,7 @@
-var app=angular.module('Ieducative',[]);
-app.controller('TestResults',['$scope','$http','$location','AuthService',function($scope,$http,$location,AuthService){
+
+app.controller('TestResults',['$scope','$http','$location','AuthService','$routeParams',function($scope,$http,$location,AuthService,$routeParams){
 	$scope.studentid=window.localStorage.user;
-	$scope.marksid=$location.search().marksid;
+	$scope.marksid=$routeParams.marksid;
 	$scope.testid='';
 	$scope.TestPaper=[];
 	$scope.NoofAttemptedStudents=0;
@@ -15,6 +15,7 @@ app.controller('TestResults',['$scope','$http','$location','AuthService',functio
 	$scope.questionwiseresult='';
 	$scope.topten=[];
 	$scope.rating=1;
+	$scope.rated=false;
 	$scope.getNumber=function(N){
 		return Array.apply(null, {length: N}).map(Number.call, Number);
 	};
@@ -22,13 +23,15 @@ app.controller('TestResults',['$scope','$http','$location','AuthService',functio
 	$scope.yourtestresults=function(){
 		AuthService.usertoken();
 		$http.get("/testresults/"+$scope.marksid).then(function(response){
-			$scope.questionwiseresult=response.data.answersgiven;
-	$scope.marks=response.data.totalmarks;
-	$scope.studentid=response.data.username;
-	$scope.testid=response.data.Testid;
-	$scope.Answers=response.data.Answers;
-
-	$http.post("/testpaper",{testid:response.data.Testid}).then(function(response){
+			$scope.questionwiseresult=response.data.data.answersgiven;
+	$scope.marks=response.data.data.totalmarks;
+	$scope.studentid=response.data.data.username;
+	$scope.testid=response.data.data.Testid;
+	$scope.Answers=response.data.data.Answers;
+	$scope.rated=response.data.rating;
+	console.log(response.data)
+	console.log(response.data.Testid)
+	$http.post("/testpaper",{testid:response.data.data.Testid}).then(function(response){
 			console.log(response);
 			$scope.Questions=response.data[0].Questions;
 			$scope.Questionid=response.data[0]._id;
@@ -50,7 +53,8 @@ app.controller('TestResults',['$scope','$http','$location','AuthService',functio
 };
 
 	$scope.testpaperhome=function(id){
-		window.location='http://localhost:8080/testdisplay.html?id='+id;
+		$location.path('/testdisplay/'+id);
+		//window.location='http://localhost:8080/testdisplay.html?id='+id;
 	};
 	$scope.submitrating=function(){
 		$http.post('/testrating',{
@@ -62,9 +66,6 @@ app.controller('TestResults',['$scope','$http','$location','AuthService',functio
 		})
 	};
 }]);
-app.config(function($locationProvider) {
- $locationProvider.html5Mode(true); 
-});
 
 
 

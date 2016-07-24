@@ -35,4 +35,15 @@ exports.saveNewTestRating=function(req,res){
 
 	});
 }
+exports.finduserrating=function(username,cb){
 
+	addTestRating.find({username:username},function(err,data){
+		if(err){
+			cb(err,null);
+		}else if(data=''){
+			cb(null,false)
+		}else{
+			cb(null,true);
+		}
+	})
+}

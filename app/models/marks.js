@@ -1,6 +1,7 @@
 var User = require('./user');
 var Test = require('./testpaper');
 var teststats=require('./teststats');
+var addTestRating=require('./testrating')
 var mongoose=require('mongoose'),
 Schema=mongoose.Schema,
 autoIncrement=require('mongoose-auto-increment');
@@ -19,8 +20,6 @@ TestMarks.plugin(autoIncrement.plugin,'TestMarks');
 
 var addTestMarks=mongoose.model('addTestMarks',TestMarks);
 exports.saveNewTestMarks=function(testdata,cb){
-	console.log(testdata);
-	console.log(Schema.ObjectId(testdata.Testid));
 	var TestMarks=new addTestMarks({
 		answersgiven:testdata.answersgiven,
 		totalmarks:testdata.totalmarks,
@@ -119,7 +118,18 @@ exports.yourtestrank=function(req,res){
 exports.thistestmarks=function(req,res){
 	addTestMarks.findOne({_id:req.params.marksid},function(err,data){
 		if(!err){
-			res.send(data);
+			
+			addTestRating.finduserrating(data.username,function(err,ratingdata){
+				if(err){
+					res.send(err);
+				}else{
+					if(ratingdata){
+						res.send({data:data,rating:true});
+					}else{
+						res.send({data:data,rating:false});
+					}
+				}
+			})
 		}else{
 			res.send(err);
 		}

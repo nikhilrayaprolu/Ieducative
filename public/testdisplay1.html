@@ -1,0 +1,53 @@
+<main>
+<div ng-controller="TestDisplay">
+<div class="container">
+<div class="stopwatch" ng-hide="group=='Faculty'">
+<div class="clock  z-depth-1">
+	<span>{{days}}:{{hours}}:{{minutes}}:{{seconds}}</span>
+	<div class="overlay waves-effect"></div>
+</div>
+</div>
+<div>
+	<p>Class:{{class}}</p>
+	<p>Subject:{{Subject}}</p>
+	<p>FacultyName:{{facultyname}}</p>
+	<p>PaperTitle:{{title}}</p>
+
+</div>
+    <nav>
+      <div class="nav-wrapper">
+        <ul id="nav-mobile">
+          <li  ng-repeat="question in Questions" ng-class="{ active: isSet($index) }">
+            <a href ng-click="setTab($index)">{{$index+1}}</a>
+          </li>
+          
+        </ul>
+      </div>
+
+    </nav>
+
+<form novalidate ng-submit="submit()">
+<div ng-repeat="question in Questions" ng-show="isSet($index)">
+	<p>{{$index+1}}.{{question.name}}</p>
+	
+	<p ng-repeat="option in question.options" >
+	
+	<input type="radio" name="{{$parent.$index}}" id="{{$parent.$index}}india{{$index+1}}" ng-value="$index+1" ng-model="Answers[$parent.$index]" ng-disabled="disabled">
+	<label for="{{$parent.$index}}india{{$index+1}}">{{$index+1}}.{{option}}</label>
+	
+	</p>
+
+	
+
+</div>
+
+	
+	<button class="btn waves-effect waves-light" type="submit" ng-hide="group=='Faculty'" name="action" >Submit
+    					<i class="material-icons right">send</i>
+  						</button>
+        
+	</form>
+</div>
+
+</div>
+</main>

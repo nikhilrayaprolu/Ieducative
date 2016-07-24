@@ -1,0 +1,34 @@
+app.controller('DashBoardController',['$scope','$http','$location','$routeParams',function($scope,$http,$location,$routeParams){
+	$scope.username=window.localStorage.user;
+	$scope.topics=[];
+	$scope.class=window.localStorage.studentclass||0;
+	$scope.completedtests=window.localStorage.completedtests;
+	$scope.topstudents=[];
+	if($scope.completedtests=="undefined"){
+		$scope.completedtests=0;
+	}
+	$scope.studentrating=window.localStorage.studentrating;
+	if($scope.studentrating=="undefined"){
+		$scope.studentrating=0;
+	}
+	$scope.nextcontestdetails=function(){
+		$http.post("/Recommended").then(function(response){
+			Recommended=response.data;
+		})
+	}
+	$scope.getNumber=function(N){
+		return Array.apply(null, {length: N}).map(Number.call, Number);
+	};
+	$scope.getrecentfivedoubts=function(){
+		$http.get('/getrecentfivedoubts').then(function(response){
+			$scope.Doubts=response.data;
+		})
+	}
+	$scope.gettoptenstudents=function(){
+		$http.get('/gettoptenstudents').then(function(response){
+			$scope.topstudents=response.data;
+		})
+	}
+	$scope.getrecentfivedoubts();
+	$scope.gettoptenstudents();
+}]);

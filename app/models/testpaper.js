@@ -1,6 +1,9 @@
 var mongoose=require('mongoose');
 var marks=require('./marks');
 var teststats=require('./teststats');
+var timestamps = require('mongoose-timestamp');
+async = require("async");
+
 Schema=mongoose.Schema,
 autoIncrement=require('mongoose-auto-increment');
 
@@ -17,14 +20,28 @@ var TestPaper=mongoose.Schema({
 	class:Number,
 	subject:String,
 	facultyname:String,
+	State:String,
 
 
 },{collection:'TestPaper'});
 TestPaper.plugin(autoIncrement.plugin,'TestPaper');
+TestPaper.plugin(timestamps);
 var addTestPaper=mongoose.model('addTestPaper',TestPaper);
 exports.saveNewTestPaper=function(req,res){
+	console.log(req.body);
+	if(req.body.testid){
+	addTestPaper.findOneAndUpdate({_id:req.body.testid},req.body,{new:true,upsert:true},function(err,doc){
+		if(err){
+			res.send(err);
+		}else{
+			console.log("yes"+doc);
+			teststats.saveontestregister(doc,req.body.testrating)
+			res.send(doc);
+		}
+	});	
+}else{
 	var TestPaperData=new addTestPaper(req.body);
-	console.log(req);
+	
 	TestPaperData.save({},function(err,data){
 		if(!err){
 			teststats.saveontestregister(data,req.body.testrating);
@@ -36,7 +53,11 @@ exports.saveNewTestPaper=function(req,res){
 
 	});
 }
+	
+	
+}
 exports.findalltestpapers=function(req,res){
+
 	addTestPaper.find({},function(err,data){
 		if(!err){
 			if(data==''){
@@ -50,6 +71,43 @@ exports.findalltestpapers=function(req,res){
 		}
 	});
 };
+exports.findalltestpapersadvanced=function(req,res){
+	if(1){
+		finaldata=[];
+		addTestPaper.find(req.body.filters,function(err,data){
+			console.log(data);
+
+			async.forEachOfSeries(data,function(dataitem,index,callback){
+				console.log('yes'+dataitem)
+				addTestStats.findOne({Testid:dataitem._id},function(err,teststats){
+				if(err){
+					callback(err);
+				}	else{
+	console.log('no'+teststats);
+	data[index]["completemarks"]=teststats.completemarks;
+	
+	data[index].avgmarks=teststats.avgmarks;
+	data[index].totalNoOfStudentsAttempted=teststats.totalNoOfStudentsAttempted;
+	data[index].RatingAvg=teststats.RatingAvg;
+	//finaldata.push({"data":data[index],"teststats":teststats});
+	finaldata[index]={"data":data[index],"teststats":teststats};
+	console.log(index);
+	//console.log("check"+data[index]);
+	callback();}
+				})
+				
+			},function(err){
+				if(err){
+					res.send(err);
+				}else{
+					console.log('fun'+finaldata);
+					res.send(finaldata);
+				}
+			})
+		});
+	}
+	
+}
 exports.findTestDetails=function(req,res){
 	if(req.body.testid!=null){
 		console.log(typeof req.body.testid);

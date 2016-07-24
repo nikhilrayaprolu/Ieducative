@@ -1,26 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
-		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-		<!-- Compiled and minified JavaScript -->
-		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
-		<script type="text/javascript" src="/controllers/newtopic.js"></script>
-		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.js"></script>
-		<base href="/">
-	<title>New Topic</title>
-</head>
-<body ng-app="Ieducative">
+<main>
 <div class="container" ng-controller="TopicCreator">
 	<form ng-submit="Submit()">
-	topictitle:<input type="text" ng-model="topictitle" name="topictitle">
-	topictext:<input type="text" ng-model="topictext" name="topictext">
-	Course:<input type="text" ng-model="Course" name="Course">
-	<input type="submit" id="submit" value="Submit" ng-click="submit()" />
+	<div class="input-field col s6">
+				<input type="text" id="topictitle" ng-model="topictitle" name="topictitle">
+				<label for="topictitle">Title</label>
+			</div>
+	<div class="input-field col s6">
+	<textarea ng-model="topictext" class="materialize-textarea" id="#textarea1"></textarea> 
+        <label>Text</label>
+				
+			</div>
+	<input type="submit" class="btn" id="submit" value="Submit" class="button" ng-click="submit()" />
 	</form>
+	
 </div>
-</body>
-</html>
+</main>

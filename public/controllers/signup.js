@@ -1,5 +1,10 @@
-var app=angular.module('SignUp',[]);
-app.controller('SignUpController',['$scope','$http','AuthService',function($scope,$http,AuthService){
+
+app.controller('SignUpController',['$scope','$http','AuthService','$location',function($scope,$http,AuthService,$location){
+	if(AuthService.isAuthenticated()){
+		console.log(AuthService.isAuthenticated());
+		$location.path('/dashboarduser');
+	}
+	$scope.pageClass = 'page-home';
 	$scope.name='',
 	$scope.password='',
 	$scope.FirstName='',
@@ -22,7 +27,26 @@ AuthService.register({
 	schoolname:$scope.schoolname,
 
 }).then(function(msg) {
-      alert("registration successfull Please Login to have the fun")
+   AuthService.login({
+	name:$scope.name,
+	password:$scope.password,
+
+}).then(function(msg) {
+	console.log(msg);
+      if(msg=='Faculty'){
+      	$location.path('/profile');
+      	//window.location="http://localhost:8080/coursesfaculty";
+
+      }else if(msg=='Student'){
+      	//window.location="/coursesstudent";
+      	$location.path('/profile')
+      }else{
+
+      };
+
+    }, function(errMsg) {
+      alert("unsuccess");
+    });
     }, function(errMsg) {
       alert("registration is not successfull")
     });		
@@ -36,33 +60,18 @@ AuthService.register({
 
 }]);
 		
-/*		$http.post("/api/signup",{
-	name:$scope.name,
-	password:$scope.password,
-	FirstName:$scope.FirstName,
-	LastName:$scope.LastName,
-	email:$scope.email,
-	phone:$scope.phone,
-	dob:$scope.dob,
-	studentclass:$scope.studentclass,
-	schoolname:$scope.schoolname,
 
-}).then(function(response){
-			alert(response);
-			console.log(response);
-			return response;
-
-		});
-*/
-
-app.controller('SignInController',['$scope','$http','AuthService',function($scope,$http,AuthService,AUTH_EVENTS){
-	$scope.name='',
+app.controller('SignInController',['$scope','$http','AuthService','$location',function($scope,$http,AuthService,$location){
+	
 	$scope.password='',
 			$scope.user={
 	name:$scope.name,
 	password:$scope.password,
 
 };
+$scope.forgotpassword=function(){
+	$location.path('/forgotpasswordrequest');
+}
 $scope.submit=function(){
 
     AuthService.login({
@@ -70,28 +79,28 @@ $scope.submit=function(){
 	password:$scope.password,
 
 }).then(function(msg) {
+	$scope.username=window.localStorage.user;
+	$scope.profilepic=window.localStorage.profilepic;
+	$scope.group=window.localStorage.group;
+	$scope.$digest();
 	console.log(msg);
       if(msg=='Faculty'){
-      	window.location="http://localhost:8080/coursesfaculty.html?id="+$scope.name;
+      	//$location.path('/dashboarduser');
+      	window.location="/dashboarduser";
+
+      }else if(msg=='Student'){
+      	window.location="/dashboarduser";
+      	//$location.path('/dashboarduser')
       }else{
-      	window.location="http://localhost:8080/coursesstudent.html?id="+$scope.name;
+      	alert("LOGIN WRONG");
+      	window.location='/signup';
       };
 
     }, function(errMsg) {
       alert("unsuccess");
     });
 
-/*		$http.post("/api/authenticate",{
-	name:$scope.name,
-	password:$scope.password,
-
-}).then(function(response){
-			alert(response.data);
-			console.log(response.data);
-			return response;
-
-		});
-*/};
+};
 
 	$scope.$on('auth-not-authenticated',function(event){
 		AuthService.logout();
@@ -99,31 +108,3 @@ $scope.submit=function(){
 	});
 
 }]);
-
-/*$httpProvider.interceptors.push(['$rootScope', '$q', '$localStorage',
-      function ($rootScope, $q, $localStorage) {
-        return {
-          request: function (config) {
-            config.params = config.params || {};
-            config.headers = config.headers || {};
-            if ($localStorage.token) {
-              config.headers.Authorization = $localStorage.token;
-              config.params.token = $localStorage.token; 
-            }
-            return config;
-          },
-          response: function (res) {
-            return res || $q.when(res);
-          },
-          'responseError': function(response) {
-              if(response.status === 401 || response.status === 400) {
-                //console.log("Not logged in");
-                // Handle unauthenticated user
-                $rootScope.$broadcast('unauthorized');
-                //$location.path('auth/login');
-              }
-              return $q.reject(response);
-          }
-        };
-      }
-    ]);*/

@@ -1,11 +1,11 @@
-var app=angular.module('NewCourseApp',['ngRoute']);
+
 app.controller('NewCourse',['$location','$scope','$http','$routeParams',function($location,$scope,$http,$routeParams){
 	$scope.id=''
 	$scope.name="";
 	$scope.syllabus="";
 	$scope.fees="";
 	$scope.durationWeeks="";
-	$scope.faculty=[];
+	$scope.faculty=window.localStorage.user;
 	$scope.student=[];
 	$scope.pre_requisites=[];
 	$scope.courseclass=''
@@ -18,7 +18,7 @@ app.controller('NewCourse',['$location','$scope','$http','$routeParams',function
 		console.log($location.search().id);
 
 		$http.post("/findCourse",{
-			id:$location.search().id
+			id:$routeParams.id
 
 		}).then(function(response){
 			console.log(response.data[0]);
@@ -38,7 +38,9 @@ app.controller('NewCourse',['$location','$scope','$http','$routeParams',function
 	};
 	init();
 	$scope.submit=function(){
-		$http.post("/addCourse",{
+		if($scope.name){
+	$http.post("/addCourse",{
+
 			id:$scope.id,
 			name:$scope.name,
 			syllabus:$scope.syllabus,
@@ -49,9 +51,14 @@ app.controller('NewCourse',['$location','$scope','$http','$routeParams',function
 			pre_requisites:$scope.pre_requisites,
 			courseclass:$scope.courseclass,
 		}).then(function(response){
+			$location.path('/allcourses')
 			return response;
 		});
-
+		
+	}else{
+		alert("fill the required details");
+	}
+		
 
 	};
 	$scope.delete=function(){
@@ -63,7 +70,4 @@ app.controller('NewCourse',['$location','$scope','$http','$routeParams',function
 	};
 
 }]);
-app.config(function($locationProvider) {
- $locationProvider.html5Mode(true); 
-});
 

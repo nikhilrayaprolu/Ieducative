@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+<base href="/">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Materialize - Material Design Admin Template</title>
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,700' rel='stylesheet' type='text/css'>
+    <!-- Favicons-->
+    <link rel="icon" href="images/favicon/favicon-32x32.png" sizes="32x32">
+    <!-- Favicons-->
+    <link rel="apple-touch-icon-precomposed" href="images/favicon/apple-touch-icon-152x152.png">
+    <!-- For iPhone -->
+    <meta name="msapplication-TileColor" content="#00bcd4">
+    <meta name="msapplication-TileImage" content="images/favicon/mstile-144x144.png">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="/css/styles.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- CORE CSS-->    
+    <link href="css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <!-- Latest compiled and minified CSS -->
+    <link href="css/style.min.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <!-- Custome CSS-->    
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+
+    <!-- For Windows Phone -->
+
+    <script type="text/javascript" src="js/plugins/jquery-1.11.2.min.js"></script>    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-css/1.0.8/angular-css.js"></script>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.js"></script>
+ <script type="text/javascript" src="js/materialize.min.js"></script>
+<script src="/js/ng-file-upload-bower-12.0.4/ng-file-upload-shim.min.js"></script>
+<script src="/js/ng-file-upload-bower-12.0.4/ng-file-upload.min.js"></script>
+     <script type="text/javascript" src="/js/materialize-angular.js"></script>
+    <script type="text/javascript" src="/controllers/maincontroller.js"></script>
+    <script type="text/javascript" src="/controllers/signup.js"></script>
+    <script type="text/javascript" src="/controllers/coursesstudent.js"></script>
+    <script type="text/javascript" src="/controllers/testpapers.js"></script>
+    <script type="text/javascript" src="/controllers/coursehome.js"></script>
+    <script type="text/javascript" src="/controllers/allcourses.js"></script>
+    <script type="text/javascript" src="/controllers/newtopic.js"></script>
+    <script type="text/javascript" src="/controllers/courseblog.js"></script>
+    <script type="text/javascript" src="/controllers/doubtcreate.js"></script>
+    <script type="text/javascript" src="/controllers/postbody.js"></script>
+    <script type="text/javascript" src="/controllers/commentcreate.js"></script>
+    <script type="text/javascript" src="/controllers/createtest.js"></script>
+    <script type="text/javascript" src="/controllers/testdisplay.js"></script>
+    <script type="text/javascript" src="/controllers/testresults.js"></script>
+    <script type="text/javascript" src="/controllers/notificationreceiver.js"></script>
+    <script type="text/javascript" src="/controllers/notificationsender.js"></script>
+    <script type="text/javascript" src="/controllers/yourprofile.js"></script>
+    <script type="text/javascript" src="/controllers/testresultsfaculty.js"></script>
+    <script type="text/javascript" src="/controllers/facultystats.js"></script>
+    <script type="text/javascript" src="/controllers/coursesfaculty.js"></script>
+    <script type="text/javascript" src="/controllers/newcourse.js"></script>
+    <script type="text/javascript" src="/controllers/userstats.js"></script>
+    <script type="text/javascript" src="/controllers/dashboarduser.js"></script>
+    <script type="text/javascript" src="/controllers/testpaperconditions.js"></script>
+    <script type="text/javascript" src="/controllers/edittopic.js"></script>
+    <script type="text/javascript" src="/controllers/updateprofilephoto.js"></script>
+    <script type="text/javascript" src="/controllers/watchvideo.js"></script>
+    <script type="text/javascript" src="/controllers/facultyrequest.js"></script>
+    <script type="text/javascript" src="/controllers/forgotpasswordrequest.js"></script>
+    <script type="text/javascript" src="/controllers/forgotpassword.js"></script>
+    
+    <base href="/">
+    <script type="text/javascript" src="/controllers/service.js"></script>
+    <script type="text/javascript" src="/controllers/constants.js"></script>
+
+    <script type="text/javascript" src="/controllers/routeconfig.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular-route.min.js"></script>
+  
+
+
+</head>
+<body ng-app="Ieducative" ng-controller="MainController">
+    <header id="header" class="page-topbar" >
+        <!-- start header nav-->
+        <div class="navbar-fixed" >
+            <nav class="navbar-color" style="background: rgba(0,0,0,0.4)">
+                <div class="nav-wrapper " >
+                    <ul class="left">                      
+                      <li><h1 class="logo-wrapper"><a href="index-2.html" class="brand-logo darken-1"><img src="images/logo.png" alt="materialize logo"></a> <span class="logo-text">Materialize</span></h1></li>
+                  </ul>
+                  
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="javascript:void(0);" class="waves-effect waves-block waves-light notification-button" data-activates="notifications-dropdown"><i class="mdi-social-notifications"><small class="notification-badge">{{notificationscount}}</small></i>
+
+                    </a>
+                </li>                        
+                
+            </ul>
+            
+        <!-- notifications-dropdown -->
+        <ul id="notifications-dropdown" class="dropdown-content">
+          <li>
+            <h5>NOTIFICATIONS <span class="new badge">{{notificationscount}}</span></h5>
+        </li>
+        <li class="divider"></li>
+        <li >
+            
+        </li>
+        <li ng-repeat="notification in notifications">
+            <a ng-href="notification.link || null"><i class="mdi-action-add-shopping-cart"></i>{{notification.text}}<br/>room:{{notification.room}}</a>
+            <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">{{notification.time}}</time>
+        </li>
+        <li>
+            <a href="#!"><i class="mdi-action-stars"></i> Completed the task</a>
+            <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">3 days ago</time>
+        </li>
+        <li>
+            <a href="#!"><i class="mdi-action-settings"></i> Settings updated</a>
+            <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">4 days ago</time>
+        </li>
+        <li>
+            <a href="#!"><i class="mdi-editor-insert-invitation"></i> Director meeting started</a>
+            <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">6 days ago</time>
+        </li>
+        <li>
+            <a href="#!"><i class="mdi-action-trending-up"></i> Generate monthly report</a>
+            <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">1 week ago</time>
+        </li>
+    </ul>
+</div>
+</nav>
+</div>
+<!-- end header nav-->
+</header>
+<!-- END HEADER -->
+
+<!-- //////////////////////////////////////////////////////////////////////////// -->
+
+<!-- START MAIN -->
+<div id="main">
+    <!-- START WRAPPER -->
+    <div class="wrapper">
+
+        <!-- START LEFT SIDEBAR NAV-->
+        <aside id="left-sidebar-nav">
+            <ul id="slide-out" class="side-nav fixed leftside-navigation" style="text-align:left">
+                <li class="user-details cyan darken-2">
+                    <div class="row">
+                        <div class="col col s4 m4 l4">
+                            <img src="images/{{profilepic}}" alt="" class="circle responsive-img valign profile-image">
+                            
+                        </div>
+                        <div class="col col s8 m8 l8">
+                            <ul id="profile-dropdown" class="dropdown-content" ng-show="isAuthenticated()">
+                                <li><a href="/profile/"><i class="mdi-action-face-unlock"></i> Profile</a>
+                                </li>
+                                <li><a href="#"><i class="mdi-action-settings"></i> Settings</a>
+                                </li>
+                                <li><a href="#"><i class="mdi-communication-live-help"></i> Help</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li><a href="#"><i class="mdi-hardware-keyboard-tab" ng-click="LogOut()"></i> Logout</a>
+                                </li>
+                            </ul>
+                            <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="#" data-activates="profile-dropdown">{{username}}<i class="mdi-navigation-arrow-drop-down right"></i></a>
+                            <p class="user-roal">{{group}}</p>
+                        </div>
+                    </div>
+                </li>
+                <li ng-show="isAuthenticated()" class="bold active"><a href="/dashboarduser/" class="waves-effect waves-cyan"><i class="mdi-action-dashboard"></i> Dashboard</a>
+                </li>
+                <li class="no-padding">
+                    <ul class="collapsible collapsible-accordion" >
+                        <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-view-carousel"></i> TestPapers</a>
+                            <div class="collapsible-body" ng-show="isAuthenticated()">
+                                <ul>
+                                    <li><a href="/testpaper/">All TestPapers</a>
+                                    </li>
+                                    <li ng-show="group=='Faculty'">
+                                        <a href="/facultystats/">Manage Results</a>
+                                    </li>
+                                    <li ng-show="group=='Student'">
+                                        <a href="/userstats/" >Manage Results</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li class="bold" ng-show="isAuthenticated()"><a href="/notifications/" class="waves-effect waves-cyan"><i class="mdi-communication-email"></i> Notifications <span class="new badge">{{notificationscount}}</span></a>
+                </li>
+                <li class="bold"><a href="app-calendar.html" class="waves-effect waves-cyan"><i class="mdi-editor-insert-invitation"></i> Calender</a>
+                </li>
+                <li class="no-padding" >
+                    <ul class="collapsible collapsible-accordion">
+                        <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-invert-colors"></i> Courses</a>
+                            <div class="collapsible-body" ng-show="isAuthenticated()">
+                                <ul>
+                                    <li><a href="/allcourses/">All courses</a>
+                                    </li>
+                                    <li><a href="/coursesstudent/">My Courses</a>
+                                    </li>
+                                    <li><a href="/coursesfaculty/">Manage Courses</a>
+                                    </li>
+                                    
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-social-pages"></i> About Us</a>
+                            <div class="collapsible-body">
+                                <ul>                                        
+                                    <li><a href="page-contact.html">Contact Page</a>
+                                    </li>
+                                    <li><a href="page-todo.html">Compliants</a>
+                                    </li>
+                                    <li><a href="page-blog-1.html">About Us</a>
+                                    </li>
+                                    
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-shopping-cart"></i> Shop</a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li><a href="eCommerce-products-page.html">Prodducts</a>
+                                    </li>                                        
+                                    <li><a href="eCommerce-pricing.html">Pricing</a>
+                                    </li>
+                                    <li><a href="eCommerce-invoice.html">Invoice</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        
+                        <li ng-show="isAuthenticated()" class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-account-circle"></i> User</a>
+                            <div class="collapsible-body">
+                                <ul>     
+                                    <li><a ng-href="/profile">User Profile</a>
+                                    </li>                                   
+                                    
+                                    <li><a ng-href="/forgotpasswordrequest">Forgot Password</a>
+                                    </li>
+                                    <li><a ng-click="LogOut()">LogOut</a>
+                                    </li>                                        
+                                    
+                                </ul>
+                            </div>
+                        </li>
+                        
+                        
+                    </ul>
+                </li>
+                <li class="li-hover"><div class="divider"></div></li>
+                <li class="li-hover"><p class="ultra-small margin more-text">MORE</p></li>
+                
+            </ul>
+            <a href="#" data-activates="slide-out" class="sidebar-collapse btn-floating btn-medium waves-effect waves-light hide-on-large-only cyan"><i class="mdi-navigation-menu"></i></a>
+        </aside>
+    </div>
+</div>
+
+
+  
+        <div class="" style="height: 100%" ng-view>
+            
+        </div>
+        
+  
+
+<!-- jQuery Library -->
+
+<!--materialize js-->
+
+<script type="text/javascript" src="js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    
+
+    <!-- chartist -->
+    <script type="text/javascript" src="js/plugins/chartist-js/chartist.min.js"></script>   
+
+    <!-- chartjs -->
+    <script type="text/javascript" src="js/plugins/chartjs/chart.min.js"></script>
+   <!-- <script type="text/javascript" src="js/plugins/chartjs/chart-script.js"></script>-->
+
+    <!-- sparkline -->
+    <script type="text/javascript" src="js/plugins/sparkline/jquery.sparkline.min.js"></script>
+    <script type="text/javascript" src="js/plugins/sparkline/sparkline-script.js"></script>
+    <script type="text/javascript" src="js/plugins.min.js"></script>
+    
+
+
+</body>
+</html>

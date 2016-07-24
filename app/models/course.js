@@ -1,7 +1,8 @@
 var path=require('path');
 var jwt = require('jwt-simple');
 var config = require('./../../config/database');
-var mongoose=require('mongoose'),
+var mongoose=require('mongoose');
+var userchannels=require('./userchannels');
 Schema=mongoose.Schema,
 autoIncrement=require('mongoose-auto-increment');
 var mongoose = require('mongoose');
@@ -60,8 +61,6 @@ exports.deleteCourse=function(req,res){
 exports.saveNewCourse=function(req,res){
 if(req.body.id){
 	addCourse.findOne({_id:req.body.id},function(err,course){
-		
-		
 		course.name=req.body.name;
 		course.syllabus=req.body.syllabus;
 		course.fees=req.body.fees;
@@ -82,7 +81,7 @@ if(req.body.id){
 	});
 }
 else{
-	console.log(req.body);
+	console.log(req);
 	var courseData=new addCourse(req.body);
 	if(req.file){
 	courseData.set('profilephoto',req.file.filename);}
@@ -122,7 +121,13 @@ exports.Subscribe=function(req,res){
 		if(req.body.username==decoded.name){
 			query={'_id':req.body.courseid};
 			addCourse.findOneAndUpdate(query,{$addToSet:{student:req.body.username}},{upsert:true},function(err,doc){
+
 				if(err)return res.send(500,{error:err});
+				data={
+					username:req.body.username,
+					channels:req.body.courseid,
+				}
+				userchannels.saveNewUserChannel(data);
 				return res.send("success")
 			});
 		}else{
@@ -157,7 +162,9 @@ exports.findCoursesofstudent=function(req,res){
 	}
 }
 exports.findallcourses=function(req,res){
-	addCourse.find({},function(err,data){
+	studentid=[];
+	studentid.push(req.params.studentid);
+	addCourse.find({student:{$not:{$all:studentid}}},function(err,data){
 			if(!err){
 				if(data==''){
 					res.sendStatus(400);

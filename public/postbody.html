@@ -1,0 +1,39 @@
+<main>
+<div ng-controller="PostBodyController" ng-init="blogposts()">
+<div class="card blue lighten-4">
+	  	<h2>{{Post.Title}}</h2>
+      <h4>{{Post.Topic}}</h4>
+      <p>{{Post.PostBody}}</p>
+      
+      <p class="right-align">{{Post.submitted}}</p>
+      <p class="right-align">Posted By:{{Post.user}}</p>
+      </div>
+      <div class="col s12 m12 l12">
+
+          <button style="float: right;" class="btn waves-effect waves-light" type="submit" name="action" ng-click="NewComment()">NewComment</button>
+          
+  <form novalidate class="simple-form" ng-submit="submit()" ng-show="commentshow">
+    <div class="input-field">
+        <textarea ng-model="CommentBody" class="materialize-textarea" id="#textarea1"></textarea> 
+        <label>comment</label>
+      </div>
+      
+    
+    <input type="submit" class="btn waves" id="submit" value="Submit" />
+  </form>
+    </div>
+      <div class="card orange lighten-3 col l12">
+      <h4>Comments:</h4>
+      <div ng-repeat="comment in Comments" class="yellow lighten-4">
+commentbody:<p>{{comment.CommentBody}}</p>
+submitted:<p>{{comment.submitted}}</p>
+user:<p>{{comment.user}}</p>
+</div>
+          
+</div>
+
+  
+</div>
+
+
+</main>

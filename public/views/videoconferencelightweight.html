@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>VideoConference</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+<script type="text/javascript" src="/controllers/videoconference.js"></script>
+</head>
+<body ng-app="Ieducative" ng-controller="VideoConference"><main>
+    <article>
+<section class="experiment">
+            <div class="make-center">
+                <input type="text" id="room-id" value="abcdef">
+                <button id="open-room">Open Room</button>
+                <button id="join-room">Join Room</button>
+
+                <br><br>
+                <input type="text" id="invite-list" ng-model="invitelist" >
+                <button ng-click="Invite()">Invite</button>
+                {{invitelist}}
+                <input type="text" id="input-text-chat" placeholder="Enter Text Chat" disabled>
+                <button id="share-file" disabled>Share File</button>
+
+                <div id="room-urls" style="text-align: center;display: none;background: #F1EDED;margin: 15px -10px;border: 1px solid rgb(189, 189, 189);border-left: 0;border-right: 0;"></div>
+            </div>
+
+            <div id="chat-container">
+                <div id="file-container"></div>
+                <div class="chat-output"></div>
+            </div>
+
+            <div id="videos-container"></div>
+        </section>
+
+        <script src="/dist/rmc3.min.js"></script> 
+        <!--<script src="https://cdn.webrtc-experiment.com:443/rmc3.min.js"></script>-->
+        
+        <script src="/dev/FileBufferReader.js"></script> 
+        <!--<script src="https://cdn.webrtc-experiment.com:443/rmc3.fbr.min.js"></script>-->
+
+        <script src="https://cdn.webrtc-experiment.com/firebase.js"></script>
+        <script src="../dev/globals.js"></script>
+        <script src="../dev/FirebaseConnection.js"></script>
+    
+        <script>
+        </script>
+</body>
+        </main>

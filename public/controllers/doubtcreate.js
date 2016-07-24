@@ -1,28 +1,37 @@
-var app=angular.module('Ieducative',['ngRoute']);
+
 app.controller('NewQuestionController',['$location','$scope','$http','$routeParams',function($location,$scope,$http,$routeParams){
-	$scope.course=$location.search().courseid;
-	$scope.user=window.localStorage.user;
+	$scope.data={};
+	$scope.data.course=$routeParams.courseid;
+	$scope.data.user=window.localStorage.user;
+	
 	$scope.Title='';
 	$scope.PostBody='';
 	$scope.Topic='';
 	$scope.submit=function(){
-		$http.post("/forumpost",{
-			Title:$scope.Title,
-			course:$scope.course,
-			Topic:$scope.Topic,
-			PostBody:$scope.PostBody,
-			user:$scope.user,
+		if($scope.data.PostBody){
+			$http.post("/forumpost",{
+
+				Title:$scope.data.Title,
+				course:$scope.data.course,
+				Topic:$scope.data.Topic,
+				PostBody:$scope.data.PostBody,
+				user:$scope.data.user,
 
 
-		}).then(function(response){
-			return response;
-			alert("successfully submitted");
-		});
+			}).then(function(response){
 
+				alert("successfully submitted");
+				$location.path('/courseblog/'+$scope.data.course);
+			});
+
+		}
+		else{
+			alert("fill the required details");
+		}
+		
 
 	};
+	 $('#textarea1').val('New Text');
+  $('#textarea1').trigger('autoresize');
 	
 }]);
-app.config(function($locationProvider) {
- $locationProvider.html5Mode(true); 
-});
