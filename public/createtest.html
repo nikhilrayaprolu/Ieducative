@@ -12,13 +12,36 @@
     <label>QuestionNumber</label>
     
 </input-field>
-<div input-field class="col l3">
-    <input type="text" ng-model="data.subject" length="150">
-    <label>Subject</label>
+<div   class="input-field col l3">
+<select ng-model="data.subject" class="browser-default">
+                    <option value="" disabled selected>Subject</option>
+                    <option value="English">English</option>
+                    <option value="Math">Math</option>
+                    <option value="Science">Science</option>
+                    <option value="Social">Social</option>
+                    
+                </select>
+
+    
 </div>
 <div input-field class="col l3">
-    <input type="text" ng-model="data.class" length="150">
-    <label>Class</label>
+<select ng-model="data.class" class="browser-default">
+                    <option value="" disabled selected>Class</option>
+                    <option value="1">class 1</option>
+                    <option value="2">class 2</option>
+                    <option value="3">class 3</option>
+                    <option value="4">class 4</option>
+                    <option value="5">class 5</option>
+                    <option value="6">class 6</option>
+                    <option value="7">class 7</option>
+                    <option value="8">class 8</option>
+                    <option value="9">class 9</option>
+                    <option value="10">class 10</option>
+
+                </select>
+
+    
+    
 
 </div>
 
@@ -56,12 +79,13 @@
 
 <div class="input-field">
     <select ng-model="data.testrating" watch>
+     <option value="" disabled selected>testrating</option>
         <option ng-repeat="value in selectarray">{{value}}</option>
 
     </select>
-    <label>testrating:</label>
+
 </div>
-{{data.testrating[0]}}
+
 
 
 </form>
